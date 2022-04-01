@@ -9,6 +9,9 @@ import traceback
 import random
 import socket
 import heapq    
+import sys
+from os.path import exists
+import re
 
 from listener import *
 
@@ -252,8 +255,15 @@ class DHCPServerConfiguration(object):
     debug = lambda *args, **kw: None
 
     def load(self, file):
-        with open(file) as f:
-            exec(f.read(), self.__dict__)
+        if(len(file) > 0 and exists(file)):
+            with open(file) as f:
+                exec(f.read(), self.__dict__)
+        else:
+            args = ' '.join(sys.argv[1:])
+            args = re.sub(' -', "\r\n", args)
+            args = re.sub('^-', '', args)
+            args = re.sub('^([a-z_]+)([ ]+)(.+)$', r"\1=\3", args, flags=re.MULTILINE)
+            exec(args, self.__dict__)
 
     def adjust_if_this_computer_is_a_router(self):
         ip_addresses = get_host_ip_addresses()
@@ -290,6 +300,7 @@ class ALL(object):
         return True
     def __repr__(self):
         return self.__class__.__name__
+    
 ALL = ALL()
 
 class GREATER(object):
@@ -556,12 +567,15 @@ class DHCPServer(object):
         return sorted_hosts(self.hosts.get(last_used = GREATER(self.time_started)))
 
 if __name__ == '__main__':
+    
     configuration = DHCPServerConfiguration()
     configuration.debug = print
     configuration.adjust_if_this_computer_is_a_router()
+    configuration.load(sys.argv[1])
     configuration.router #+= ['192.168.0.1']
     configuration.ip_address_lease_time = 60
     server = DHCPServer(configuration)
+    
     for ip in server.configuration.all_ip_addresses():
         assert ip == server.configuration.network_filter()
     server.run()
