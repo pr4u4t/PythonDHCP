@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import time
 import threading
@@ -12,7 +12,8 @@ import heapq
 import sys
 from os.path import exists
 import re
-from expiringdict import ExpiringDict
+from ttldict import  TTLOrderedDict
+import socketserver
 
 from listener import *
 
@@ -566,15 +567,49 @@ class DHCPServer(object):
     def get_current_hosts(self):
         return sorted_hosts(self.hosts.get(last_used = GREATER(self.time_started)))
 
+class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
+    def handle(self):
+        self.request.sendall(bytes("Welcome to micro python dhcp server", 'ascii'))
+        try:
+            while(True):
+                self.request.sendall(bytes("\r\npydhcp ?> ", 'ascii'))
+                data = self.rfile.readline().strip()
+                if(data.decode() == "hosts"):
+                    self.request.sendall(bytes("Active Hosts:\r\n{}".format("\r\n".join(self.server.hosts.all())),'ascii'))
+                elif(data.decode() == "events"):
+                    self.request.sendall(bytes("Events last 24h:\r\n{}".format("\r\n".join(self.server.events.items())),'ascii'))
+                elif(data.decode() == "configuration"):
+                    self.request.sendall(bytes("Current configuration\r\n", 'ascii'))
+                    for value in options:
+                        if(hasattr(self.server.configuration,value[0])):
+                            self.request.sendall(bytes("{}: {}\r\n".format(value[0],getattr(self.server.configuration,value[0])),'ascii'))
+                elif(data.decode() == "quit"):
+                    self.request.sendall(bytes("bye\r\n", 'ascii'))
+                    break
+                else:
+                    self.request.sendall(bytes("unknown command: {}".format(data.decode('ascii')), 'ascii'))
+        except Exception as e:
+            pass
+
+class ThreadedTcpServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    def setEvents(self,data):
+        self.events = data
+
+    def setHosts(self,data):
+        self.hosts = data
+        
+    def setConfiguration(self,data):
+        self.configuration = data
+        
 if __name__ == '__main__':
     
-    messages = ExpiringDict(max_len=1000, max_age_seconds=86400)
+    messages = TTLOrderedDict(default_ttl=86400) #keep messages for 24h
     
     def debug_msg(msg,type):
         if bool(type):
             type = 'debug'
         messages[time.time()] = { 'type': type, 'msg': msg }
-    
+
     configuration = DHCPServerConfiguration()
     configuration.debug = debug_msg
     configuration.adjust_if_this_computer_is_a_router()
@@ -585,4 +620,12 @@ if __name__ == '__main__':
     
     for ip in server.configuration.all_ip_addresses():
         assert ip == server.configuration.network_filter()
+
+    with ThreadedTcpServer(("127.0.0.1", 6767), ThreadedTcpRequestHandler) as cserver:
+        cserver.setEvents(messages)
+        cserver.setHosts(server.hosts.db)
+        cserver.setConfiguration(configuration)
+        cserver.serve_forever()
+    
+    #server.run_in_thread()
     server.run()
