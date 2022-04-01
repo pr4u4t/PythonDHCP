@@ -12,6 +12,7 @@ import heapq
 import sys
 from os.path import exists
 import re
+from expiringdict import ExpiringDict
 
 from listener import *
 
@@ -34,7 +35,6 @@ class PriorityQueue(object):
         return len(self._queue)
 
 class WriteBootProtocolPacket(object):
-
     message_type = 2 # 1 for client -> server 2 for server -> client
     hardware_type = 1
     hardware_address_length = 6
@@ -131,7 +131,6 @@ class WriteBootProtocolPacket(object):
         return str(ReadBootProtocolPacket(self.to_bytes()))
 
 class DelayWorker(object):
-
     def __init__(self):
         self.closed = False
         self.queue = PriorityQueue()
@@ -160,7 +159,6 @@ class DelayWorker(object):
         self.closed = True
 
 class Transaction(object):
-
     def __init__(self, server):
         self.server = server
         self.configuration = server.configuration
@@ -168,7 +166,8 @@ class Transaction(object):
         self.done_time = time.time() + self.configuration.length_of_transaction
         self.done = False
         self.do_after = self.server.delay_worker.do_after
-
+        self.debug = debug
+        
     def is_done(self):
         return self.done or self.done_time < time.time()
 
@@ -209,10 +208,12 @@ class Transaction(object):
         offer.bootp_flags = discovery.bootp_flags
         offer.dhcp_message_type = 'DHCPOFFER'
         offer.client_identifier = mac
+        self.configuration.debug('offer:\n {}'.format(str(offer).replace('\n', '\n\t')))
         self.server.broadcast(offer)
     
     def received_dhcp_request(self, request):
         if self.is_done(): return 
+        self.configuration.debug('request:\n {}'.format(str(request).replace('\n', '\n\t')))
         self.server.client_has_chosen(request)
         self.acknowledge(request)
         self.close()
@@ -230,14 +231,15 @@ class Transaction(object):
         ack.client_ip_address = request.client_ip_address or '0.0.0.0'
         ack.your_ip_address = self.server.get_ip_address(request)
         ack.dhcp_message_type = 'DHCPACK'
+        self.configuration.debug('acknowledge:\n {}'.format(str(ack).replace('\n', '\n\t')))
         self.server.broadcast(ack)
 
     def received_dhcp_inform(self, inform):
+        self.configuration.debug('inform:\n {}'.format(str(inform).replace('\n', '\n\t')))
         self.close()
         self.server.client_has_chosen(inform)
 
 class DHCPServerConfiguration(object):
-    
     dhcp_offer_after_seconds = 10
     dhcp_acknowledge_after_seconds = 10
     length_of_transaction = 40
@@ -326,7 +328,6 @@ class CASEINSENSITIVE(object):
         return self.s == other.lower()
 
 class CSVDatabase(object):
-
     delimiter = ';'
 
     def __init__(self, file_name):
@@ -357,7 +358,6 @@ class CSVDatabase(object):
             return [list(line.strip().split(self.delimiter)) for line in f]
 
 class Host(object):
-
     def __init__(self, mac, ip, hostname, last_used):
         self.mac = mac.upper()
         self.ip = ip
@@ -396,7 +396,6 @@ class Host(object):
     def has_valid_ip(self):
         return self.ip and self.ip != '0.0.0.0'
         
-
 class HostDatabase(object):
     def __init__(self, file_name):
         self.db = CSVDatabase(file_name)
@@ -432,6 +431,7 @@ class DHCPServer(object):
     def __init__(self, configuration = None):
         if configuration == None:
             configuration = DHCPServerConfiguration()
+            
         self.configuration = configuration
         self.socket = socket(type = SOCK_DGRAM)
         self.socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
@@ -568,8 +568,15 @@ class DHCPServer(object):
 
 if __name__ == '__main__':
     
+    messages = ExpiringDict(max_len=1000, max_age_seconds=86400)
+    
+    def debug_msg(msg,type):
+        if bool(type):
+            type = 'debug'
+        messages[time.time()] = { 'type': type, 'msg': msg }
+    
     configuration = DHCPServerConfiguration()
-    configuration.debug = print
+    configuration.debug = debug_msg
     configuration.adjust_if_this_computer_is_a_router()
     configuration.load(sys.argv[1])
     configuration.router #+= ['192.168.0.1']
