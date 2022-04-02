@@ -26,5 +26,3 @@ USE netcat or telnet to connect server command line:
 nc 127.0.0.1 6868
 
 type `help` to get list of commands
-
-

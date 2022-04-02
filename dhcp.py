@@ -202,7 +202,7 @@ class DHCPTransaction(object):
         self.done_time = time.time() + self.configuration.length_of_transaction
         self.done = False
         self.do_after = self.server.delay_worker.do_after
-        self.debug = debug
+        #self.debug = debug
         
     def is_done(self):
         """Check if transaction is done 
@@ -634,6 +634,7 @@ class DHCPServer(object):
                 broadcast_socket.close()
 
     def run(self):
+        self.configuration.debug("DHCP server starting")
         while not self.closed:
             try:
                 self.update(1)
@@ -641,6 +642,7 @@ class DHCPServer(object):
                 break
             except:
                 traceback.print_exc()
+        self.configuration.debug("DHCP server closing")
 
     def run_in_thread(self):
         thread = threading.Thread(target = self.run)
@@ -673,7 +675,7 @@ class ThreadedTCPRequestHandler(socketserver.StreamRequestHandler):
                 if(data.decode() == "hosts"):
                     self.request.sendall(bytes("Active Hosts:\r\n{}".format("\r\n".join(self.server.hosts.all())),'ascii'))
                 elif(data.decode() == "events"):
-                    self.request.sendall(bytes("Events last 24h:\r\n{}".format("\r\n".join(self.server.events.items())),'ascii'))
+                    self.request.sendall(bytes("Events last 24h:\r\n{}".format("\r\n".join(map(str,self.server.events.items()))),'ascii'))
                 elif(data.decode() == "configuration"):
                     self.request.sendall(bytes("Current configuration\r\n", 'ascii'))
                     for value in options:
@@ -716,7 +718,7 @@ if __name__ == "__main__":
     HOST, PORT = "localhost", 6868
     messages = TTLOrderedDict(default_ttl=86400) #keep messages for 24h
     
-    def debug_msg(msg,type):
+    def debug_msg(msg,type=None):
         if bool(type):
             type = 'debug'
         messages[time.time()] = { 'type': type, 'msg': msg }
