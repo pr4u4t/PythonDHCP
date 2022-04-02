@@ -1,0 +1,221 @@
+\hypertarget{classttldict_1_1_t_t_l_ordered_dict}{}\doxysection{ttldict.\+TTLOrdered\+Dict Class Reference}
+\label{classttldict_1_1_t_t_l_ordered_dict}\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+Inheritance diagram for ttldict.\+TTLOrdered\+Dict\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classttldict_1_1_t_t_l_ordered_dict}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, default\+\_\+ttl, $\ast$args, $\ast$$\ast$kwargs)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5c8732dc608a83dd34ae6816cda7e579}{\+\_\+\+\_\+repr\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}{\+\_\+\+\_\+len\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a48600535f4edf65bd03983773f70b9dd}{set\+\_\+ttl}} (self, key, ttl, now=None)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a004030f29f2f0a555ac9f8c9f550197a}{get\+\_\+ttl}} (self, key, now=None)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_ac83d5ddce040eeb4704caa0e3a62770a}{expire\+\_\+at}} (self, key, timestamp)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{is\+\_\+expired}} (self, key, now=None)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}{\+\_\+\+\_\+iter\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{\+\_\+\+\_\+setitem\+\_\+\+\_\+}} (self, key, value)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{\+\_\+\+\_\+delitem\+\_\+\+\_\+}} (self, key)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\+\_\+\+\_\+getitem\+\_\+\+\_\+}} (self, key)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}{keys}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}{items}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}{values}} (self)
+\item 
+def \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a0fff5c429984a81ee22b7357fbbf874e}{get}} (self, key, default=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}OrderedDict with TTL
+Extra args and kwargs are passed to initial .update() call
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00008}{8}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}\label{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{default\+\_\+ttl,  }\item[{$\ast$}]{args,  }\item[{$\ast$$\ast$}]{kwargs }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Be warned, if you use this with Python versions earlier than 3.6
+when passing **kwargs order is not preseverd.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00013}{13}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}\label{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_delitem\_\_@{\_\_delitem\_\_}}
+\index{\_\_delitem\_\_@{\_\_delitem\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_delitem\_\_()}{\_\_delitem\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+delitem\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00089}{89}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}\label{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_getitem\_\_@{\_\_getitem\_\_}}
+\index{\_\_getitem\_\_@{\_\_getitem\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_getitem\_\_()}{\_\_getitem\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+getitem\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00093}{93}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}\label{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_iter\_\_@{\_\_iter\_\_}}
+\index{\_\_iter\_\_@{\_\_iter\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_iter\_\_()}{\_\_iter\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+iter\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Yield only non expired keys, without purging the expired ones
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00072}{72}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}\label{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_len\_\_@{\_\_len\_\_}}
+\index{\_\_len\_\_@{\_\_len\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_len\_\_()}{\_\_len\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+len\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00028}{28}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a5c8732dc608a83dd34ae6816cda7e579}\label{classttldict_1_1_t_t_l_ordered_dict_a5c8732dc608a83dd34ae6816cda7e579}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_repr\_\_@{\_\_repr\_\_}}
+\index{\_\_repr\_\_@{\_\_repr\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_repr\_\_()}{\_\_repr\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+repr\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00024}{24}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}\label{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!\_\_setitem\_\_@{\_\_setitem\_\_}}
+\index{\_\_setitem\_\_@{\_\_setitem\_\_}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{\_\_setitem\_\_()}{\_\_setitem\_\_()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+\_\+\+\_\+setitem\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00081}{81}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_ac83d5ddce040eeb4704caa0e3a62770a}\label{classttldict_1_1_t_t_l_ordered_dict_ac83d5ddce040eeb4704caa0e3a62770a}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!expire\_at@{expire\_at}}
+\index{expire\_at@{expire\_at}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{expire\_at()}{expire\_at()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+expire\+\_\+at (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{timestamp }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Set the key expire timestamp\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00049}{49}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a0fff5c429984a81ee22b7357fbbf874e}\label{classttldict_1_1_t_t_l_ordered_dict_a0fff5c429984a81ee22b7357fbbf874e}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!get@{get}}
+\index{get@{get}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+get (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{default = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00118}{118}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a004030f29f2f0a555ac9f8c9f550197a}\label{classttldict_1_1_t_t_l_ordered_dict_a004030f29f2f0a555ac9f8c9f550197a}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!get\_ttl@{get\_ttl}}
+\index{get\_ttl@{get\_ttl}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{get\_ttl()}{get\_ttl()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+get\+\_\+ttl (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{now = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Return remaining TTL for a key\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00041}{41}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}\label{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!is\_expired@{is\_expired}}
+\index{is\_expired@{is\_expired}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{is\_expired()}{is\_expired()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+is\+\_\+expired (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{now = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Check if key has expired, and return it if so\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00055}{55}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}\label{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!items@{items}}
+\index{items@{items}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{items()}{items()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+items (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00106}{106}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}\label{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!keys@{keys}}
+\index{keys@{keys}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{keys()}{keys()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+keys (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00101}{101}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_a48600535f4edf65bd03983773f70b9dd}\label{classttldict_1_1_t_t_l_ordered_dict_a48600535f4edf65bd03983773f70b9dd}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!set\_ttl@{set\_ttl}}
+\index{set\_ttl@{set\_ttl}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{set\_ttl()}{set\_ttl()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+set\+\_\+ttl (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key,  }\item[{}]{ttl,  }\item[{}]{now = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Set TTL for the given key\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00033}{33}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+\mbox{\Hypertarget{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}\label{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}} 
+\index{ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}!values@{values}}
+\index{values@{values}!ttldict.TTLOrderedDict@{ttldict.TTLOrderedDict}}
+\doxysubsubsection{\texorpdfstring{values()}{values()}}
+{\footnotesize\ttfamily def ttldict.\+TTLOrdered\+Dict.\+values (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{ttldict_8py_source_l00112}{112}} of file \mbox{\hyperlink{ttldict_8py_source}{ttldict.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ttldict_8py}{ttldict.\+py}}\end{DoxyCompactItemize}

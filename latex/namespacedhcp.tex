@@ -1,0 +1,169 @@
+\hypertarget{namespacedhcp}{}\doxysection{dhcp Namespace Reference}
+\label{namespacedhcp}\index{dhcp@{dhcp}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e}{CASEINSENSITIVE}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_c_s_v_database}{CSVDatabase}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_delay_worker}{Delay\+Worker}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServer\+Configuration}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r}{GREATER}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_host}{Host}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_host_database}{Host\+Database}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k}{NETWORK}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_priority_queue}{Priority\+Queue}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler}{Threaded\+Tcp\+Request\+Handler}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{Threaded\+Tcp\+Server}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_transaction}{Transaction}}
+\item 
+class \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet}{Write\+Boot\+Protocol\+Packet}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedhcp_af20880fd0c047e3357f1c8c239968538}{get\+\_\+host\+\_\+ip\+\_\+addresses}} ()
+\item 
+def \mbox{\hyperlink{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}{ip\+\_\+addresses}} (network, subnet\+\_\+mask)
+\item 
+def \mbox{\hyperlink{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}{sorted\+\_\+hosts}} (hosts)
+\item 
+def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{debug\+\_\+msg}} (msg, type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}{ALL}} = \mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}()
+\item 
+\mbox{\hyperlink{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}{messages}} = \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{TTLOrdered\+Dict}}(default\+\_\+ttl=86400)
+\item 
+\mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}} = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServer\+Configuration}}()
+\item 
+\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{debug}}
+\item 
+\mbox{\hyperlink{namespacedhcp_ab7a91c254731d739131c23acd44cc194}{ip\+\_\+address\+\_\+lease\+\_\+time}}
+\item 
+\mbox{\hyperlink{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}{server}} = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}(\mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}\label{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}} 
+\index{dhcp@{dhcp}!debug\_msg@{debug\_msg}}
+\index{debug\_msg@{debug\_msg}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{debug\_msg()}{debug\_msg()}}
+{\footnotesize\ttfamily def dhcp.\+debug\+\_\+msg (\begin{DoxyParamCaption}\item[{}]{msg,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00670}{670}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_af20880fd0c047e3357f1c8c239968538}\label{namespacedhcp_af20880fd0c047e3357f1c8c239968538}} 
+\index{dhcp@{dhcp}!get\_host\_ip\_addresses@{get\_host\_ip\_addresses}}
+\index{get\_host\_ip\_addresses@{get\_host\_ip\_addresses}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{get\_host\_ip\_addresses()}{get\_host\_ip\_addresses()}}
+{\footnotesize\ttfamily def dhcp.\+get\+\_\+host\+\_\+ip\+\_\+addresses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get IP address of current host.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00021}{21}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}\label{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}} 
+\index{dhcp@{dhcp}!ip\_addresses@{ip\_addresses}}
+\index{ip\_addresses@{ip\_addresses}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{ip\_addresses()}{ip\_addresses()}}
+{\footnotesize\ttfamily def dhcp.\+ip\+\_\+addresses (\begin{DoxyParamCaption}\item[{}]{network,  }\item[{}]{subnet\+\_\+mask }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00342}{342}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}\label{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}} 
+\index{dhcp@{dhcp}!sorted\_hosts@{sorted\_hosts}}
+\index{sorted\_hosts@{sorted\_hosts}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{sorted\_hosts()}{sorted\_hosts()}}
+{\footnotesize\ttfamily def dhcp.\+sorted\+\_\+hosts (\begin{DoxyParamCaption}\item[{}]{hosts }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00475}{475}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}\label{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}} 
+\index{dhcp@{dhcp}!ALL@{ALL}}
+\index{ALL@{ALL}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{ALL}{ALL}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classdhcp_1_1_a_l_l}{dhcp.\+ALL}} = \mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}()}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00357}{357}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}\label{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}} 
+\index{dhcp@{dhcp}!configuration@{configuration}}
+\index{configuration@{configuration}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily dhcp.\+configuration = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServer\+Configuration}}()}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00675}{675}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}\label{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}} 
+\index{dhcp@{dhcp}!debug@{debug}}
+\index{debug@{debug}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily dhcp.\+debug}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00676}{676}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_ab7a91c254731d739131c23acd44cc194}\label{namespacedhcp_ab7a91c254731d739131c23acd44cc194}} 
+\index{dhcp@{dhcp}!ip\_address\_lease\_time@{ip\_address\_lease\_time}}
+\index{ip\_address\_lease\_time@{ip\_address\_lease\_time}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{ip\_address\_lease\_time}{ip\_address\_lease\_time}}
+{\footnotesize\ttfamily dhcp.\+ip\+\_\+address\+\_\+lease\+\_\+time}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00680}{680}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}\label{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}} 
+\index{dhcp@{dhcp}!messages@{messages}}
+\index{messages@{messages}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{messages}{messages}}
+{\footnotesize\ttfamily dhcp.\+messages = \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{TTLOrdered\+Dict}}(default\+\_\+ttl=86400)}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00668}{668}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}\label{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}} 
+\index{dhcp@{dhcp}!server@{server}}
+\index{server@{server}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily dhcp.\+server = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}(\mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00681}{681}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+

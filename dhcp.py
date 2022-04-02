@@ -17,10 +17,16 @@ import socketserver
 
 from listener import *
 
+
 def get_host_ip_addresses():
+    """Get IP address of current host.
+    """
     return gethostbyname_ex(gethostname())[2]
 
 class PriorityQueue(object):
+    """This class contains Heapq for more information:
+    https://docs.python.org/3/library/heapq.html
+    """
     def __init__(self):
         self._queue = []
         self._index = 0
@@ -36,6 +42,10 @@ class PriorityQueue(object):
         return len(self._queue)
 
 class WriteBootProtocolPacket(object):
+    """DHCP protocol datagram serializer
+    This class serializes UDP DHCP packet, instance is constructed using global 
+    configuration from which dhcp options are copied
+    """
     message_type = 2 # 1 for client -> server 2 for server -> client
     hardware_type = 1
     hardware_address_length = 6
@@ -57,6 +67,9 @@ class WriteBootProtocolPacket(object):
     parameter_order = []
     
     def __init__(self, configuration):
+        """Create new packet instance and search for options set in configuration 
+        and copy them tgo packet
+        """
         for i in range(256):
             names = ['option_{}'.format(i)]
             if i < len(options) and hasattr(configuration, options[i][0]):
@@ -66,6 +79,8 @@ class WriteBootProtocolPacket(object):
                     setattr(self, name, getattr(configuration, name))
 
     def to_bytes(self):
+        """Serialize UDP DHCP response packet to bytes
+        """
         result = bytearray(236)
         
         result[0] = self.message_type
@@ -97,6 +112,8 @@ class WriteBootProtocolPacket(object):
         return bytes(result)
 
     def get_option(self, option):
+        """Get DHCP UDP response packet option value
+        """
         if option < len(options) and hasattr(self, options[option][0]):
             value = getattr(self, options[option][0])
         elif hasattr(self, 'option_{}'.format(option)):
@@ -110,6 +127,8 @@ class WriteBootProtocolPacket(object):
     
     @property
     def options(self):
+        """Get DHCP UDP response packet option value
+        """
         done = list()
         # fulfill wishes
         for option in self.parameter_order:
@@ -129,16 +148,24 @@ class WriteBootProtocolPacket(object):
         return done
 
     def __str__(self):
+        """Serialize UDP DHCP response packet to bytes
+        """
         return str(ReadBootProtocolPacket(self.to_bytes()))
 
 class DelayWorker(object):
+    """Class used to delay response to DHCP client
+    """
     def __init__(self):
+        """class constructor internally using priority queue where priority is time
+        """
         self.closed = False
         self.queue = PriorityQueue()
         self.thread = threading.Thread(target = self._delay_response_thread)
         self.thread.start()
 
     def _delay_response_thread(self):
+        """thread worker
+        """
         while not self.closed:
             if self.closed:
                 break
@@ -154,13 +181,22 @@ class DelayWorker(object):
 
 
     def do_after(self, seconds, func, args = (), kw = {}):
+        """Add to queue function which should be called after certain time
+        specified by seconds, args, kw are arguments
+        """
         self.queue.put((time.time() + seconds, func, args, kw))
 
     def close(self):
+        """Method used to stop worker
+        """
         self.closed = True
 
 class Transaction(object):
+    """Class representing DHCP Transaction
+    """
     def __init__(self, server):
+        """Contructor of new transaction
+        """
         self.server = server
         self.configuration = server.configuration
         self.packets = []
@@ -170,12 +206,18 @@ class Transaction(object):
         self.debug = debug
         
     def is_done(self):
+        """Check if transaction is done 
+        """
         return self.done or self.done_time < time.time()
 
     def close(self):
+        """Close transaction
+        """
         self.done = True
 
     def receive(self, packet):
+        """Receive DHCP UDP packet check it's type and call a proper callback
+        """
         # packet from client <-> packet.message_type == 1
         if packet.message_type == 1 and packet.dhcp_message_type == 'DHCPDISCOVER':
             self.do_after(self.configuration.dhcp_offer_after_seconds,
@@ -190,11 +232,15 @@ class Transaction(object):
         return True
 
     def received_dhcp_discover(self, discovery):
+        """Method used to handle DHCP Discover packet
+        """
         if self.is_done(): return
         self.configuration.debug('discover:\n {}'.format(str(discovery).replace('\n', '\n\t')))
         self.send_offer(discovery)
 
     def send_offer(self, discovery):
+        """Method used to send DHCP offer packet
+        """
         # https://tools.ietf.org/html/rfc2131
         offer = WriteBootProtocolPacket(self.configuration)
         offer.parameter_order = discovery.parameter_request_list
@@ -213,6 +259,8 @@ class Transaction(object):
         self.server.broadcast(offer)
     
     def received_dhcp_request(self, request):
+        """Method used to handle DHCP Request packet
+        """
         if self.is_done(): return 
         self.configuration.debug('request:\n {}'.format(str(request).replace('\n', '\n\t')))
         self.server.client_has_chosen(request)
@@ -220,6 +268,8 @@ class Transaction(object):
         self.close()
 
     def acknowledge(self, request):
+        """Method used to handle DHCP Acknowledge packet
+        """
         ack = WriteBootProtocolPacket(self.configuration)
         ack.parameter_order = request.parameter_request_list
         ack.transaction_id = request.transaction_id
@@ -568,7 +618,11 @@ class DHCPServer(object):
         return sorted_hosts(self.hosts.get(last_used = GREATER(self.time_started)))
 
 class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
+    """Control socket client connection handler
+    """
     def handle(self):
+        """Method used to handle client connection parsing commands and giving response to them
+        """
         self.request.sendall(bytes("Welcome to micro python dhcp server", 'ascii'))
         try:
             while(True):
@@ -592,13 +646,21 @@ class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
             pass
 
 class ThreadedTcpServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    """DHCP server control interface TCP server
+    """
     def setEvents(self,data):
+        """Set DHCP events dictionary reference
+        """
         self.events = data
 
     def setHosts(self,data):
+        """Set DHCP host database with active leases reference
+        """
         self.hosts = data
         
     def setConfiguration(self,data):
+        """Set DHCP UDP global configuration reference
+        """
         self.configuration = data
         
 if __name__ == '__main__':

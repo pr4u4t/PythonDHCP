@@ -1,0 +1,264 @@
+\hypertarget{listener_8py_source}{}\doxysection{listener.\+py}
+\mbox{\hyperlink{listener_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00001}\mbox{\hyperlink{namespacelistener}{00001}} \textcolor{comment}{\#!/usr/bin/env python3}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00002}00002 \textcolor{keyword}{from} socket \textcolor{keyword}{import} *}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00004}00004 \textcolor{keyword}{import} struct}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00005}00005 \textcolor{keyword}{import} base64}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00006}00006 \textcolor{keyword}{import} select}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00008}00008 \textcolor{comment}{\# see https://en.wikipedia.org/wiki/Dynamic\_Host\_Configuration\_Protocol}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00009}00009 \textcolor{comment}{\# section DHCP options}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00011}\mbox{\hyperlink{namespacelistener_a0c4f77316951a70aa30079f1633365cc}{00011}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_a0c4f77316951a70aa30079f1633365cc}{inet\_ntoaX}}(data):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00012}00012     \textcolor{keywordflow}{return} [\textcolor{stringliteral}{'.'}.join(map(str, data[i:i + 4])) \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(0, len(data), 4)]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00014}\mbox{\hyperlink{namespacelistener_a29b918ea7300437205b510053fe33dac}{00014}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_a29b918ea7300437205b510053fe33dac}{inet\_atonX}}(ips):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00015}00015     \textcolor{keywordflow}{return} b\textcolor{stringliteral}{''}.join(map(inet\_aton, ips))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00017}\mbox{\hyperlink{namespacelistener_a0d9b9e0e632268b3a9a29e1e76fb0c07}{00017}} dhcp\_message\_types = \{}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00018}00018     1 : \textcolor{stringliteral}{'DHCPDISCOVER'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00019}00019     2 : \textcolor{stringliteral}{'DHCPOFFER'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00020}00020     3 : \textcolor{stringliteral}{'DHCPREQUEST'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00021}00021     4 : \textcolor{stringliteral}{'DHCPDECLINE'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00022}00022     5 : \textcolor{stringliteral}{'DHCPACK'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00023}00023     6 : \textcolor{stringliteral}{'DHCPNAK'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00024}00024     7 : \textcolor{stringliteral}{'DHCPRELEASE'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00025}00025     8 : \textcolor{stringliteral}{'DHCPINFORM'},}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00026}00026 \}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00027}\mbox{\hyperlink{namespacelistener_a04a91fa40083c8a74458563f869474fc}{00027}} reversed\_dhcp\_message\_types = dict()}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00028}00028 \textcolor{keywordflow}{for} i, v \textcolor{keywordflow}{in} dhcp\_message\_types.items():}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00029}00029     reversed\_dhcp\_message\_types[v] = i}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00031}\mbox{\hyperlink{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}{00031}} shortunpack = \textcolor{keyword}{lambda} data: (data[0] << 8) + data[1]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00032}\mbox{\hyperlink{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}{00032}} shortpack = \textcolor{keyword}{lambda} i: bytes([i >> 8, i \& 255])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00035}\mbox{\hyperlink{namespacelistener_a393567f88ed75b1e57776d61530b2a26}{00035}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_a393567f88ed75b1e57776d61530b2a26}{macunpack}}(data):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00036}00036     s = base64.b16encode(data)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00037}00037     \textcolor{keywordflow}{return} \textcolor{stringliteral}{':'}.join([s[i:i+2].decode(\textcolor{stringliteral}{'ascii'}) \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(0, 12, 2)])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00039}\mbox{\hyperlink{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}{00039}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}{macpack}}(mac):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00040}00040     \textcolor{keywordflow}{return} base64.b16decode(mac.replace(\textcolor{stringliteral}{':'}, \textcolor{stringliteral}{''}).replace(\textcolor{stringliteral}{'-\/'}, \textcolor{stringliteral}{''}).encode(\textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00042}\mbox{\hyperlink{namespacelistener_ac69c4f8f4efab46a2f093d86f15b2bf4}{00042}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_ac69c4f8f4efab46a2f093d86f15b2bf4}{unpackbool}}(data):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00043}00043     \textcolor{keywordflow}{return} data[0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00045}\mbox{\hyperlink{namespacelistener_aac2063401b57bbbf1b6188386694a3ed}{00045}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacelistener_aac2063401b57bbbf1b6188386694a3ed}{packbool}}(bool):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00046}00046     \textcolor{keywordflow}{return} bytes([bool])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00048}\mbox{\hyperlink{namespacelistener_abeab9fa9161aa45a0b82cde5dda42299}{00048}} options = [}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00049}00049 \textcolor{comment}{\# RFC1497 vendor extensions}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00050}00050     (\textcolor{stringliteral}{'pad'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00051}00051     (\textcolor{stringliteral}{'subnet\_mask'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00052}00052     (\textcolor{stringliteral}{'time\_offset'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00053}00053     (\textcolor{stringliteral}{'router'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00054}00054     (\textcolor{stringliteral}{'time\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00055}00055     (\textcolor{stringliteral}{'name\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00056}00056     (\textcolor{stringliteral}{'domain\_name\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00057}00057     (\textcolor{stringliteral}{'log\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00058}00058     (\textcolor{stringliteral}{'cookie\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00059}00059     (\textcolor{stringliteral}{'lpr\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00060}00060     (\textcolor{stringliteral}{'impress\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00061}00061     (\textcolor{stringliteral}{'resource\_location\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00062}00062     (\textcolor{stringliteral}{'host\_name'}, \textcolor{keyword}{lambda} d: d.decode(\textcolor{stringliteral}{'ASCII'}), \textcolor{keyword}{lambda} d: d.encode(\textcolor{stringliteral}{'ASCII'})),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00063}00063     (\textcolor{stringliteral}{'boot\_file\_size'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00064}00064     (\textcolor{stringliteral}{'merit\_dump\_file'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00065}00065     (\textcolor{stringliteral}{'domain\_name'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00066}00066     (\textcolor{stringliteral}{'swap\_server'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00067}00067     (\textcolor{stringliteral}{'root\_path'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00068}00068     (\textcolor{stringliteral}{'extensions\_path'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00069}00069 \textcolor{comment}{\# IP Layer Parameters per Host}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00070}00070     (\textcolor{stringliteral}{'ip\_forwarding\_enabled'}, unpackbool, packbool),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00071}00071     (\textcolor{stringliteral}{'non\_local\_source\_routing\_enabled'}, unpackbool, packbool),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00072}00072     (\textcolor{stringliteral}{'policy\_filer'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00073}00073     (\textcolor{stringliteral}{'maximum\_datagram\_reassembly\_size'}, shortunpack, shortpack),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00074}00074     (\textcolor{stringliteral}{'default\_ip\_time\_to\_live'}, \textcolor{keyword}{lambda} data: data[0], \textcolor{keyword}{lambda} i: bytes([i])),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00075}00075     (\textcolor{stringliteral}{'path\_mtu\_aging\_timeout'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00076}00076     (\textcolor{stringliteral}{'path\_mtu\_plateau\_table'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00077}00077 \textcolor{comment}{\# IP Layer Parameters per Interface}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00078}00078     (\textcolor{stringliteral}{'interface\_mtu'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00079}00079     (\textcolor{stringliteral}{'all\_subnets\_are\_local'}, unpackbool, packbool),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00080}00080     (\textcolor{stringliteral}{'broadcast\_address'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00081}00081     (\textcolor{stringliteral}{'perform\_mask\_discovery'}, unpackbool, packbool),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00082}00082     (\textcolor{stringliteral}{'mask\_supplier'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00083}00083     (\textcolor{stringliteral}{'perform\_router\_discovery'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00084}00084     (\textcolor{stringliteral}{'router\_solicitation\_address'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00085}00085     (\textcolor{stringliteral}{'static\_route'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00086}00086 \textcolor{comment}{\# Link Layer Parameters per Interface}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00087}00087     (\textcolor{stringliteral}{'trailer\_encapsulation\_option'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00088}00088     (\textcolor{stringliteral}{'arp\_cache\_timeout'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00089}00089     (\textcolor{stringliteral}{'ethernet\_encapsulation'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00090}00090 \textcolor{comment}{\# TCP Parameters}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00091}00091     (\textcolor{stringliteral}{'tcp\_default\_ttl'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00092}00092     (\textcolor{stringliteral}{'tcp\_keep\_alive\_interval'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00093}00093     (\textcolor{stringliteral}{'tcp\_keep\_alive\_garbage'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00094}00094 \textcolor{comment}{\# Application and Service Parameters Part 1}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00095}00095     (\textcolor{stringliteral}{'network\_information\_service\_domain'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00096}00096     (\textcolor{stringliteral}{'network\_informtaion\_servers'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00097}00097     (\textcolor{stringliteral}{'network\_time\_protocol\_servers'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00098}00098     (\textcolor{stringliteral}{'vendor\_specific\_information'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00099}00099     (\textcolor{stringliteral}{'netbios\_over\_tcp\_ip\_name\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00100}00100     (\textcolor{stringliteral}{'netbios\_over\_tcp\_ip\_datagram\_distribution\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00101}00101     (\textcolor{stringliteral}{'netbios\_over\_tcp\_ip\_node\_type'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00102}00102     (\textcolor{stringliteral}{'netbios\_over\_tcp\_ip\_scope'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00103}00103     (\textcolor{stringliteral}{'x\_window\_system\_font\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00104}00104     (\textcolor{stringliteral}{'x\_window\_system\_display\_manager'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00105}00105 \textcolor{comment}{\# DHCP Extensions}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00106}00106     (\textcolor{stringliteral}{'requested\_ip\_address'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00107}00107     (\textcolor{stringliteral}{'ip\_address\_lease\_time'}, \textcolor{keyword}{lambda} d: struct.unpack(\textcolor{stringliteral}{'>I'}, d)[0], \textcolor{keyword}{lambda} i: struct.pack(\textcolor{stringliteral}{'>I'}, i)),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00108}00108     (\textcolor{stringliteral}{'option\_overload'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00109}00109     (\textcolor{stringliteral}{'dhcp\_message\_type'}, \textcolor{keyword}{lambda} data: dhcp\_message\_types.get(data[0], data[0]), (\textcolor{keyword}{lambda} name: bytes([reversed\_dhcp\_message\_types.get(name, name)]))),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00110}00110     (\textcolor{stringliteral}{'server\_identifier'}, inet\_ntoa, inet\_aton),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00111}00111     (\textcolor{stringliteral}{'parameter\_request\_list'}, list, bytes),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00112}00112     (\textcolor{stringliteral}{'message'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00113}00113     (\textcolor{stringliteral}{'maximum\_dhcp\_message\_size'}, shortunpack, shortpack),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00114}00114     (\textcolor{stringliteral}{'renewal\_time\_value'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00115}00115     (\textcolor{stringliteral}{'rebinding\_time\_value'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00116}00116     (\textcolor{stringliteral}{'vendor\_class\_identifier'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00117}00117     (\textcolor{stringliteral}{'client\_identifier'}, macunpack, macpack),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00118}00118     (\textcolor{stringliteral}{'tftp\_server\_name'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00119}00119     (\textcolor{stringliteral}{'boot\_file\_name'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00120}00120 \textcolor{comment}{\# Application and Service Parameters Part 2}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00121}00121     (\textcolor{stringliteral}{'network\_information\_service\_domain'}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00122}00122     (\textcolor{stringliteral}{'network\_information\_servers'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00123}00123     (\textcolor{stringliteral}{''}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00124}00124     (\textcolor{stringliteral}{''}, \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00125}00125     (\textcolor{stringliteral}{'mobile\_ip\_home\_agent'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00126}00126     (\textcolor{stringliteral}{'smtp\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00127}00127     (\textcolor{stringliteral}{'pop\_servers'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00128}00128     (\textcolor{stringliteral}{'nntp\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00129}00129     (\textcolor{stringliteral}{'default\_www\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00130}00130     (\textcolor{stringliteral}{'default\_finger\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00131}00131     (\textcolor{stringliteral}{'default\_irc\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00132}00132     (\textcolor{stringliteral}{'streettalk\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00133}00133     (\textcolor{stringliteral}{'stda\_server'}, inet\_ntoaX, inet\_atonX),}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00134}00134     ]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00136}00136 \textcolor{keyword}{assert} options[18][0] == \textcolor{stringliteral}{'extensions\_path'}, options[18][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00137}00137 \textcolor{keyword}{assert} options[25][0] == \textcolor{stringliteral}{'path\_mtu\_plateau\_table'}, options[25][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00138}00138 \textcolor{keyword}{assert} options[33][0] == \textcolor{stringliteral}{'static\_route'}, options[33][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00139}00139 \textcolor{keyword}{assert} options[50][0] == \textcolor{stringliteral}{'requested\_ip\_address'}, options[50][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00140}00140 \textcolor{keyword}{assert} options[64][0] == \textcolor{stringliteral}{'network\_information\_service\_domain'}, options[64][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00141}00141 \textcolor{keyword}{assert} options[76][0] == \textcolor{stringliteral}{'stda\_server'}, options[76][0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00142}00142 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00143}00143 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00144}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{00144}} \textcolor{keyword}{class }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{ReadBootProtocolPacket}}(object):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00145}00145 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00146}00146     \textcolor{keywordflow}{for} i, o \textcolor{keywordflow}{in} enumerate(options):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00147}00147         locals()[o[0]] = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00148}00148         locals()[\textcolor{stringliteral}{'option\_\{0\}'}.format(i)] = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00150}00150     del i, o}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00152}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af79cad649456f9dc9e4087e2c7798bb1}{00152}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af79cad649456f9dc9e4087e2c7798bb1}{\_\_init\_\_}}(self, data, address = (\textcolor{stringliteral}{'0.0.0.0'}, 0)):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00153}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ad2550dfd97b023a76d0f0069a707f099}{00153}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ad2550dfd97b023a76d0f0069a707f099}{data}} = data}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00154}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a6a0bc4d4c84fb36209970eef53a9cc4f}{00154}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a6a0bc4d4c84fb36209970eef53a9cc4f}{address}} = address}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00155}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a13023361d7d2c2eb6ade562c70b5b3c6}{00155}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a13023361d7d2c2eb6ade562c70b5b3c6}{host}} = address[0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00156}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a0753b6574194d21b79950f7a244730e0}{00156}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a0753b6574194d21b79950f7a244730e0}{port}} = address[1]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00158}00158         \textcolor{comment}{\# wireshark = wikipedia = data[...]}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00159}00159         }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00160}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a351e42e489b454ab57fe85d4f79b5ead}{00160}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a351e42e489b454ab57fe85d4f79b5ead}{message\_type}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a9cab6aba227841a9714b5769fd0d7e04}{OP}} =                data[0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00161}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a26197a4102583e9cd76ddc7e1b06519a}{00161}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a26197a4102583e9cd76ddc7e1b06519a}{hardware\_type}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a7da87a2c24d8fd063542e3f0267a9024}{HTYPE}} =            data[1]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00162}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a096ef24516a8c19a847a37b81e628594}{00162}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a096ef24516a8c19a847a37b81e628594}{hardware\_address\_length}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af0229d869c8cfce72079c40b9b544e7c}{HLEN}} =   data[2]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00163}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ac69d82c42cf94cf9e04eaa8b08bd26df}{00163}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a67227d29d96a999260f45172ab1b9e46}{hops}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ac69d82c42cf94cf9e04eaa8b08bd26df}{HOPS}} =                      data[3]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00164}00164 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00165}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af35fc9df394eda545cfe95100a61b6a8}{00165}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a93d900d0a84bbd90f77e8229c774d91a}{XID}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af35fc9df394eda545cfe95100a61b6a8}{transaction\_id}} = struct.unpack(\textcolor{stringliteral}{'>I'}, data[4:8])[0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00166}00166 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00167}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af9f675a01088e5776a7fcc97b383f273}{00167}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_af9f675a01088e5776a7fcc97b383f273}{seconds\_elapsed}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aa2b3b5486815db4bb07e498d1308409a}{SECS}} = \mbox{\hyperlink{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}{shortunpack}}(data[8:10])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00168}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a92e1bda1657ff6abe8eb4729a71dab8f}{00168}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a92e1bda1657ff6abe8eb4729a71dab8f}{bootp\_flags}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ae17219766f82a6b7822b105f1a63c82d}{FLAGS}} =    \mbox{\hyperlink{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}{shortunpack}}(data[8:10])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00169}00169 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00170}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a03d8f883dc9ccdc69678316953bcc595}{00170}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aaf722416b37bc7e1ae457a15ffbd0c9d}{client\_ip\_address}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a03d8f883dc9ccdc69678316953bcc595}{CIADDR}} = inet\_ntoa(data[12:16])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00171}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a58e53111bf9aa5ab4da58cc08c54e742}{00171}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a5f44a29a67618060d0fb7ae40b20d581}{your\_ip\_address}}   = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a58e53111bf9aa5ab4da58cc08c54e742}{YIADDR}} = inet\_ntoa(data[16:20])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00172}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ab370cdd6ec1cfb578dcfd21448ffc957}{00172}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ab370cdd6ec1cfb578dcfd21448ffc957}{next\_server\_ip\_address}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a1726a6a1483886480eb8f23516ab92a7}{SIADDR}} = inet\_ntoa(data[20:24])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00173}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ac8d637387bdffa92dfbbfa65a78ce2b7}{00173}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a3a0991908bddc82330803fbf1307542f}{relay\_agent\_ip\_address}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_ac8d637387bdffa92dfbbfa65a78ce2b7}{GIADDR}} = inet\_ntoa(data[24:28])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00175}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a00fa4c3437586b7a5755a26cf9399083}{00175}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a0cf3ba4547fe70dabe1d7654034e8577}{client\_mac\_address}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a00fa4c3437586b7a5755a26cf9399083}{CHADDR}} = \mbox{\hyperlink{namespacelistener_a393567f88ed75b1e57776d61530b2a26}{macunpack}}(data[28: 28 + self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a096ef24516a8c19a847a37b81e628594}{hardware\_address\_length}}])}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00176}00176         index = 236}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00177}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_acbea0e964dee17b0b3e0c3f035124e3c}{00177}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_acbea0e964dee17b0b3e0c3f035124e3c}{magic\_cookie}} = self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_acbea0e964dee17b0b3e0c3f035124e3c}{magic\_cookie}} = inet\_ntoa(data[index:index + 4]); index += 4}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00178}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aaafa5bfc794fcaabacb1f29875a9a3f2}{00178}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aaafa5bfc794fcaabacb1f29875a9a3f2}{options}} = dict()}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00179}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aa52c566f7a2562819580b6cd99c25b49}{00179}}         self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aa52c566f7a2562819580b6cd99c25b49}{named\_options}} = dict()}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00180}00180         \textcolor{keywordflow}{while} index < len(data):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00181}00181             option = data[index]; index += 1}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00182}00182             \textcolor{keywordflow}{if} option == 0:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00183}00183                 \textcolor{comment}{\# padding}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00184}00184                 \textcolor{comment}{\# Can be used to pad other options so that they are aligned to the word boundary; is not followed by length byte}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00185}00185                 \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00186}00186             \textcolor{keywordflow}{if} option == 255:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00187}00187                 \textcolor{comment}{\# end}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00188}00188                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00189}00189             option\_length = data[index]; index += 1}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00190}00190             option\_data = data[index: index + option\_length]; index += option\_length}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00191}00191             self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aaafa5bfc794fcaabacb1f29875a9a3f2}{options}}[option] = option\_data}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00192}00192             \textcolor{keywordflow}{if} option < len(options):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00193}00193                 option\_name, function, \_ = options[option]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00194}00194                 \textcolor{keywordflow}{if} function:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00195}00195                     option\_data = function(option\_data)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00196}00196                 \textcolor{keywordflow}{if} option\_name:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00197}00197                     setattr(self, option\_name, option\_data)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00198}00198                     self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aa52c566f7a2562819580b6cd99c25b49}{named\_options}}[option\_name] = option\_data}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00199}00199             setattr(self, \textcolor{stringliteral}{'option\_\{\}'}.format(option), option\_data)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00200}00200 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00201}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a1a0c9534a8ae38adbfe9ad9332d1ec73}{00201}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a1a0c9534a8ae38adbfe9ad9332d1ec73}{\_\_getitem\_\_}}(self, key):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00202}00202         print(key, dir(self))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00203}00203         \textcolor{keywordflow}{return} getattr(self, key, \textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00204}00204 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00205}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aedcf742c641041e8c9312b66864b9c8e}{00205}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aedcf742c641041e8c9312b66864b9c8e}{\_\_contains\_\_}}(self, key):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00206}00206         \textcolor{keywordflow}{return} key \textcolor{keywordflow}{in} self.\_\_dict\_\_}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00207}00207 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00208}00208     \textcolor{preprocessor}{@property}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00209}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_afa05784da281bd77468da8235f9a17d5}{00209}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_afa05784da281bd77468da8235f9a17d5}{formatted\_named\_options}}(self):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00210}00210         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)n"{}}.join(\textcolor{stringliteral}{"{}\{\}:\(\backslash\)t\{\}"{}}.format(name.replace(\textcolor{stringliteral}{'\_'}, \textcolor{stringliteral}{' '}), value) \textcolor{keywordflow}{for} name, value \textcolor{keywordflow}{in} sorted(self.\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aa52c566f7a2562819580b6cd99c25b49}{named\_options}}.items()))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00211}00211 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00212}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aca9d511556838f05863c5d7b6a104a58}{00212}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_aca9d511556838f05863c5d7b6a104a58}{\_\_str\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00213}00213         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}"{}Message Type: \{self.message\_type\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00214}00214 \textcolor{stringliteral}{client MAC address: \{self.client\_mac\_address\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00215}00215 \textcolor{stringliteral}{client IP address: \{self.client\_ip\_address\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00216}00216 \textcolor{stringliteral}{your IP address: \{self.your\_ip\_address\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00217}00217 \textcolor{stringliteral}{next server IP address: \{self.next\_server\_ip\_address\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00218}00218 \textcolor{stringliteral}{\{self.formatted\_named\_options\}}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00219}00219 \textcolor{stringliteral}{"{}"{}"{}}.format(self = self)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00221}\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a987884af094e840027b874cd3df4b0bc}{00221}}     \textcolor{keyword}{def }\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet_a987884af094e840027b874cd3df4b0bc}{\_\_gt\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00222}00222         \textcolor{keywordflow}{return} id(self) < id(other)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00223}00223 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00224}\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{00224}} data = base64.b16decode(b\textcolor{stringliteral}{'02010600f7b41ad100000000c0a800640000000000000000000000007c7a914bca6c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000638253633501053604c0a800010104ffffff000304c0a800010604c0a80001ff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'}.upper())}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00225}00225 \textcolor{keyword}{assert} data[0] == 2}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00226}\mbox{\hyperlink{namespacelistener_a390b9c69130659db6349daf506cfefea}{00226}} p = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{ReadBootProtocolPacket}}(data)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00227}00227 \textcolor{keyword}{assert} p.message\_type == 2}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00228}00228 \textcolor{keyword}{assert} p.hardware\_type == 1}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00229}00229 \textcolor{keyword}{assert} p.hardware\_address\_length == 6}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00230}00230 \textcolor{keyword}{assert} p.hops == 0}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00231}00231 \textcolor{keyword}{assert} p.transaction\_id == 4155775697}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00232}00232 \textcolor{keyword}{assert} p.seconds\_elapsed == 0}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00233}00233 \textcolor{keyword}{assert} p.bootp\_flags == 0}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00234}00234 \textcolor{keyword}{assert} p.client\_ip\_address == \textcolor{stringliteral}{'192.168.0.100'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00235}00235 \textcolor{keyword}{assert} p.your\_ip\_address == \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00236}00236 \textcolor{keyword}{assert} p.next\_server\_ip\_address == \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00237}00237 \textcolor{keyword}{assert} p.relay\_agent\_ip\_address == \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00238}00238 \textcolor{keyword}{assert} p.client\_mac\_address.lower() == \textcolor{stringliteral}{'7c:7a:91:4b:ca:6c'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00239}00239 \textcolor{keyword}{assert} p.magic\_cookie == \textcolor{stringliteral}{'99.130.83.99'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00240}00240 \textcolor{keyword}{assert} p.dhcp\_message\_type == \textcolor{stringliteral}{'DHCPACK'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00241}00241 \textcolor{keyword}{assert} p.options[53] == b\textcolor{stringliteral}{'\(\backslash\)x05'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00242}00242 \textcolor{keyword}{assert} p.server\_identifier == \textcolor{stringliteral}{'192.168.0.1'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00243}00243 \textcolor{keyword}{assert} p.subnet\_mask == \textcolor{stringliteral}{'255.255.255.0'}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00244}00244 \textcolor{keyword}{assert} p.router == [\textcolor{stringliteral}{'192.168.0.1'}]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00245}00245 \textcolor{keyword}{assert} p.domain\_name\_server == [\textcolor{stringliteral}{'192.168.0.1'}]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00246}00246 str(p)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00248}00248 \textcolor{keywordflow}{if} \_\_name\_\_ == \textcolor{stringliteral}{'\_\_main\_\_'}:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00249}\mbox{\hyperlink{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}{00249}}     s1 = \mbox{\hyperlink{namespacesocket}{socket}}(type = SOCK\_DGRAM)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00250}00250     s1.setsockopt(SOL\_IP, SO\_REUSEADDR, 1)}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00251}00251     s1.bind((\textcolor{stringliteral}{''}, 67))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00252}00252     \textcolor{comment}{\#s2 = socket(type = SOCK\_DGRAM)}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00253}00253     \textcolor{comment}{\#s2.setsockopt(SOL\_IP, SO\_REUSEADDR, 1)}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00254}00254     \textcolor{comment}{\#s2.bind(('', 68))}}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00255}00255     \textcolor{keywordflow}{while} 1:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00256}\mbox{\hyperlink{namespacelistener_ad9e2511b2a065b4143f5a7a71da2baf9}{00256}}         reads = select.select([s1], [], [], 1)[0]}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00257}00257         \textcolor{keywordflow}{for} s \textcolor{keywordflow}{in} reads:}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00258}\mbox{\hyperlink{namespacelistener_a5bccea4f84af3a2a57917ff10a721736}{00258}}             packet = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{ReadBootProtocolPacket}}(*s.recvfrom(4096))}
+\DoxyCodeLine{\Hypertarget{listener_8py_source_l00259}00259             print(packet)}
+
+\end{DoxyCode}

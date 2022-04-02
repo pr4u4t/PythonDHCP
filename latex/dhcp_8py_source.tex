@@ -1,0 +1,698 @@
+\hypertarget{dhcp_8py_source}{}\doxysection{dhcp.\+py}
+\mbox{\hyperlink{dhcp_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00001}\mbox{\hyperlink{namespacedhcp}{00001}} \textcolor{comment}{\#!/usr/bin/env python3}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00003}00003 \textcolor{keyword}{import} time}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00004}00004 \textcolor{keyword}{import} threading}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00005}00005 \textcolor{keyword}{import} struct}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00006}00006 \textcolor{keyword}{import} queue}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00007}00007 \textcolor{keyword}{import} collections}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00008}00008 \textcolor{keyword}{import} traceback}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00009}00009 \textcolor{keyword}{import} random}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00010}00010 \textcolor{keyword}{import} socket}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00011}00011 \textcolor{keyword}{import} heapq    }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00012}00012 \textcolor{keyword}{import} sys}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00013}00013 \textcolor{keyword}{from} os.path \textcolor{keyword}{import} exists}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00014}00014 \textcolor{keyword}{import} re}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00015}00015 \textcolor{keyword}{from} ttldict \textcolor{keyword}{import}  TTLOrderedDict}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00016}00016 \textcolor{keyword}{import} socketserver}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00017}00017 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00018}00018 \textcolor{keyword}{from} listener \textcolor{keyword}{import} *}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00021}\mbox{\hyperlink{namespacedhcp_af20880fd0c047e3357f1c8c239968538}{00021}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacedhcp_af20880fd0c047e3357f1c8c239968538}{get\_host\_ip\_addresses}}():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00022}00022     \textcolor{stringliteral}{"{}"{}"{}Get IP address of current host.}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00023}00023 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00024}00024 \textcolor{stringliteral}{    }\textcolor{keywordflow}{return} gethostbyname\_ex(gethostname())[2]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00026}\mbox{\hyperlink{classdhcp_1_1_priority_queue}{00026}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_priority_queue}{PriorityQueue}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00027}00027     \textcolor{stringliteral}{"{}"{}"{}This class contains Heapq for more information:}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00028}00028 \textcolor{stringliteral}{    https://docs.python.org/3/library/heapq.html}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00029}00029 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00030}\mbox{\hyperlink{classdhcp_1_1_priority_queue_a790eb940b494728bc6753ddf3febc513}{00030}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_priority_queue_a790eb940b494728bc6753ddf3febc513}{\_\_init\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00031}00031         self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a6a52ec70f226bbb5c32ab8ac85dbad95}{\_queue}} = []}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00032}00032         self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a784952c04d9144e3d1521b377609daee}{\_index}} = 0}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00034}\mbox{\hyperlink{classdhcp_1_1_priority_queue_afd1fdf4e96d3c3dde2a05113e161728c}{00034}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_priority_queue_afd1fdf4e96d3c3dde2a05113e161728c}{put}}(self, item):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00035}00035         heapq.heappush(self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a6a52ec70f226bbb5c32ab8ac85dbad95}{\_queue}}, (self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a784952c04d9144e3d1521b377609daee}{\_index}}, item))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00036}00036         self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a784952c04d9144e3d1521b377609daee}{\_index}} += 1}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00038}\mbox{\hyperlink{classdhcp_1_1_priority_queue_ac1073e720d4edd4f4eb220e86421bc9d}{00038}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_priority_queue_ac1073e720d4edd4f4eb220e86421bc9d}{get}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00039}00039         \textcolor{keywordflow}{return} heapq.heappop(self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a6a52ec70f226bbb5c32ab8ac85dbad95}{\_queue}})[-\/1]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00041}\mbox{\hyperlink{classdhcp_1_1_priority_queue_af0f906a4edcc884001a82593805432b1}{00041}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_priority_queue_af0f906a4edcc884001a82593805432b1}{qsize}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00042}00042         \textcolor{keywordflow}{return} len(self.\mbox{\hyperlink{classdhcp_1_1_priority_queue_a6a52ec70f226bbb5c32ab8ac85dbad95}{\_queue}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00044}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet}{00044}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet}{WriteBootProtocolPacket}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00045}00045     \textcolor{stringliteral}{"{}"{}"{}DHCP protocol datagram serializer}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00046}00046 \textcolor{stringliteral}{    This }\textcolor{keyword}{class }serializes UDP DHCP \mbox{\hyperlink{namespacelistener_a5bccea4f84af3a2a57917ff10a721736}{packet}}, instance is constructed using global }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00047}00047     configuration \textcolor{keyword}{from} which dhcp options are copied}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00048}00048     \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00049}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c1eaf3ea98ff19558a2873d47c1bd13}{00049}} \textcolor{stringliteral}{    message\_type = 2 }\textcolor{comment}{\# 1 for client -\/> server 2 for server -\/> client}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00050}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ae995d022d4c4280c10036f64b271d455}{00050}}     hardware\_type = 1}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00051}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}{00051}}     hardware\_address\_length = 6}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00052}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a49c598b664e64b515f80d6f29637e003}{00052}}     hops = 0}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00054}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_add8bca1f53869d801f62ff51f38ef315}{00054}}     transaction\_id = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00056}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a34a75a9fd48929777c6730460b577344}{00056}}     seconds\_elapsed = 0}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00057}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a2158cd33033b3ad7b3de5fd0ced0747d}{00057}}     bootp\_flags = 0 \textcolor{comment}{\# unicast}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00059}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c5041840cc7b7f15970bf58be486659}{00059}}     client\_ip\_address = \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00060}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_abed6f8fcad62c89ae9f670dd8ce95987}{00060}}     your\_ip\_address = \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00061}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a58a23d7668a529c7e9216228c4cf2ba1}{00061}}     next\_server\_ip\_address = \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00062}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aec59dbba94aedab6025226cb7bf92682}{00062}}     relay\_agent\_ip\_address = \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00064}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a8dadba279ad323c2986da9c8822664ff}{00064}}     client\_mac\_address = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00065}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ab5a5b6937a48e0daa4aae992a247f2d5}{00065}}     magic\_cookie = \textcolor{stringliteral}{'99.130.83.99'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00067}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7833e353ff7adc5f1b8042fcd739c7cd}{00067}}     parameter\_order = []}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00068}00068     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00069}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a04195f0af2bc134ac398a11227af4b16}{00069}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a04195f0af2bc134ac398a11227af4b16}{\_\_init\_\_}}(self, configuration):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00070}00070         \textcolor{stringliteral}{"{}"{}"{}Create new packet instance and search for options set in configuration }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00071}00071 \textcolor{stringliteral}{        }\textcolor{keywordflow}{and} copy them tgo packet}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00072}00072         \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00073}00073 \textcolor{stringliteral}{        }\textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(256):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00074}00074             names = [\textcolor{stringliteral}{'option\_\{\}'}.format(i)]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00075}00075             \textcolor{keywordflow}{if} i < len(options) \textcolor{keywordflow}{and} hasattr(configuration, options[i][0]):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00076}00076                 names.append(options[i][0])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00077}00077             \textcolor{keywordflow}{for} name \textcolor{keywordflow}{in} names:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00078}00078                 \textcolor{keywordflow}{if} hasattr(configuration, name):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00079}00079                     setattr(self, name, getattr(configuration, name))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00081}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}{00081}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}{to\_bytes}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00082}00082         \textcolor{stringliteral}{"{}"{}"{}Serialize UDP DHCP response packet to bytes}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00083}00083 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00084}00084 \textcolor{stringliteral}{        result = bytearray(236)}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00085}00085 \textcolor{stringliteral}{        }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00086}00086 \textcolor{stringliteral}{        result[0] = self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c1eaf3ea98ff19558a2873d47c1bd13}{message\_type}}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00087}00087 \textcolor{stringliteral}{        result[1] = self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ae995d022d4c4280c10036f64b271d455}{hardware\_type}}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00088}00088 \textcolor{stringliteral}{        result[2] = self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}{hardware\_address\_length}}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00089}00089 \textcolor{stringliteral}{        result[3] = self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a49c598b664e64b515f80d6f29637e003}{hops}}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00090}00090 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00091}00091 \textcolor{stringliteral}{        result[4:8] = struct.pack('>I'}, self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_add8bca1f53869d801f62ff51f38ef315}{transaction\_id}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00093}00093         result[ 8:10] = \mbox{\hyperlink{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}{shortpack}}(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a34a75a9fd48929777c6730460b577344}{seconds\_elapsed}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00094}00094         result[10:12] = \mbox{\hyperlink{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}{shortpack}}(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a2158cd33033b3ad7b3de5fd0ced0747d}{bootp\_flags}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00096}00096         result[12:16] = inet\_aton(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c5041840cc7b7f15970bf58be486659}{client\_ip\_address}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00097}00097         result[16:20] = inet\_aton(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_abed6f8fcad62c89ae9f670dd8ce95987}{your\_ip\_address}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00098}00098         result[20:24] = inet\_aton(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a58a23d7668a529c7e9216228c4cf2ba1}{next\_server\_ip\_address}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00099}00099         result[24:28] = inet\_aton(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aec59dbba94aedab6025226cb7bf92682}{relay\_agent\_ip\_address}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00101}00101         result[28:28 + self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}{hardware\_address\_length}}] = \mbox{\hyperlink{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}{macpack}}(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a8dadba279ad323c2986da9c8822664ff}{client\_mac\_address}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00102}00102         }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00103}00103         result += inet\_aton(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ab5a5b6937a48e0daa4aae992a247f2d5}{magic\_cookie}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00105}00105         \textcolor{keywordflow}{for} option \textcolor{keywordflow}{in} self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}{options}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00106}00106             value = self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}{get\_option}}(option)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00107}00107             \textcolor{comment}{\#print(option, value)}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00108}00108             \textcolor{keywordflow}{if} value \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00109}00109                 \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00110}00110             result += bytes([option, len(value)]) + value}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00111}00111         result += bytes([255])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00112}00112         \textcolor{keywordflow}{return} bytes(result)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00113}00113 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00114}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}{00114}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}{get\_option}}(self, option):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00115}00115         \textcolor{stringliteral}{"{}"{}"{}Get DHCP UDP response packet option value}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00116}00116 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00117}00117 \textcolor{stringliteral}{        }\textcolor{keywordflow}{if} option < len(options) \textcolor{keywordflow}{and} hasattr(self, options[option][0]):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00118}00118             value = getattr(self, options[option][0])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00119}00119         \textcolor{keywordflow}{elif} hasattr(self, \textcolor{stringliteral}{'option\_\{\}'}.format(option)):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00120}00120             value = getattr(self, \textcolor{stringliteral}{'option\_\{\}'}.format(option))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00121}00121         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00122}00122             \textcolor{keywordflow}{return} \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00123}00123         function = options[option][2]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00124}00124         \textcolor{keywordflow}{if} function \textcolor{keywordflow}{and} value \textcolor{keywordflow}{is} \textcolor{keywordflow}{not} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00125}00125             value = function(value)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00126}00126         \textcolor{keywordflow}{return} value}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00127}00127     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00128}00128     \textcolor{preprocessor}{@property}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00129}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}{00129}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}{options}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00130}00130         \textcolor{stringliteral}{"{}"{}"{}Get DHCP UDP response packet option value}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00131}00131 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00132}00132 \textcolor{stringliteral}{        done = list()}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00133}00133 \textcolor{stringliteral}{        }\textcolor{comment}{\# fulfill wishes}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00134}00134         \textcolor{keywordflow}{for} option \textcolor{keywordflow}{in} self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7833e353ff7adc5f1b8042fcd739c7cd}{parameter\_order}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00135}00135             \textcolor{keywordflow}{if} option < len(options) \textcolor{keywordflow}{and} hasattr(self, options[option][0]) \textcolor{keywordflow}{or} hasattr(self, \textcolor{stringliteral}{'option\_\{\}'}.format(option)):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00136}00136                 \textcolor{comment}{\# this may break with the specification because we must try to fulfill the wishes}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00137}00137                 \textcolor{keywordflow}{if} option \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} done:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00138}00138                     done.append(option)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00139}00139         \textcolor{comment}{\# add my stuff}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00140}00140         \textcolor{keywordflow}{for} option, o \textcolor{keywordflow}{in} enumerate(options):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00141}00141             \textcolor{keywordflow}{if} o[0] \textcolor{keywordflow}{and} hasattr(self, o[0]):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00142}00142                 \textcolor{keywordflow}{if} option \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} done:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00143}00143                     done.append(option)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00144}00144         \textcolor{keywordflow}{for} option \textcolor{keywordflow}{in} range(256):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00145}00145             \textcolor{keywordflow}{if} hasattr(self, \textcolor{stringliteral}{'option\_\{\}'}.format(option)):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00146}00146                 \textcolor{keywordflow}{if} option \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} done:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00147}00147                     done.append(option)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00148}00148         \textcolor{keywordflow}{return} done}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00150}\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aea12de4e76f8ea2b8c4eb33f4adac9c4}{00150}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aea12de4e76f8ea2b8c4eb33f4adac9c4}{\_\_str\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00151}00151         \textcolor{stringliteral}{"{}"{}"{}Serialize UDP DHCP response packet to bytes}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00152}00152 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00153}00153 \textcolor{stringliteral}{        }\textcolor{keywordflow}{return} str(\mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{ReadBootProtocolPacket}}(self.\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}{to\_bytes}}()))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00155}\mbox{\hyperlink{classdhcp_1_1_delay_worker}{00155}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_delay_worker}{DelayWorker}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00156}00156     \textcolor{stringliteral}{"{}"{}"{}Class used to delay response to DHCP client}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00157}00157 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00158}\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7568c60fc34f0d72e01bf9b42268ff86}{00158}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7568c60fc34f0d72e01bf9b42268ff86}{\_\_init\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00159}00159         \textcolor{stringliteral}{"{}"{}"{}class constructor internally using priority queue where priority is time}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00160}00160 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00161}\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{00161}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{closed}} = }\textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00162}\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{00162}}         self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}} = \mbox{\hyperlink{classdhcp_1_1_priority_queue}{PriorityQueue}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00163}\mbox{\hyperlink{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}{00163}}         self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}{thread}} = threading.Thread(target = self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4dcd5e5a0865bac09f94537a20608af5}{\_delay\_response\_thread}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00164}00164         self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}{thread}}.start()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00166}00166     \textcolor{keyword}{def }\_delay\_response\_thread(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00167}00167         \textcolor{stringliteral}{"{}"{}"{}thread worker}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00168}00168 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00169}00169 \textcolor{stringliteral}{        }\textcolor{keywordflow}{while} \textcolor{keywordflow}{not} self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{closed}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00170}00170             \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{closed}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00171}00171                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00172}00172             \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}}.qsize() > 0:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00173}00173                 p = self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}}.get()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00174}00174                 t, func, args, kw = p}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00175}00175                 now = time.time()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00176}00176                 \textcolor{keywordflow}{if} now < t:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00177}00177                     time.sleep(0.01)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00178}00178                     self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}}.put(p)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00179}00179                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00180}00180                     func(*args, **kw)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00182}00182 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00183}\mbox{\hyperlink{classdhcp_1_1_delay_worker_a71df6984475182b90240cdd99874c6ac}{00183}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_delay_worker_a71df6984475182b90240cdd99874c6ac}{do\_after}}(self, seconds, func, args = (), kw = \{\}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00184}00184         \textcolor{stringliteral}{"{}"{}"{}Add to queue function which should be called after certain time}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00185}00185 \textcolor{stringliteral}{        specified by seconds, args, kw are arguments}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00186}00186 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00187}00187 \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}}.put((time.time() + seconds, func, args, kw))}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00188}00188 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00189}\mbox{\hyperlink{classdhcp_1_1_delay_worker_ae892a5a19501fa23f97640939d81f534}{00189}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_delay_worker_ae892a5a19501fa23f97640939d81f534}{close}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00190}00190         \textcolor{stringliteral}{"{}"{}"{}Method used to stop worker}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00191}00191 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00192}00192 \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{closed}} = }\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00193}00193 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00194}\mbox{\hyperlink{classdhcp_1_1_transaction}{00194}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_transaction}{Transaction}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00195}00195     \textcolor{stringliteral}{"{}"{}"{}Class representing DHCP Transaction}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00196}00196 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00197}\mbox{\hyperlink{classdhcp_1_1_transaction_ad181dc4a851300a7db0cf311cdf93ccb}{00197}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_ad181dc4a851300a7db0cf311cdf93ccb}{\_\_init\_\_}}(self, server):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00198}00198         \textcolor{stringliteral}{"{}"{}"{}Contructor of new transaction}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00199}00199 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00200}\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{00200}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}} = server}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00201}\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{00201}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}} = server.configuration}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00202}\mbox{\hyperlink{classdhcp_1_1_transaction_a298787ec425f21b7cf59a15f3be811f8}{00202}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_a298787ec425f21b7cf59a15f3be811f8}{packets}} = []}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00203}\mbox{\hyperlink{classdhcp_1_1_transaction_a49624ca70052fc6124a297b245a934bd}{00203}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_a49624ca70052fc6124a297b245a934bd}{done\_time}} = time.time() + self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.length\_of\_transaction}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00204}\mbox{\hyperlink{classdhcp_1_1_transaction_aed5a0af29e4f822509abc446ffe318f8}{00204}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_aed5a0af29e4f822509abc446ffe318f8}{done}} = }\textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00205}\mbox{\hyperlink{classdhcp_1_1_transaction_aa768fdc5ef1f5ae177c50e1e06000de1}{00205}}         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa768fdc5ef1f5ae177c50e1e06000de1}{do\_after}} = self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.delay\_worker.do\_after}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00206}\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{00206}}         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}} = debug}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00207}00207         }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00208}\mbox{\hyperlink{classdhcp_1_1_transaction_a4feb75824eed69acba29166c8b6debbb}{00208}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_a4feb75824eed69acba29166c8b6debbb}{is\_done}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00209}00209         \textcolor{stringliteral}{"{}"{}"{}Check if transaction is done }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00210}00210 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00211}00211 \textcolor{stringliteral}{        }\textcolor{keywordflow}{return} self.\mbox{\hyperlink{classdhcp_1_1_transaction_aed5a0af29e4f822509abc446ffe318f8}{done}} \textcolor{keywordflow}{or} self.\mbox{\hyperlink{classdhcp_1_1_transaction_a49624ca70052fc6124a297b245a934bd}{done\_time}} < time.time()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00213}\mbox{\hyperlink{classdhcp_1_1_transaction_ac817eb678b7bd583c0d1159c27d4fe27}{00213}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_ac817eb678b7bd583c0d1159c27d4fe27}{close}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00214}00214         \textcolor{stringliteral}{"{}"{}"{}Close transaction}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00215}00215 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00216}00216 \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_transaction_aed5a0af29e4f822509abc446ffe318f8}{done}} = }\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00218}\mbox{\hyperlink{classdhcp_1_1_transaction_a46c6fe1262f832b8bf09f9d76746a55e}{00218}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_a46c6fe1262f832b8bf09f9d76746a55e}{receive}}(self, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00219}00219         \textcolor{stringliteral}{"{}"{}"{}Receive DHCP UDP packet check it's type and call a proper callback}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00220}00220 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00221}00221 \textcolor{stringliteral}{        }\textcolor{comment}{\# packet from client <-\/> packet.message\_type == 1}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00222}00222         \textcolor{keywordflow}{if} packet.message\_type == 1 \textcolor{keywordflow}{and} packet.dhcp\_message\_type == \textcolor{stringliteral}{'DHCPDISCOVER'}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00223}00223             self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa768fdc5ef1f5ae177c50e1e06000de1}{do\_after}}(self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.dhcp\_offer\_after\_seconds,}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00224}00224                           self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa895e028c9ed581677b0dd0cb9cb8c17}{received\_dhcp\_discover}}, (packet,), )}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00225}00225         \textcolor{keywordflow}{elif} packet.message\_type == 1 \textcolor{keywordflow}{and} packet.dhcp\_message\_type == \textcolor{stringliteral}{'DHCPREQUEST'}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00226}00226             self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa768fdc5ef1f5ae177c50e1e06000de1}{do\_after}}(self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.dhcp\_acknowledge\_after\_seconds,}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00227}00227                           self.\mbox{\hyperlink{classdhcp_1_1_transaction_a448b8f3026f416bfa14951e41eac617a}{received\_dhcp\_request}}, (packet,), )}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00228}00228         \textcolor{keywordflow}{elif} packet.message\_type == 1 \textcolor{keywordflow}{and} packet.dhcp\_message\_type == \textcolor{stringliteral}{'DHCPINFORM'}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00229}00229             self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa9257afbb26fdc431c41a1f4a8f3e65d}{received\_dhcp\_inform}}(packet)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00230}00230         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00231}00231             \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00232}00232         \textcolor{keywordflow}{return} \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00234}\mbox{\hyperlink{classdhcp_1_1_transaction_aa895e028c9ed581677b0dd0cb9cb8c17}{00234}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_aa895e028c9ed581677b0dd0cb9cb8c17}{received\_dhcp\_discover}}(self, discovery):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00235}00235         \textcolor{stringliteral}{"{}"{}"{}Method used to handle DHCP Discover packet}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00236}00236 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00237}00237 \textcolor{stringliteral}{        }\textcolor{keywordflow}{if} self.\mbox{\hyperlink{classdhcp_1_1_transaction_a4feb75824eed69acba29166c8b6debbb}{is\_done}}(): \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00238}00238         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}}(\textcolor{stringliteral}{'discover:\(\backslash\)n \{\}'}.format(str(discovery).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00239}00239         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a2aea56edf7949a25ff0ccb84b5ff8c47}{send\_offer}}(discovery)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00241}\mbox{\hyperlink{classdhcp_1_1_transaction_a2aea56edf7949a25ff0ccb84b5ff8c47}{00241}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_a2aea56edf7949a25ff0ccb84b5ff8c47}{send\_offer}}(self, discovery):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00242}00242         \textcolor{stringliteral}{"{}"{}"{}Method used to send DHCP offer packet}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00243}00243 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00244}00244 \textcolor{stringliteral}{        }\textcolor{comment}{\# https://tools.ietf.org/html/rfc2131}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00245}00245         offer = \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet}{WriteBootProtocolPacket}}(self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00246}00246         offer.parameter\_order = discovery.parameter\_request\_list}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00247}00247         mac = discovery.client\_mac\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00248}00248         ip = offer.your\_ip\_address = self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.get\_ip\_address(discovery)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00249}00249         \textcolor{comment}{\# offer.client\_ip\_address = }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00250}00250         offer.transaction\_id = discovery.transaction\_id}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00251}00251         \textcolor{comment}{\# offer.next\_server\_ip\_address =}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00252}00252         offer.relay\_agent\_ip\_address = discovery.relay\_agent\_ip\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00253}00253         offer.client\_mac\_address = mac}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00254}00254         offer.client\_ip\_address = discovery.client\_ip\_address \textcolor{keywordflow}{or} \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00255}00255         offer.bootp\_flags = discovery.bootp\_flags}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00256}00256         offer.dhcp\_message\_type = \textcolor{stringliteral}{'DHCPOFFER'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00257}00257         offer.client\_identifier = mac}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00258}00258         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}}(\textcolor{stringliteral}{'offer:\(\backslash\)n \{\}'}.format(str(offer).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00259}00259         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.broadcast(offer)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00260}00260     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00261}\mbox{\hyperlink{classdhcp_1_1_transaction_a448b8f3026f416bfa14951e41eac617a}{00261}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_a448b8f3026f416bfa14951e41eac617a}{received\_dhcp\_request}}(self, request):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00262}00262         \textcolor{stringliteral}{"{}"{}"{}Method used to handle DHCP Request packet}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00263}00263 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00264}00264 \textcolor{stringliteral}{        }\textcolor{keywordflow}{if} self.\mbox{\hyperlink{classdhcp_1_1_transaction_a4feb75824eed69acba29166c8b6debbb}{is\_done}}(): \textcolor{keywordflow}{return} }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00265}00265         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}}(\textcolor{stringliteral}{'request:\(\backslash\)n \{\}'}.format(str(request).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00266}00266         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.client\_has\_chosen(request)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00267}00267         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a4aff2eee69d44c3ca8acec5b93a71c10}{acknowledge}}(request)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00268}00268         self.\mbox{\hyperlink{classdhcp_1_1_transaction_ac817eb678b7bd583c0d1159c27d4fe27}{close}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00270}\mbox{\hyperlink{classdhcp_1_1_transaction_a4aff2eee69d44c3ca8acec5b93a71c10}{00270}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_a4aff2eee69d44c3ca8acec5b93a71c10}{acknowledge}}(self, request):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00271}00271         \textcolor{stringliteral}{"{}"{}"{}Method used to handle DHCP Acknowledge packet}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00272}00272 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00273}00273 \textcolor{stringliteral}{        ack = \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet}{WriteBootProtocolPacket}}(self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}})}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00274}00274 \textcolor{stringliteral}{        ack.parameter\_order = request.parameter\_request\_list}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00275}00275 \textcolor{stringliteral}{        ack.transaction\_id = request.transaction\_id}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00276}00276 \textcolor{stringliteral}{        }\textcolor{comment}{\# ack.next\_server\_ip\_address =}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00277}00277         ack.bootp\_flags = request.bootp\_flags}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00278}00278         ack.relay\_agent\_ip\_address = request.relay\_agent\_ip\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00279}00279         mac = request.client\_mac\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00280}00280         ack.client\_mac\_address = mac}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00281}00281         requested\_ip\_address = request.requested\_ip\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00282}00282         ack.client\_ip\_address = request.client\_ip\_address \textcolor{keywordflow}{or} \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00283}00283         ack.your\_ip\_address = self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.get\_ip\_address(request)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00284}00284         ack.dhcp\_message\_type = \textcolor{stringliteral}{'DHCPACK'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00285}00285         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}}(\textcolor{stringliteral}{'acknowledge:\(\backslash\)n \{\}'}.format(str(ack).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00286}00286         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.broadcast(ack)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00287}00287 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00288}\mbox{\hyperlink{classdhcp_1_1_transaction_aa9257afbb26fdc431c41a1f4a8f3e65d}{00288}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_transaction_aa9257afbb26fdc431c41a1f4a8f3e65d}{received\_dhcp\_inform}}(self, inform):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00289}00289         self.\mbox{\hyperlink{classdhcp_1_1_transaction_a9196e388fc83f18135f91d5039133649}{configuration}}.\mbox{\hyperlink{classdhcp_1_1_transaction_aeb2cca27565eb7ff96b52b13586cc706}{debug}}(\textcolor{stringliteral}{'inform:\(\backslash\)n \{\}'}.format(str(inform).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00290}00290         self.\mbox{\hyperlink{classdhcp_1_1_transaction_ac817eb678b7bd583c0d1159c27d4fe27}{close}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00291}00291         self.\mbox{\hyperlink{classdhcp_1_1_transaction_aa8541d8697426eb56d5a600981225df0}{server}}.client\_has\_chosen(inform)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00292}00292 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00293}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{00293}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServerConfiguration}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00294}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8e86611b3ea41d75f9d0ac7010edbc5f}{00294}}     dhcp\_offer\_after\_seconds = 10}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00295}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a3237c2a7ad2a15e2ed260960fe04eafc}{00295}}     dhcp\_acknowledge\_after\_seconds = 10}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00296}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a3d224e886f43ae665f010cdaf09546a9}{00296}}     length\_of\_transaction = 40}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00298}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}{00298}}     network = \textcolor{stringliteral}{'192.168.173.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00299}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa58cf42f87609209ddce0173b45322c9}{00299}}     broadcast\_address = \textcolor{stringliteral}{'255.255.255.255'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00300}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}{00300}}     subnet\_mask = \textcolor{stringliteral}{'255.255.255.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00301}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a55b1c1ae7a00c76da1ed7ce2a1f12bf9}{00301}}     router = \textcolor{keywordtype}{None} \textcolor{comment}{\# list of ips}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00302}00302     \textcolor{comment}{\# 1 day is 86400}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00303}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa32aa9798ca8bda68d0a251fda995440}{00303}}     ip\_address\_lease\_time = 300 \textcolor{comment}{\# seconds}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00304}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8dfb7835e513433b9ec1bb29f380e34a}{00304}}     domain\_name\_server = \textcolor{keywordtype}{None} \textcolor{comment}{\# list of ips}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00306}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8e7b3b6cdecb88a5355ae33e7b829a46}{00306}}     host\_file = \textcolor{stringliteral}{'hosts.csv'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00307}00307 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00308}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a74cb330547f34b82e62afaf10e75478e}{00308}}     debug = \textcolor{keyword}{lambda} *args, **kw: \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00309}00309 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00310}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a180484ac4bdf23fc07407d3b44f722cc}{00310}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a180484ac4bdf23fc07407d3b44f722cc}{load}}(self, file):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00311}00311         if(len(file) > 0 \textcolor{keywordflow}{and} exists(file)):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00312}00312             \textcolor{keyword}{with} open(file) \textcolor{keyword}{as} f:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00313}00313                 exec(f.read(), self.\_\_dict\_\_)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00314}00314         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00315}00315             args = \textcolor{stringliteral}{' '}.join(sys.argv[1:])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00316}00316             args = re.sub(\textcolor{stringliteral}{' -\/'}, \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}, args)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00317}00317             args = re.sub(\textcolor{stringliteral}{'\string^-\/'}, \textcolor{stringliteral}{''}, args)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00318}00318             args = re.sub(\textcolor{stringliteral}{'\string^([a-\/z\_]+)([ ]+)(.+)\$'}, \textcolor{stringliteral}{r"{}\(\backslash\)1=\(\backslash\)3"{}}, args, flags=re.MULTILINE)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00319}00319             exec(args, self.\_\_dict\_\_)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00320}00320 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00321}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a7a5fc60105c8d57601ec948d7d43c8fa}{00321}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a7a5fc60105c8d57601ec948d7d43c8fa}{adjust\_if\_this\_computer\_is\_a\_router}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00322}00322         ip\_addresses = \mbox{\hyperlink{namespacedhcp_af20880fd0c047e3357f1c8c239968538}{get\_host\_ip\_addresses}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00323}00323         \textcolor{keywordflow}{for} ip \textcolor{keywordflow}{in} reversed(ip\_addresses):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00324}00324             \textcolor{keywordflow}{if} ip.split(\textcolor{stringliteral}{'.'})[-\/1] == \textcolor{stringliteral}{'1'}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00325}00325                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a55b1c1ae7a00c76da1ed7ce2a1f12bf9}{router}} = [ip]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00326}00326                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8dfb7835e513433b9ec1bb29f380e34a}{domain\_name\_server}} = [ip]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00327}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}{00327}}                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}{network}}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}{network}} = \textcolor{stringliteral}{'.'}.join(ip.split(\textcolor{stringliteral}{'.'})[:-\/1] + [\textcolor{stringliteral}{'0'}])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00328}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a314df3b0d50a13968153f317cfac2ee2}{00328}}                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa58cf42f87609209ddce0173b45322c9}{broadcast\_address}}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a314df3b0d50a13968153f317cfac2ee2}{broadcast\_address}} = \textcolor{stringliteral}{'.'}.join(ip.split(\textcolor{stringliteral}{'.'})[:-\/1] + [\textcolor{stringliteral}{'255'}])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00329}00329                 \textcolor{comment}{\#self.ip\_forwarding\_enabled = True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00330}00330                 \textcolor{comment}{\#self.non\_local\_source\_routing\_enabled = True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00331}00331                 \textcolor{comment}{\#self.perform\_mask\_discovery = True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00332}00332 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00333}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a59a4bfcf49842e7453ba71412d7e9abf}{00333}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a59a4bfcf49842e7453ba71412d7e9abf}{all\_ip\_addresses}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00334}00334         ips = \mbox{\hyperlink{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}{ip\_addresses}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}{network}}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}{network}}, self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}{subnet\_mask}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00335}00335         \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(5):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00336}00336             next(ips)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00337}00337         \textcolor{keywordflow}{return} ips}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00338}00338 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00339}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa1e71c8f12e8968a8da7a5779da19f7c}{00339}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa1e71c8f12e8968a8da7a5779da19f7c}{network\_filter}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00340}00340         \textcolor{keywordflow}{return} \mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k}{NETWORK}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}{network}}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}{network}}, self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}{subnet\_mask}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00341}00341 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00342}\mbox{\hyperlink{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}{00342}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacedhcp_ab060cad3f10abaad7ad33123c5118aea}{ip\_addresses}}(network, subnet\_mask):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00343}00343     \textcolor{keyword}{import} socket, struct}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00344}00344     subnet\_mask = struct.unpack(\textcolor{stringliteral}{'>I'}, socket.inet\_aton(subnet\_mask))[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00345}00345     network = struct.unpack(\textcolor{stringliteral}{'>I'}, socket.inet\_aton(network))[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00346}00346     network = network \& subnet\_mask}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00347}00347     start = network + 1}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00348}00348     end = (network | (\string~subnet\_mask \& 0xffffffff))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00349}00349     \textcolor{keywordflow}{return} (socket.inet\_ntoa(struct.pack(\textcolor{stringliteral}{'>I'}, i)) \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(start, end))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00350}00350 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00351}\mbox{\hyperlink{classdhcp_1_1_a_l_l}{00351}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00352}\mbox{\hyperlink{classdhcp_1_1_a_l_l_a2decb7f5204c7f5c975e1b0feccab3f4}{00352}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_a_l_l_a2decb7f5204c7f5c975e1b0feccab3f4}{\_\_eq\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00353}00353         \textcolor{keywordflow}{return} \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00354}\mbox{\hyperlink{classdhcp_1_1_a_l_l_abe30d795d1074c9eeae934f5dc74b97b}{00354}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_a_l_l_abe30d795d1074c9eeae934f5dc74b97b}{\_\_repr\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00355}00355         \textcolor{keywordflow}{return} self.\_\_class\_\_.\_\_name\_\_}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00356}00356     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00357}\mbox{\hyperlink{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}{00357}} ALL = \mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00358}00358 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00359}\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r}{00359}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r}{GREATER}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00360}\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_a6c283efcaf3815abb7121061f45b4332}{00360}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_a6c283efcaf3815abb7121061f45b4332}{\_\_init\_\_}}(self, value):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00361}\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_ac340b80531a5e54d8ad03059c41c4906}{00361}}         self.\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_ac340b80531a5e54d8ad03059c41c4906}{value}} = value}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00362}\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_a904d88008338389f183032d0e996f3c1}{00362}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_a904d88008338389f183032d0e996f3c1}{\_\_eq\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00363}00363         \textcolor{keywordflow}{return} type(self.\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_ac340b80531a5e54d8ad03059c41c4906}{value}})(other) > self.\mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r_ac340b80531a5e54d8ad03059c41c4906}{value}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00364}00364 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00365}\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k}{00365}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k}{NETWORK}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00366}\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_aad7fdb6b11bad9cb44e9d35b00e97631}{00366}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_aad7fdb6b11bad9cb44e9d35b00e97631}{\_\_init\_\_}}(self, network, subnet\_mask):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00367}\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_af96eacbe29f44b963ba8e1553b9a5412}{00367}}         self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_af96eacbe29f44b963ba8e1553b9a5412}{subnet\_mask}} = struct.unpack(\textcolor{stringliteral}{'>I'}, inet\_aton(subnet\_mask))[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00368}\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_a0389879d6d5493763fd15a6a6c18a73d}{00368}}         self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_a0389879d6d5493763fd15a6a6c18a73d}{network}} = struct.unpack(\textcolor{stringliteral}{'>I'}, inet\_aton(network))[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00369}\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_ab2aa1dd0d3ed83f1eb87deadc60f200f}{00369}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_ab2aa1dd0d3ed83f1eb87deadc60f200f}{\_\_eq\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00370}00370         ip = struct.unpack(\textcolor{stringliteral}{'>I'}, inet\_aton(other))[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00371}00371         \textcolor{keywordflow}{return} ip \& self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_af96eacbe29f44b963ba8e1553b9a5412}{subnet\_mask}} == self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_a0389879d6d5493763fd15a6a6c18a73d}{network}} \textcolor{keywordflow}{and} \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00372}00372                ip -\/ self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_a0389879d6d5493763fd15a6a6c18a73d}{network}} \textcolor{keywordflow}{and} \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00373}00373                ip -\/ self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_a0389879d6d5493763fd15a6a6c18a73d}{network}} != \string~self.\mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k_af96eacbe29f44b963ba8e1553b9a5412}{subnet\_mask}} \& 0xffffffff}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00374}00374         }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00375}\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e}{00375}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e}{CASEINSENSITIVE}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00376}\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_a4ce239988cab4ee26e3ae2f2373d4502}{00376}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_a4ce239988cab4ee26e3ae2f2373d4502}{\_\_init\_\_}}(self, s):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00377}\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_abf08fca05bbe0b19153e9ddb27b56528}{00377}}         self.\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_abf08fca05bbe0b19153e9ddb27b56528}{s}} = s.lower()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00378}\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_ad51c9059a0928e7d6fb9fc770ddbe7c2}{00378}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_ad51c9059a0928e7d6fb9fc770ddbe7c2}{\_\_eq\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00379}00379         \textcolor{keywordflow}{return} self.\mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e_abf08fca05bbe0b19153e9ddb27b56528}{s}} == other.lower()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00381}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database}{00381}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database}{CSVDatabase}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00382}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6c415d72358e6ba6abc2459662a7bdb9}{00382}}     delimiter = \textcolor{stringliteral}{';'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00383}00383 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00384}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_ac81f0160bc47f0d0b09027654dad7b92}{00384}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_ac81f0160bc47f0d0b09027654dad7b92}{\_\_init\_\_}}(self, file\_name):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00385}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a4c64356172f2f54a7d2d16214316b8ab}{00385}}         self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a4c64356172f2f54a7d2d16214316b8ab}{file\_name}} = file\_name}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00386}00386         self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{file}}(\textcolor{stringliteral}{'a'}).close() \textcolor{comment}{\# create file}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00387}00387 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00388}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{00388}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{file}}(self, mode = 'r'):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00389}00389         \textcolor{keywordflow}{return} open(self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a4c64356172f2f54a7d2d16214316b8ab}{file\_name}}, mode)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00390}00390 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00391}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_aa88bd3c0e526c7ee639669d0079f3650}{00391}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_aa88bd3c0e526c7ee639669d0079f3650}{get}}(self, pattern):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00392}00392         pattern = list(pattern)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00393}00393         \textcolor{keywordflow}{return} [line \textcolor{keywordflow}{for} line \textcolor{keywordflow}{in} self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6d9ec1ae037c871dc49185433b00f19c}{all}}() \textcolor{keywordflow}{if} pattern == line]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00394}00394 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00395}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a869e6011c293c4c68df9ba689aab151a}{00395}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a869e6011c293c4c68df9ba689aab151a}{add}}(self, line):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00396}00396         \textcolor{keyword}{with} self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{file}}(\textcolor{stringliteral}{'a'}) \textcolor{keyword}{as} f:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00397}00397             f.write(self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6c415d72358e6ba6abc2459662a7bdb9}{delimiter}}.join(line) + \textcolor{stringliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00398}00398 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00399}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_adf3ffd96793b19b52fe679b3ce318f2e}{00399}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_adf3ffd96793b19b52fe679b3ce318f2e}{delete}}(self, pattern):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00400}00400         lines = self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6d9ec1ae037c871dc49185433b00f19c}{all}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00401}00401         lines\_to\_delete = self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_aa88bd3c0e526c7ee639669d0079f3650}{get}}(pattern)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00402}00402         self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{file}}(\textcolor{stringliteral}{'w'}).close() \textcolor{comment}{\# empty file}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00403}00403         \textcolor{keywordflow}{for} line \textcolor{keywordflow}{in} lines:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00404}00404             \textcolor{keywordflow}{if} line \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} lines\_to\_delete:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00405}00405                 self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a869e6011c293c4c68df9ba689aab151a}{add}}(line)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00406}00406 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00407}\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6d9ec1ae037c871dc49185433b00f19c}{00407}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6d9ec1ae037c871dc49185433b00f19c}{all}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00408}00408         \textcolor{keyword}{with} self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_afe747abe2434e051adb3f2d682a716d5}{file}}() \textcolor{keyword}{as} f:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00409}00409             \textcolor{keywordflow}{return} [list(line.strip().split(self.\mbox{\hyperlink{classdhcp_1_1_c_s_v_database_a6c415d72358e6ba6abc2459662a7bdb9}{delimiter}})) \textcolor{keywordflow}{for} line \textcolor{keywordflow}{in} f]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00410}00410 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00411}\mbox{\hyperlink{classdhcp_1_1_host}{00411}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_host}{Host}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00412}\mbox{\hyperlink{classdhcp_1_1_host_ab0ad131caf3688fda7ec3246d3a919aa}{00412}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_ab0ad131caf3688fda7ec3246d3a919aa}{\_\_init\_\_}}(self, mac, ip, hostname, last\_used):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00413}\mbox{\hyperlink{classdhcp_1_1_host_aabc84008d42981a5c7c2e8322bd8b5f4}{00413}}         self.\mbox{\hyperlink{classdhcp_1_1_host_aabc84008d42981a5c7c2e8322bd8b5f4}{mac}} = mac.upper()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00414}\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{00414}}         self.\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{ip}} = ip}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00415}\mbox{\hyperlink{classdhcp_1_1_host_a4db1cd4ba6cae9480967587ed4b26b95}{00415}}         self.\mbox{\hyperlink{classdhcp_1_1_host_a4db1cd4ba6cae9480967587ed4b26b95}{hostname}} = hostname}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00416}\mbox{\hyperlink{classdhcp_1_1_host_aee6d734c3a4608ebc899f14efce36ff0}{00416}}         self.\mbox{\hyperlink{classdhcp_1_1_host_aee6d734c3a4608ebc899f14efce36ff0}{last\_used}} = int(last\_used)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00417}00417 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00418}00418     \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00419}\mbox{\hyperlink{classdhcp_1_1_host_a45ba91c0afcceeb3a7a3370aab91dc0f}{00419}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a45ba91c0afcceeb3a7a3370aab91dc0f}{from\_tuple}}(cls, line):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00420}00420         mac, ip, hostname, last\_used = line}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00421}00421         last\_used = int(last\_used)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00422}00422         \textcolor{keywordflow}{return} cls(mac, ip, hostname, last\_used)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00423}00423 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00424}00424     \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00425}\mbox{\hyperlink{classdhcp_1_1_host_a65e90f26bd53e4484d53f82b0b8b3bc8}{00425}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a65e90f26bd53e4484d53f82b0b8b3bc8}{from\_packet}}(cls, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00426}00426         \textcolor{keywordflow}{return} cls(packet.client\_mac\_address,}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00427}00427                    packet.requested\_ip\_address \textcolor{keywordflow}{or} packet.client\_ip\_address,}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00428}00428                    packet.host\_name \textcolor{keywordflow}{or} \textcolor{stringliteral}{''},}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00429}00429                    int(time.time()))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00430}00430 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00431}00431     \textcolor{preprocessor}{@staticmethod}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00432}\mbox{\hyperlink{classdhcp_1_1_host_a90055429ec7c36129ea44d6f9e2f45a7}{00432}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a90055429ec7c36129ea44d6f9e2f45a7}{get\_pattern}}(mac = ALL, ip = ALL, hostname = ALL, last\_used = ALL):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00433}00433         \textcolor{keywordflow}{return} [mac, ip, hostname, last\_used]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00434}00434 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00435}\mbox{\hyperlink{classdhcp_1_1_host_af4101aa3d505fb12742083f2268b0aaa}{00435}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_af4101aa3d505fb12742083f2268b0aaa}{to\_tuple}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00436}00436         \textcolor{keywordflow}{return} [self.\mbox{\hyperlink{classdhcp_1_1_host_aabc84008d42981a5c7c2e8322bd8b5f4}{mac}}, self.\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{ip}}, self.\mbox{\hyperlink{classdhcp_1_1_host_a4db1cd4ba6cae9480967587ed4b26b95}{hostname}}, str(int(self.\mbox{\hyperlink{classdhcp_1_1_host_aee6d734c3a4608ebc899f14efce36ff0}{last\_used}}))]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00437}00437 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00438}\mbox{\hyperlink{classdhcp_1_1_host_a700da84969feda66ac68f7214fa3b113}{00438}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a700da84969feda66ac68f7214fa3b113}{to\_pattern}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00439}00439         \textcolor{keywordflow}{return} self.\mbox{\hyperlink{classdhcp_1_1_host_a90055429ec7c36129ea44d6f9e2f45a7}{get\_pattern}}(ip = self.\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{ip}}, mac = self.\mbox{\hyperlink{classdhcp_1_1_host_aabc84008d42981a5c7c2e8322bd8b5f4}{mac}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00440}00440 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00441}\mbox{\hyperlink{classdhcp_1_1_host_a221af5247505072a9ca2223025377756}{00441}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a221af5247505072a9ca2223025377756}{\_\_hash\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00442}00442         \textcolor{keywordflow}{return} hash(self.key)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00443}00443 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00444}\mbox{\hyperlink{classdhcp_1_1_host_adcf88164490fe575a9f220d3b37d5fff}{00444}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_adcf88164490fe575a9f220d3b37d5fff}{\_\_eq\_\_}}(self, other):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00445}00445         \textcolor{keywordflow}{return} self.\mbox{\hyperlink{classdhcp_1_1_host_af4101aa3d505fb12742083f2268b0aaa}{to\_tuple}}() == other.to\_tuple()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00446}00446 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00447}\mbox{\hyperlink{classdhcp_1_1_host_a287287e62149143af68711e7c1617282}{00447}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_a287287e62149143af68711e7c1617282}{has\_valid\_ip}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00448}00448         \textcolor{keywordflow}{return} self.\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{ip}} \textcolor{keywordflow}{and} self.\mbox{\hyperlink{classdhcp_1_1_host_aecf59068c5829a6fc9bfe52f35a33391}{ip}} != \textcolor{stringliteral}{'0.0.0.0'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00449}00449         }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00450}\mbox{\hyperlink{classdhcp_1_1_host_database}{00450}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_host_database}{HostDatabase}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00451}\mbox{\hyperlink{classdhcp_1_1_host_database_aaf801ca6318cd6092aff4564e22665f0}{00451}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_aaf801ca6318cd6092aff4564e22665f0}{\_\_init\_\_}}(self, file\_name):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00452}\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{00452}}         self.\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{db}} = \mbox{\hyperlink{classdhcp_1_1_c_s_v_database}{CSVDatabase}}(file\_name)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00453}00453 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00454}\mbox{\hyperlink{classdhcp_1_1_host_database_a392bba3af76de29a6bf8314c15fb298e}{00454}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_a392bba3af76de29a6bf8314c15fb298e}{get}}(self, **kw):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00455}00455         pattern = Host.get\_pattern(**kw)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00456}00456         \textcolor{keywordflow}{return} list(map(Host.from\_tuple, self.\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{db}}.\mbox{\hyperlink{classdhcp_1_1_host_database_a392bba3af76de29a6bf8314c15fb298e}{get}}(pattern)))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00457}00457 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00458}\mbox{\hyperlink{classdhcp_1_1_host_database_afbf9e7255243735d446d69da9ad01b95}{00458}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_afbf9e7255243735d446d69da9ad01b95}{add}}(self, host):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00459}00459         self.\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{db}}.\mbox{\hyperlink{classdhcp_1_1_host_database_afbf9e7255243735d446d69da9ad01b95}{add}}(host.to\_tuple())}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00460}00460 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00461}\mbox{\hyperlink{classdhcp_1_1_host_database_a011b8b19259f5df030e3746c5f751717}{00461}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_a011b8b19259f5df030e3746c5f751717}{delete}}(self, host = None, **kw):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00462}00462         \textcolor{keywordflow}{if} host \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00463}00463             pattern = Host.get\_pattern(**kw)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00464}00464         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00465}00465             pattern = host.to\_pattern()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00466}00466         self.\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{db}}.\mbox{\hyperlink{classdhcp_1_1_host_database_a011b8b19259f5df030e3746c5f751717}{delete}}(pattern)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00467}00467 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00468}\mbox{\hyperlink{classdhcp_1_1_host_database_a1bfeeeca3271a5e20a957d41f75be28c}{00468}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_a1bfeeeca3271a5e20a957d41f75be28c}{all}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00469}00469         \textcolor{keywordflow}{return} list(map(Host.from\_tuple, self.\mbox{\hyperlink{classdhcp_1_1_host_database_ad10f58a0a7ec720fbf530c9b0fb98058}{db}}.\mbox{\hyperlink{classdhcp_1_1_host_database_a1bfeeeca3271a5e20a957d41f75be28c}{all}}()))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00470}00470 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00471}\mbox{\hyperlink{classdhcp_1_1_host_database_a54e5a7e7e3d9479470b7c3c103ea052c}{00471}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_host_database_a54e5a7e7e3d9479470b7c3c103ea052c}{replace}}(self, host):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00472}00472         self.\mbox{\hyperlink{classdhcp_1_1_host_database_a011b8b19259f5df030e3746c5f751717}{delete}}(host)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00473}00473         self.\mbox{\hyperlink{classdhcp_1_1_host_database_afbf9e7255243735d446d69da9ad01b95}{add}}(host)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00474}00474         }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00475}\mbox{\hyperlink{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}{00475}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}{sorted\_hosts}}(hosts):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00476}00476     hosts = list(hosts)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00477}00477     hosts.sort(key = \textcolor{keyword}{lambda} host: (host.hostname.lower(), host.mac.lower(), host.ip.lower()))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00478}00478     \textcolor{keywordflow}{return} hosts}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00479}00479 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00480}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{00480}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}(object):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00481}00481 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00482}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_aae6fca0bb91de82b090278a45bb5634f}{00482}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_aae6fca0bb91de82b090278a45bb5634f}{\_\_init\_\_}}(self, configuration = None):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00483}00483         \textcolor{keywordflow}{if} configuration == \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00484}00484             configuration = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServerConfiguration}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00485}00485             }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00486}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{00486}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}} = configuration}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00487}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{00487}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{socket}} = \mbox{\hyperlink{namespacesocket}{socket}}(type = SOCK\_DGRAM)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00488}00488         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{socket}}.setsockopt(SOL\_SOCKET, SO\_REUSEADDR, 1)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00489}00489         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{socket}}.bind((\textcolor{stringliteral}{''}, 67))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00490}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad0db4a8937934f994c6bf861873dc8b9}{00490}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad0db4a8937934f994c6bf861873dc8b9}{delay\_worker}} = \mbox{\hyperlink{classdhcp_1_1_delay_worker}{DelayWorker}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00491}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ac2c06166394c431fdf45fac68a95a23c}{00491}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ac2c06166394c431fdf45fac68a95a23c}{closed}} = \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00492}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{00492}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{transactions}} = collections.defaultdict(\textcolor{keyword}{lambda}: \mbox{\hyperlink{classdhcp_1_1_transaction}{Transaction}}(self)) \textcolor{comment}{\# id: transaction}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00493}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{00493}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}} = \mbox{\hyperlink{classdhcp_1_1_host_database}{HostDatabase}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.host\_file)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00494}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a29aa89ca8607f78da17e3585866c0cf9}{00494}}         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a29aa89ca8607f78da17e3585866c0cf9}{time\_started}} = time.time()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00495}00495 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00496}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ab35d34adc3b6c6b820eacae82dfb7361}{00496}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ab35d34adc3b6c6b820eacae82dfb7361}{close}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00497}00497         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{socket}}.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ab35d34adc3b6c6b820eacae82dfb7361}{close}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00498}00498         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ac2c06166394c431fdf45fac68a95a23c}{closed}} = \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00499}00499         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad0db4a8937934f994c6bf861873dc8b9}{delay\_worker}}.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ab35d34adc3b6c6b820eacae82dfb7361}{close}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00500}00500         \textcolor{keywordflow}{for} transaction \textcolor{keywordflow}{in} list(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{transactions}}.values()):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00501}00501             transaction.close()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00502}00502 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00503}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a1270c39efab736e13b4645adccb5d445}{00503}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a1270c39efab736e13b4645adccb5d445}{update}}(self, timeout = 0):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00504}00504         \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00505}00505             reads = select.select([self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a93516cbbbd270d873698bbe13dbd3520}{socket}}], [], [], timeout)[0]}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00506}00506         \textcolor{keywordflow}{except} ValueError:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00507}00507             \textcolor{comment}{\# ValueError: file descriptor cannot be a negative integer (-\/1)}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00508}00508             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00509}00509         \textcolor{keywordflow}{for} socket \textcolor{keywordflow}{in} reads:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00510}00510             \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00511}00511                 packet = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{ReadBootProtocolPacket}}(*socket.recvfrom(4096))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00512}00512             \textcolor{keywordflow}{except} OSError:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00513}00513                 \textcolor{comment}{\# OSError: [WinError 10038] An operation was attempted on something that is not a socket}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00514}00514                 \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00515}00515             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00516}00516                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad4d593daddb6f818f3b8aa2240dc1cb5}{received}}(packet)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00517}00517         \textcolor{keywordflow}{for} transaction\_id, transaction \textcolor{keywordflow}{in} list(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{transactions}}.items()):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00518}00518             \textcolor{keywordflow}{if} transaction.is\_done():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00519}00519                 transaction.close()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00520}00520                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{transactions}}.pop(transaction\_id)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00521}00521 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00522}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad4d593daddb6f818f3b8aa2240dc1cb5}{00522}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad4d593daddb6f818f3b8aa2240dc1cb5}{received}}(self, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00523}00523         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a67a29068f2ed30839ae9d136abbe2c89}{transactions}}[packet.transaction\_id].receive(packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00524}00524             self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{debug}}(\textcolor{stringliteral}{'received:\(\backslash\)n \{\}'}.format(str(packet).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00525}00525             }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00526}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a613a716546dae583db2f813414a34f2b}{00526}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a613a716546dae583db2f813414a34f2b}{client\_has\_chosen}}(self, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00527}00527         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{debug}}(\textcolor{stringliteral}{'client\_has\_chosen:\(\backslash\)n \{\}'}.format(str(packet).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00528}00528         host = Host.from\_packet(packet)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00529}00529         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} host.has\_valid\_ip():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00530}00530             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00531}00531         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.replace(host)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00532}00532 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00533}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a09717723751aecefc6ead6efb43bfe27}{00533}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a09717723751aecefc6ead6efb43bfe27}{is\_valid\_client\_address}}(self, address):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00534}00534         \textcolor{keywordflow}{if} address \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00535}00535             \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00536}00536         a = address.split(\textcolor{stringliteral}{'.'})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00537}00537         s = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.subnet\_mask.split(\textcolor{stringliteral}{'.'})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00538}00538         n = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.network.split(\textcolor{stringliteral}{'.'})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00539}00539         \textcolor{keywordflow}{return} all(s[i] == \textcolor{stringliteral}{'0'} \textcolor{keywordflow}{or} a[i] == n[i] \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(4))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00540}00540 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00541}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad0abc95458235a7300991d9111c49869}{00541}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad0abc95458235a7300991d9111c49869}{get\_ip\_address}}(self, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00542}00542         mac\_address = packet.client\_mac\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00543}00543         requested\_ip\_address = packet.requested\_ip\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00544}00544         known\_hosts = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.get(mac = \mbox{\hyperlink{classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e}{CASEINSENSITIVE}}(mac\_address))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00545}00545         ip = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00546}00546         \textcolor{keywordflow}{if} known\_hosts:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00547}00547             \textcolor{comment}{\# 1. choose known ip address}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00548}00548             \textcolor{keywordflow}{for} host \textcolor{keywordflow}{in} known\_hosts:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00549}00549                 \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a09717723751aecefc6ead6efb43bfe27}{is\_valid\_client\_address}}(host.ip):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00550}00550                     ip = host.ip}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00551}00551             print(\textcolor{stringliteral}{'known ip:'}, ip)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00552}00552         \textcolor{keywordflow}{if} ip \textcolor{keywordflow}{is} \textcolor{keywordtype}{None} \textcolor{keywordflow}{and} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a09717723751aecefc6ead6efb43bfe27}{is\_valid\_client\_address}}(requested\_ip\_address):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00553}00553             \textcolor{comment}{\# 2. choose valid requested ip address}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00554}00554             ip = requested\_ip\_address}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00555}00555             print(\textcolor{stringliteral}{'valid ip:'}, ip)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00556}00556         \textcolor{keywordflow}{if} ip \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00557}00557             \textcolor{comment}{\# 3. choose new, free ip address}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00558}00558             chosen = \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00559}00559             network\_hosts = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.get(ip = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.network\_filter())}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00560}00560             \textcolor{keywordflow}{for} ip \textcolor{keywordflow}{in} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.all\_ip\_addresses():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00561}00561                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} any(host.ip == ip \textcolor{keywordflow}{for} host \textcolor{keywordflow}{in} network\_hosts):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00562}00562                     chosen = \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00563}00563                     \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00564}00564             \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} chosen:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00565}00565                 \textcolor{comment}{\# 4. reuse old valid ip address}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00566}00566                 network\_hosts.sort(key = \textcolor{keyword}{lambda} host: host.last\_used)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00567}00567                 ip = network\_hosts[0].ip}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00568}00568                 \textcolor{keyword}{assert} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a09717723751aecefc6ead6efb43bfe27}{is\_valid\_client\_address}}(ip)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00569}00569             print(\textcolor{stringliteral}{'new ip:'}, ip)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00570}00570         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} any([host.ip == ip \textcolor{keywordflow}{for} host \textcolor{keywordflow}{in} known\_hosts]):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00571}00571             print(\textcolor{stringliteral}{'add'}, mac\_address, ip, packet.host\_name)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00572}00572             self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.replace(\mbox{\hyperlink{classdhcp_1_1_host}{Host}}(mac\_address, ip, packet.host\_name \textcolor{keywordflow}{or} \textcolor{stringliteral}{''}, time.time()))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00573}00573         \textcolor{keywordflow}{return} ip}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00574}00574 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00575}00575     \textcolor{preprocessor}{@property}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00576}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a0c3ee14aec5d0474ac6cc370c5347795}{00576}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a0c3ee14aec5d0474ac6cc370c5347795}{server\_identifiers}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00577}00577         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedhcp_af20880fd0c047e3357f1c8c239968538}{get\_host\_ip\_addresses}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00578}00578 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00579}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a657300b76aa268c81976de4ffcbc0644}{00579}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a657300b76aa268c81976de4ffcbc0644}{broadcast}}(self, packet):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00580}00580         self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{debug}}(\textcolor{stringliteral}{'broadcasting:\(\backslash\)n \{\}'}.format(str(packet).replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n\(\backslash\)t'})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00581}00581         \textcolor{keywordflow}{for} addr \textcolor{keywordflow}{in} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a0c3ee14aec5d0474ac6cc370c5347795}{server\_identifiers}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00582}00582             broadcast\_socket = \mbox{\hyperlink{namespacesocket}{socket}}(type = SOCK\_DGRAM)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00583}00583             broadcast\_socket.setsockopt(SOL\_SOCKET, SO\_REUSEADDR, 1)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00584}00584             broadcast\_socket.setsockopt(SOL\_SOCKET, SO\_BROADCAST, 1)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00585}00585             packet.server\_identifier = addr}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00586}00586             broadcast\_socket.bind((addr, 67))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00587}00587             \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00588}00588                 data = packet.to\_bytes()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00589}00589                 broadcast\_socket.sendto(data, (\textcolor{stringliteral}{'255.255.255.255'}, 68))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00590}00590                 broadcast\_socket.sendto(data, (addr, 68))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00591}00591             \textcolor{keywordflow}{finally}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00592}00592                 broadcast\_socket.close()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00593}00593 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00594}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_af7a2d659dc19642dbfd3838982491f53}{00594}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_af7a2d659dc19642dbfd3838982491f53}{run}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00595}00595         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ac2c06166394c431fdf45fac68a95a23c}{closed}}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00596}00596             \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00597}00597                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a1270c39efab736e13b4645adccb5d445}{update}}(1)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00598}00598             \textcolor{keywordflow}{except} KeyboardInterrupt:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00599}00599                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00600}00600             \textcolor{keywordflow}{except}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00601}00601                 traceback.print\_exc()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00602}00602 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00603}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a60d24347513562e332a247704d0d3ff8}{00603}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a60d24347513562e332a247704d0d3ff8}{run\_in\_thread}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00604}00604         thread = threading.Thread(target = self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_af7a2d659dc19642dbfd3838982491f53}{run}})}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00605}00605         thread.start()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00606}00606         \textcolor{keywordflow}{return} thread}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00607}00607 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00608}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_aaf1568a67cd2ba6132c412f664e72ca1}{00608}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_aaf1568a67cd2ba6132c412f664e72ca1}{debug\_clients}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00609}00609         \textcolor{keywordflow}{for} line \textcolor{keywordflow}{in} self.ips.all():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00610}00610             line = \textcolor{stringliteral}{'\(\backslash\)t'}.join(line)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00611}00611             \textcolor{keywordflow}{if} line:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00612}00612                 self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ad2c9c6bac9f72b52c9be75cb1a0477b2}{configuration}}.\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{debug}}(line)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00613}00613 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00614}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a7a509c96ae764cd0bd9bd8e84ee23562}{00614}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a7a509c96ae764cd0bd9bd8e84ee23562}{get\_all\_hosts}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00615}00615         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}{sorted\_hosts}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.get())}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00616}00616 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00617}\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ada6bcaad1d88519fd7086a442ed998e1}{00617}}     \textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_ada6bcaad1d88519fd7086a442ed998e1}{get\_current\_hosts}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00618}00618         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}{sorted\_hosts}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a664b45ac7c71967fd415966f2ba5ab4d}{hosts}}.get(last\_used = \mbox{\hyperlink{classdhcp_1_1_g_r_e_a_t_e_r}{GREATER}}(self.\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_a29aa89ca8607f78da17e3585866c0cf9}{time\_started}})))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00619}00619 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00620}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler}{00620}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler}{ThreadedTcpRequestHandler}}(socketserver.StreamRequestHandler):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00621}00621     \textcolor{stringliteral}{"{}"{}"{}Control socket client connection handler}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00622}00622 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00623}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler_a5115c3033d5cfa179fe11734c1b723b7}{00623}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler_a5115c3033d5cfa179fe11734c1b723b7}{handle}}(self):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00624}00624         \textcolor{stringliteral}{"{}"{}"{}Method used to handle client connection parsing commands and giving response to them}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00625}00625 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00626}00626 \textcolor{stringliteral}{        self.request.sendall(bytes("{}Welcome to micro python dhcp server"{}}, \textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00627}00627         \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00628}00628             while(\textcolor{keyword}{True}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00629}00629                 self.request.sendall(bytes(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)npydhcp ?> "{}}, \textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00630}00630                 data = self.rfile.readline().strip()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00631}00631                 if(data.decode() == \textcolor{stringliteral}{"{}hosts"{}}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00632}00632                     self.request.sendall(bytes(\textcolor{stringliteral}{"{}Active Hosts:\(\backslash\)r\(\backslash\)n\{\}"{}}.format(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}.join(self.server.hosts.all())),\textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00633}00633                 elif(data.decode() == \textcolor{stringliteral}{"{}events"{}}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00634}00634                     self.request.sendall(bytes(\textcolor{stringliteral}{"{}Events last 24h:\(\backslash\)r\(\backslash\)n\{\}"{}}.format(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}.join(self.server.events.items())),\textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00635}00635                 elif(data.decode() == \textcolor{stringliteral}{"{}configuration"{}}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00636}00636                     self.request.sendall(bytes(\textcolor{stringliteral}{"{}Current configuration\(\backslash\)r\(\backslash\)n"{}}, \textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00637}00637                     \textcolor{keywordflow}{for} value \textcolor{keywordflow}{in} options:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00638}00638                         if(hasattr(self.server.configuration,value[0])):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00639}00639                             self.request.sendall(bytes(\textcolor{stringliteral}{"{}\{\}: \{\}\(\backslash\)r\(\backslash\)n"{}}.format(value[0],getattr(self.server.configuration,value[0])),\textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00640}00640                 elif(data.decode() == \textcolor{stringliteral}{"{}quit"{}}):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00641}00641                     self.request.sendall(bytes(\textcolor{stringliteral}{"{}bye\(\backslash\)r\(\backslash\)n"{}}, \textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00642}00642                     \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00643}00643                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00644}00644                     self.request.sendall(bytes(\textcolor{stringliteral}{"{}unknown command: \{\}"{}}.format(data.decode(\textcolor{stringliteral}{'ascii'})), \textcolor{stringliteral}{'ascii'}))}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00645}00645         \textcolor{keywordflow}{except} Exception \textcolor{keyword}{as} e:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00646}00646             \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00647}00647 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00648}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{00648}} \textcolor{keyword}{class }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{ThreadedTcpServer}}(socketserver.ThreadingMixIn, socketserver.TCPServer):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00649}00649     \textcolor{stringliteral}{"{}"{}"{}DHCP server control interface TCP server}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00650}00650 \textcolor{stringliteral}{    "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00651}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_af4c73c0134b6144ff97708a14dc46392}{00651}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_af4c73c0134b6144ff97708a14dc46392}{setEvents}}(self,data):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00652}00652         \textcolor{stringliteral}{"{}"{}"{}Set DHCP events dictionary reference}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00653}00653 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00654}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a1c34ad0930f63177eb1f891fe17347e3}{00654}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a1c34ad0930f63177eb1f891fe17347e3}{events}} = data}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00655}00655 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00656}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_af25ebadb195f52024a11ce124da2e7a3}{00656}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_af25ebadb195f52024a11ce124da2e7a3}{setHosts}}(self,data):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00657}00657         \textcolor{stringliteral}{"{}"{}"{}Set DHCP host database with active leases reference}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00658}00658 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00659}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a57e6722af81dc4507ad2a3ac68d75bf2}{00659}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a57e6722af81dc4507ad2a3ac68d75bf2}{hosts}} = data}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00660}00660 \textcolor{stringliteral}{        }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00661}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a7722262211b7553389da1607bb1cc626}{00661}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_a7722262211b7553389da1607bb1cc626}{setConfiguration}}(self,data):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00662}00662         \textcolor{stringliteral}{"{}"{}"{}Set DHCP UDP global configuration reference}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00663}00663 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00664}\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_ae82155d046aa6e4d76b7a1d70344e5d8}{00664}} \textcolor{stringliteral}{        self.\mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server_ae82155d046aa6e4d76b7a1d70344e5d8}{configuration}} = data}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00665}00665 \textcolor{stringliteral}{        }}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00666}00666 \textcolor{stringliteral}{}\textcolor{keywordflow}{if} \_\_name\_\_ == \textcolor{stringliteral}{'\_\_main\_\_'}:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00667}00667     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00668}\mbox{\hyperlink{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}{00668}}     messages = \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{TTLOrderedDict}}(default\_ttl=86400) \textcolor{comment}{\#keep messages for 24h}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00669}00669     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00670}\mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{00670}}     \textcolor{keyword}{def }\mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{debug\_msg}}(msg,type):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00671}00671         \textcolor{keywordflow}{if} bool(type):}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00672}00672             type = \textcolor{stringliteral}{'debug'}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00673}00673         messages[time.time()] = \{ \textcolor{stringliteral}{'type'}: type, \textcolor{stringliteral}{'msg'}: msg \}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00674}00674 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00675}\mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{00675}}     configuration = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServerConfiguration}}()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00676}\mbox{\hyperlink{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}{00676}}     configuration.debug = debug\_msg}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00677}00677     configuration.adjust\_if\_this\_computer\_is\_a\_router()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00678}00678     configuration.load(sys.argv[1])}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00679}00679     configuration.router \textcolor{comment}{\#+= ['192.168.0.1']}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00680}\mbox{\hyperlink{namespacedhcp_ab7a91c254731d739131c23acd44cc194}{00680}}     configuration.ip\_address\_lease\_time = 60}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00681}\mbox{\hyperlink{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}{00681}}     server = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}(configuration)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00682}00682     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00683}00683     \textcolor{keywordflow}{for} ip \textcolor{keywordflow}{in} server.configuration.all\_ip\_addresses():}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00684}00684         \textcolor{keyword}{assert} ip == server.configuration.network\_filter()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00685}00685 }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00686}00686     \textcolor{keyword}{with} \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{ThreadedTcpServer}}((\textcolor{stringliteral}{"{}127.0.0.1"{}}, 6767), ThreadedTcpRequestHandler) \textcolor{keyword}{as} cserver:}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00687}00687         cserver.setEvents(messages)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00688}00688         cserver.setHosts(server.hosts.db)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00689}00689         cserver.setConfiguration(configuration)}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00690}00690         cserver.serve\_forever()}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00691}00691     }
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00692}00692     \textcolor{comment}{\#server.run\_in\_thread()}}
+\DoxyCodeLine{\Hypertarget{dhcp_8py_source_l00693}00693     server.run()}
+
+\end{DoxyCode}

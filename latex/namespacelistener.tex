@@ -1,0 +1,225 @@
+\hypertarget{namespacelistener}{}\doxysection{listener Namespace Reference}
+\label{namespacelistener}\index{listener@{listener}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{Read\+Boot\+Protocol\+Packet}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacelistener_a0c4f77316951a70aa30079f1633365cc}{inet\+\_\+ntoaX}} (\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}})
+\item 
+def \mbox{\hyperlink{namespacelistener_a29b918ea7300437205b510053fe33dac}{inet\+\_\+atonX}} (ips)
+\item 
+def \mbox{\hyperlink{namespacelistener_a393567f88ed75b1e57776d61530b2a26}{macunpack}} (\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}})
+\item 
+def \mbox{\hyperlink{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}{macpack}} (mac)
+\item 
+def \mbox{\hyperlink{namespacelistener_ac69c4f8f4efab46a2f093d86f15b2bf4}{unpackbool}} (\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}})
+\item 
+def \mbox{\hyperlink{namespacelistener_aac2063401b57bbbf1b6188386694a3ed}{packbool}} (bool)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \mbox{\hyperlink{namespacelistener_a0d9b9e0e632268b3a9a29e1e76fb0c07}{dhcp\+\_\+message\+\_\+types}}
+\item 
+\mbox{\hyperlink{namespacelistener_a04a91fa40083c8a74458563f869474fc}{reversed\+\_\+dhcp\+\_\+message\+\_\+types}} = dict()
+\item 
+\mbox{\hyperlink{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}{shortunpack}} = lambda data\+: (\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}}\mbox{[}0\mbox{]} $<$$<$ 8) + \mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}}\mbox{[}1\mbox{]}
+\item 
+\mbox{\hyperlink{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}{shortpack}} = lambda i\+: bytes(\mbox{[}i $>$$>$ 8, i \& 255\mbox{]})
+\item 
+list \mbox{\hyperlink{namespacelistener_abeab9fa9161aa45a0b82cde5dda42299}{options}}
+\item 
+\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}} = base64.\+b16decode(b\textquotesingle{}02010600f7b41ad100000000c0a800640000000000000000000000007c7a914bca6c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000638253633501053604c0a800010104ffffff000304c0a800010604c0a80001ff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\textquotesingle{}.upper())
+\item 
+\mbox{\hyperlink{namespacelistener_a390b9c69130659db6349daf506cfefea}{p}} = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{Read\+Boot\+Protocol\+Packet}}(\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}})
+\item 
+\mbox{\hyperlink{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}{s1}} = socket(type = SOCK\+\_\+\+DGRAM)
+\item 
+\mbox{\hyperlink{namespacelistener_ad9e2511b2a065b4143f5a7a71da2baf9}{reads}} = select.\+select(\mbox{[}\mbox{\hyperlink{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}{s1}}\mbox{]}, \mbox{[}$\,$\mbox{]}, \mbox{[}$\,$\mbox{]}, 1)\mbox{[}0\mbox{]}
+\item 
+\mbox{\hyperlink{namespacelistener_a5bccea4f84af3a2a57917ff10a721736}{packet}} = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{Read\+Boot\+Protocol\+Packet}}($\ast$s.\+recvfrom(4096))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacelistener_a29b918ea7300437205b510053fe33dac}\label{namespacelistener_a29b918ea7300437205b510053fe33dac}} 
+\index{listener@{listener}!inet\_atonX@{inet\_atonX}}
+\index{inet\_atonX@{inet\_atonX}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{inet\_atonX()}{inet\_atonX()}}
+{\footnotesize\ttfamily def listener.\+inet\+\_\+atonX (\begin{DoxyParamCaption}\item[{}]{ips }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00014}{14}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a0c4f77316951a70aa30079f1633365cc}\label{namespacelistener_a0c4f77316951a70aa30079f1633365cc}} 
+\index{listener@{listener}!inet\_ntoaX@{inet\_ntoaX}}
+\index{inet\_ntoaX@{inet\_ntoaX}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{inet\_ntoaX()}{inet\_ntoaX()}}
+{\footnotesize\ttfamily def listener.\+inet\+\_\+ntoaX (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00011}{11}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}\label{namespacelistener_a15fb8066ece6d815dde7ba6cdb823d57}} 
+\index{listener@{listener}!macpack@{macpack}}
+\index{macpack@{macpack}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{macpack()}{macpack()}}
+{\footnotesize\ttfamily def listener.\+macpack (\begin{DoxyParamCaption}\item[{}]{mac }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00039}{39}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a393567f88ed75b1e57776d61530b2a26}\label{namespacelistener_a393567f88ed75b1e57776d61530b2a26}} 
+\index{listener@{listener}!macunpack@{macunpack}}
+\index{macunpack@{macunpack}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{macunpack()}{macunpack()}}
+{\footnotesize\ttfamily def listener.\+macunpack (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00035}{35}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_aac2063401b57bbbf1b6188386694a3ed}\label{namespacelistener_aac2063401b57bbbf1b6188386694a3ed}} 
+\index{listener@{listener}!packbool@{packbool}}
+\index{packbool@{packbool}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{packbool()}{packbool()}}
+{\footnotesize\ttfamily def listener.\+packbool (\begin{DoxyParamCaption}\item[{}]{bool }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00045}{45}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_ac69c4f8f4efab46a2f093d86f15b2bf4}\label{namespacelistener_ac69c4f8f4efab46a2f093d86f15b2bf4}} 
+\index{listener@{listener}!unpackbool@{unpackbool}}
+\index{unpackbool@{unpackbool}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{unpackbool()}{unpackbool()}}
+{\footnotesize\ttfamily def listener.\+unpackbool (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00042}{42}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}\label{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}} 
+\index{listener@{listener}!data@{data}}
+\index{data@{data}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily listener.\+data = base64.\+b16decode(b\textquotesingle{}02010600f7b41ad100000000c0a800640000000000000000000000007c7a914bca6c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000638253633501053604c0a800010104ffffff000304c0a800010604c0a80001ff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\textquotesingle{}.upper())}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00224}{224}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a0d9b9e0e632268b3a9a29e1e76fb0c07}\label{namespacelistener_a0d9b9e0e632268b3a9a29e1e76fb0c07}} 
+\index{listener@{listener}!dhcp\_message\_types@{dhcp\_message\_types}}
+\index{dhcp\_message\_types@{dhcp\_message\_types}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{dhcp\_message\_types}{dhcp\_message\_types}}
+{\footnotesize\ttfamily dictionary listener.\+dhcp\+\_\+message\+\_\+types}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 =  \{}
+\DoxyCodeLine{00002     1 : \textcolor{stringliteral}{'DHCPDISCOVER'},}
+\DoxyCodeLine{00003     2 : \textcolor{stringliteral}{'DHCPOFFER'},}
+\DoxyCodeLine{00004     3 : \textcolor{stringliteral}{'DHCPREQUEST'},}
+\DoxyCodeLine{00005     4 : \textcolor{stringliteral}{'DHCPDECLINE'},}
+\DoxyCodeLine{00006     5 : \textcolor{stringliteral}{'DHCPACK'},}
+\DoxyCodeLine{00007     6 : \textcolor{stringliteral}{'DHCPNAK'},}
+\DoxyCodeLine{00008     7 : \textcolor{stringliteral}{'DHCPRELEASE'},}
+\DoxyCodeLine{00009     8 : \textcolor{stringliteral}{'DHCPINFORM'},}
+\DoxyCodeLine{00010 \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00017}{17}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_abeab9fa9161aa45a0b82cde5dda42299}\label{namespacelistener_abeab9fa9161aa45a0b82cde5dda42299}} 
+\index{listener@{listener}!options@{options}}
+\index{options@{options}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily list listener.\+options}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00048}{48}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a390b9c69130659db6349daf506cfefea}\label{namespacelistener_a390b9c69130659db6349daf506cfefea}} 
+\index{listener@{listener}!p@{p}}
+\index{p@{p}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{p}{p}}
+{\footnotesize\ttfamily listener.\+p = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{Read\+Boot\+Protocol\+Packet}}(\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00226}{226}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a5bccea4f84af3a2a57917ff10a721736}\label{namespacelistener_a5bccea4f84af3a2a57917ff10a721736}} 
+\index{listener@{listener}!packet@{packet}}
+\index{packet@{packet}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{packet}{packet}}
+{\footnotesize\ttfamily listener.\+packet = \mbox{\hyperlink{classlistener_1_1_read_boot_protocol_packet}{Read\+Boot\+Protocol\+Packet}}($\ast$s.\+recvfrom(4096))}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00258}{258}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_ad9e2511b2a065b4143f5a7a71da2baf9}\label{namespacelistener_ad9e2511b2a065b4143f5a7a71da2baf9}} 
+\index{listener@{listener}!reads@{reads}}
+\index{reads@{reads}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{reads}{reads}}
+{\footnotesize\ttfamily listener.\+reads = select.\+select(\mbox{[}\mbox{\hyperlink{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}{s1}}\mbox{]}, \mbox{[}$\,$\mbox{]}, \mbox{[}$\,$\mbox{]}, 1)\mbox{[}0\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00256}{256}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a04a91fa40083c8a74458563f869474fc}\label{namespacelistener_a04a91fa40083c8a74458563f869474fc}} 
+\index{listener@{listener}!reversed\_dhcp\_message\_types@{reversed\_dhcp\_message\_types}}
+\index{reversed\_dhcp\_message\_types@{reversed\_dhcp\_message\_types}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{reversed\_dhcp\_message\_types}{reversed\_dhcp\_message\_types}}
+{\footnotesize\ttfamily listener.\+reversed\+\_\+dhcp\+\_\+message\+\_\+types = dict()}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00027}{27}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}\label{namespacelistener_ace45cf563e4e1b90e80395403f60ace7}} 
+\index{listener@{listener}!s1@{s1}}
+\index{s1@{s1}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{s1}{s1}}
+{\footnotesize\ttfamily listener.\+s1 = socket(type = SOCK\+\_\+\+DGRAM)}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00249}{249}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}\label{namespacelistener_a36ceadb1f7f70fbe13b1d40358555d7a}} 
+\index{listener@{listener}!shortpack@{shortpack}}
+\index{shortpack@{shortpack}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{shortpack}{shortpack}}
+{\footnotesize\ttfamily listener.\+shortpack = lambda i\+: bytes(\mbox{[}i $>$$>$ 8, i \& 255\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00032}{32}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+
+\mbox{\Hypertarget{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}\label{namespacelistener_a7c27b9c1327094a4f83861f303b01cf6}} 
+\index{listener@{listener}!shortunpack@{shortunpack}}
+\index{shortunpack@{shortunpack}!listener@{listener}}
+\doxysubsubsection{\texorpdfstring{shortunpack}{shortunpack}}
+{\footnotesize\ttfamily listener.\+shortunpack = lambda data\+: (\mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}}\mbox{[}0\mbox{]} $<$$<$ 8) + \mbox{\hyperlink{namespacelistener_ac6c5f0f2db70e3aa7d3a83a4f27ad3f7}{data}}\mbox{[}1\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{listener_8py_source_l00031}{31}} of file \mbox{\hyperlink{listener_8py_source}{listener.\+py}}.
+

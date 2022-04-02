@@ -1,0 +1,278 @@
+\hypertarget{classdhcp_1_1_write_boot_protocol_packet}{}\doxysection{dhcp.\+Write\+Boot\+Protocol\+Packet Class Reference}
+\label{classdhcp_1_1_write_boot_protocol_packet}\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+Inheritance diagram for dhcp.\+Write\+Boot\+Protocol\+Packet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdhcp_1_1_write_boot_protocol_packet}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a04195f0af2bc134ac398a11227af4b16}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}})
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}{to\+\_\+bytes}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}{get\+\_\+option}} (self, option)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}{options}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aea12de4e76f8ea2b8c4eb33f4adac9c4}{\+\_\+\+\_\+str\+\_\+\+\_\+}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c1eaf3ea98ff19558a2873d47c1bd13}{message\+\_\+type}} = 2
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ae995d022d4c4280c10036f64b271d455}{hardware\+\_\+type}} = 1
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}{hardware\+\_\+address\+\_\+length}} = 6
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a49c598b664e64b515f80d6f29637e003}{hops}} = 0
+\item 
+\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_add8bca1f53869d801f62ff51f38ef315}{transaction\+\_\+id}} = None
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a34a75a9fd48929777c6730460b577344}{seconds\+\_\+elapsed}} = 0
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a2158cd33033b3ad7b3de5fd0ced0747d}{bootp\+\_\+flags}} = 0
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7c5041840cc7b7f15970bf58be486659}{client\+\_\+ip\+\_\+address}} = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_abed6f8fcad62c89ae9f670dd8ce95987}{your\+\_\+ip\+\_\+address}} = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a58a23d7668a529c7e9216228c4cf2ba1}{next\+\_\+server\+\_\+ip\+\_\+address}} = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_aec59dbba94aedab6025226cb7bf92682}{relay\+\_\+agent\+\_\+ip\+\_\+address}} = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a8dadba279ad323c2986da9c8822664ff}{client\+\_\+mac\+\_\+address}} = None
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_ab5a5b6937a48e0daa4aae992a247f2d5}{magic\+\_\+cookie}} = \textquotesingle{}99.\+130.\+83.\+99\textquotesingle{}
+\item 
+list \mbox{\hyperlink{classdhcp_1_1_write_boot_protocol_packet_a7833e353ff7adc5f1b8042fcd739c7cd}{parameter\+\_\+order}} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}DHCP protocol datagram serializer
+This class serializes UDP DHCP packet, instance is constructed using global 
+configuration from which dhcp options are copied
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00044}{44}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a04195f0af2bc134ac398a11227af4b16}\label{classdhcp_1_1_write_boot_protocol_packet_a04195f0af2bc134ac398a11227af4b16}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dhcp.\+Write\+Boot\+Protocol\+Packet.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{configuration }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create new packet instance and search for options set in configuration 
+and copy them tgo packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00069}{69}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_aea12de4e76f8ea2b8c4eb33f4adac9c4}\label{classdhcp_1_1_write_boot_protocol_packet_aea12de4e76f8ea2b8c4eb33f4adac9c4}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!\_\_str\_\_@{\_\_str\_\_}}
+\index{\_\_str\_\_@{\_\_str\_\_}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{\_\_str\_\_()}{\_\_str\_\_()}}
+{\footnotesize\ttfamily def dhcp.\+Write\+Boot\+Protocol\+Packet.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Serialize UDP DHCP response packet to bytes
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00150}{150}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}\label{classdhcp_1_1_write_boot_protocol_packet_aab5d8b775b053559511c06cf52949670}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!get\_option@{get\_option}}
+\index{get\_option@{get\_option}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{get\_option()}{get\_option()}}
+{\footnotesize\ttfamily def dhcp.\+Write\+Boot\+Protocol\+Packet.\+get\+\_\+option (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{option }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get DHCP UDP response packet option value
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00114}{114}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}\label{classdhcp_1_1_write_boot_protocol_packet_a1eb459ed259bff6617085971eb31361c}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!options@{options}}
+\index{options@{options}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{options()}{options()}}
+{\footnotesize\ttfamily def dhcp.\+Write\+Boot\+Protocol\+Packet.\+options (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get DHCP UDP response packet option value
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00129}{129}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}\label{classdhcp_1_1_write_boot_protocol_packet_af902569db8f9c77b0b0bbbbb66c5f98f}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!to\_bytes@{to\_bytes}}
+\index{to\_bytes@{to\_bytes}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{to\_bytes()}{to\_bytes()}}
+{\footnotesize\ttfamily def dhcp.\+Write\+Boot\+Protocol\+Packet.\+to\+\_\+bytes (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Serialize UDP DHCP response packet to bytes
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00081}{81}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a2158cd33033b3ad7b3de5fd0ced0747d}\label{classdhcp_1_1_write_boot_protocol_packet_a2158cd33033b3ad7b3de5fd0ced0747d}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!bootp\_flags@{bootp\_flags}}
+\index{bootp\_flags@{bootp\_flags}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{bootp\_flags}{bootp\_flags}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+bootp\+\_\+flags = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00057}{57}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a7c5041840cc7b7f15970bf58be486659}\label{classdhcp_1_1_write_boot_protocol_packet_a7c5041840cc7b7f15970bf58be486659}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!client\_ip\_address@{client\_ip\_address}}
+\index{client\_ip\_address@{client\_ip\_address}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{client\_ip\_address}{client\_ip\_address}}
+{\footnotesize\ttfamily string dhcp.\+Write\+Boot\+Protocol\+Packet.\+client\+\_\+ip\+\_\+address = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00059}{59}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a8dadba279ad323c2986da9c8822664ff}\label{classdhcp_1_1_write_boot_protocol_packet_a8dadba279ad323c2986da9c8822664ff}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!client\_mac\_address@{client\_mac\_address}}
+\index{client\_mac\_address@{client\_mac\_address}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{client\_mac\_address}{client\_mac\_address}}
+{\footnotesize\ttfamily dhcp.\+Write\+Boot\+Protocol\+Packet.\+client\+\_\+mac\+\_\+address = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00064}{64}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}\label{classdhcp_1_1_write_boot_protocol_packet_a5e78e0ac4f0a7e322a479567bf0ab43c}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!hardware\_address\_length@{hardware\_address\_length}}
+\index{hardware\_address\_length@{hardware\_address\_length}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{hardware\_address\_length}{hardware\_address\_length}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+hardware\+\_\+address\+\_\+length = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00051}{51}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_ae995d022d4c4280c10036f64b271d455}\label{classdhcp_1_1_write_boot_protocol_packet_ae995d022d4c4280c10036f64b271d455}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!hardware\_type@{hardware\_type}}
+\index{hardware\_type@{hardware\_type}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{hardware\_type}{hardware\_type}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+hardware\+\_\+type = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00050}{50}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a49c598b664e64b515f80d6f29637e003}\label{classdhcp_1_1_write_boot_protocol_packet_a49c598b664e64b515f80d6f29637e003}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!hops@{hops}}
+\index{hops@{hops}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{hops}{hops}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+hops = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00052}{52}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_ab5a5b6937a48e0daa4aae992a247f2d5}\label{classdhcp_1_1_write_boot_protocol_packet_ab5a5b6937a48e0daa4aae992a247f2d5}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!magic\_cookie@{magic\_cookie}}
+\index{magic\_cookie@{magic\_cookie}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{magic\_cookie}{magic\_cookie}}
+{\footnotesize\ttfamily string dhcp.\+Write\+Boot\+Protocol\+Packet.\+magic\+\_\+cookie = \textquotesingle{}99.\+130.\+83.\+99\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00065}{65}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a7c1eaf3ea98ff19558a2873d47c1bd13}\label{classdhcp_1_1_write_boot_protocol_packet_a7c1eaf3ea98ff19558a2873d47c1bd13}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!message\_type@{message\_type}}
+\index{message\_type@{message\_type}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{message\_type}{message\_type}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+message\+\_\+type = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00049}{49}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a58a23d7668a529c7e9216228c4cf2ba1}\label{classdhcp_1_1_write_boot_protocol_packet_a58a23d7668a529c7e9216228c4cf2ba1}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!next\_server\_ip\_address@{next\_server\_ip\_address}}
+\index{next\_server\_ip\_address@{next\_server\_ip\_address}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{next\_server\_ip\_address}{next\_server\_ip\_address}}
+{\footnotesize\ttfamily string dhcp.\+Write\+Boot\+Protocol\+Packet.\+next\+\_\+server\+\_\+ip\+\_\+address = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00061}{61}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a7833e353ff7adc5f1b8042fcd739c7cd}\label{classdhcp_1_1_write_boot_protocol_packet_a7833e353ff7adc5f1b8042fcd739c7cd}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!parameter\_order@{parameter\_order}}
+\index{parameter\_order@{parameter\_order}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{parameter\_order}{parameter\_order}}
+{\footnotesize\ttfamily list dhcp.\+Write\+Boot\+Protocol\+Packet.\+parameter\+\_\+order = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00067}{67}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_aec59dbba94aedab6025226cb7bf92682}\label{classdhcp_1_1_write_boot_protocol_packet_aec59dbba94aedab6025226cb7bf92682}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!relay\_agent\_ip\_address@{relay\_agent\_ip\_address}}
+\index{relay\_agent\_ip\_address@{relay\_agent\_ip\_address}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{relay\_agent\_ip\_address}{relay\_agent\_ip\_address}}
+{\footnotesize\ttfamily string dhcp.\+Write\+Boot\+Protocol\+Packet.\+relay\+\_\+agent\+\_\+ip\+\_\+address = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00062}{62}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_a34a75a9fd48929777c6730460b577344}\label{classdhcp_1_1_write_boot_protocol_packet_a34a75a9fd48929777c6730460b577344}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!seconds\_elapsed@{seconds\_elapsed}}
+\index{seconds\_elapsed@{seconds\_elapsed}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{seconds\_elapsed}{seconds\_elapsed}}
+{\footnotesize\ttfamily int dhcp.\+Write\+Boot\+Protocol\+Packet.\+seconds\+\_\+elapsed = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00056}{56}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_add8bca1f53869d801f62ff51f38ef315}\label{classdhcp_1_1_write_boot_protocol_packet_add8bca1f53869d801f62ff51f38ef315}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!transaction\_id@{transaction\_id}}
+\index{transaction\_id@{transaction\_id}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{transaction\_id}{transaction\_id}}
+{\footnotesize\ttfamily dhcp.\+Write\+Boot\+Protocol\+Packet.\+transaction\+\_\+id = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00054}{54}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_write_boot_protocol_packet_abed6f8fcad62c89ae9f670dd8ce95987}\label{classdhcp_1_1_write_boot_protocol_packet_abed6f8fcad62c89ae9f670dd8ce95987}} 
+\index{dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}!your\_ip\_address@{your\_ip\_address}}
+\index{your\_ip\_address@{your\_ip\_address}!dhcp.WriteBootProtocolPacket@{dhcp.WriteBootProtocolPacket}}
+\doxysubsubsection{\texorpdfstring{your\_ip\_address}{your\_ip\_address}}
+{\footnotesize\ttfamily string dhcp.\+Write\+Boot\+Protocol\+Packet.\+your\+\_\+ip\+\_\+address = \textquotesingle{}0.\+0.\+0.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00060}{60}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dhcp_8py}{dhcp.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,239 @@
+\hypertarget{classdhcp_1_1_d_h_c_p_server_configuration}{}\doxysection{dhcp.\+DHCPServer\+Configuration Class Reference}
+\label{classdhcp_1_1_d_h_c_p_server_configuration}\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+Inheritance diagram for dhcp.\+DHCPServer\+Configuration\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdhcp_1_1_d_h_c_p_server_configuration}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a180484ac4bdf23fc07407d3b44f722cc}{load}} (self, file)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a7a5fc60105c8d57601ec948d7d43c8fa}{adjust\+\_\+if\+\_\+this\+\_\+computer\+\_\+is\+\_\+a\+\_\+router}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a59a4bfcf49842e7453ba71412d7e9abf}{all\+\_\+ip\+\_\+addresses}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa1e71c8f12e8968a8da7a5779da19f7c}{network\+\_\+filter}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}{network}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a314df3b0d50a13968153f317cfac2ee2}{broadcast\+\_\+address}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8e86611b3ea41d75f9d0ac7010edbc5f}{dhcp\+\_\+offer\+\_\+after\+\_\+seconds}} = 10
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a3237c2a7ad2a15e2ed260960fe04eafc}{dhcp\+\_\+acknowledge\+\_\+after\+\_\+seconds}} = 10
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a3d224e886f43ae665f010cdaf09546a9}{length\+\_\+of\+\_\+transaction}} = 40
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}{network}} = \textquotesingle{}192.\+168.\+173.\+0\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa58cf42f87609209ddce0173b45322c9}{broadcast\+\_\+address}} = \textquotesingle{}255.\+255.\+255.\+255\textquotesingle{}
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}{subnet\+\_\+mask}} = \textquotesingle{}255.\+255.\+255.\+0\textquotesingle{}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a55b1c1ae7a00c76da1ed7ce2a1f12bf9}{router}} = None
+\item 
+int \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_aa32aa9798ca8bda68d0a251fda995440}{ip\+\_\+address\+\_\+lease\+\_\+time}} = 300
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8dfb7835e513433b9ec1bb29f380e34a}{domain\+\_\+name\+\_\+server}} = None
+\item 
+string \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a8e7b3b6cdecb88a5355ae33e7b829a46}{host\+\_\+file}} = \textquotesingle{}hosts.\+csv\textquotesingle{}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration_a74cb330547f34b82e62afaf10e75478e}{debug}} = lambda $\ast$args, $\ast$$\ast$kw\+: None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00293}{293}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a7a5fc60105c8d57601ec948d7d43c8fa}\label{classdhcp_1_1_d_h_c_p_server_configuration_a7a5fc60105c8d57601ec948d7d43c8fa}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!adjust\_if\_this\_computer\_is\_a\_router@{adjust\_if\_this\_computer\_is\_a\_router}}
+\index{adjust\_if\_this\_computer\_is\_a\_router@{adjust\_if\_this\_computer\_is\_a\_router}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{adjust\_if\_this\_computer\_is\_a\_router()}{adjust\_if\_this\_computer\_is\_a\_router()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPServer\+Configuration.\+adjust\+\_\+if\+\_\+this\+\_\+computer\+\_\+is\+\_\+a\+\_\+router (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00321}{321}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a59a4bfcf49842e7453ba71412d7e9abf}\label{classdhcp_1_1_d_h_c_p_server_configuration_a59a4bfcf49842e7453ba71412d7e9abf}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!all\_ip\_addresses@{all\_ip\_addresses}}
+\index{all\_ip\_addresses@{all\_ip\_addresses}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{all\_ip\_addresses()}{all\_ip\_addresses()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPServer\+Configuration.\+all\+\_\+ip\+\_\+addresses (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00333}{333}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a180484ac4bdf23fc07407d3b44f722cc}\label{classdhcp_1_1_d_h_c_p_server_configuration_a180484ac4bdf23fc07407d3b44f722cc}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!load@{load}}
+\index{load@{load}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPServer\+Configuration.\+load (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{file }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00310}{310}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_aa1e71c8f12e8968a8da7a5779da19f7c}\label{classdhcp_1_1_d_h_c_p_server_configuration_aa1e71c8f12e8968a8da7a5779da19f7c}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!network\_filter@{network\_filter}}
+\index{network\_filter@{network\_filter}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{network\_filter()}{network\_filter()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPServer\+Configuration.\+network\+\_\+filter (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00339}{339}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_aa58cf42f87609209ddce0173b45322c9}\label{classdhcp_1_1_d_h_c_p_server_configuration_aa58cf42f87609209ddce0173b45322c9}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!broadcast\_address@{broadcast\_address}}
+\index{broadcast\_address@{broadcast\_address}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{broadcast\_address}{broadcast\_address}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily string dhcp.\+DHCPServer\+Configuration.\+broadcast\+\_\+address = \textquotesingle{}255.\+255.\+255.\+255\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00299}{299}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a314df3b0d50a13968153f317cfac2ee2}\label{classdhcp_1_1_d_h_c_p_server_configuration_a314df3b0d50a13968153f317cfac2ee2}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!broadcast\_address@{broadcast\_address}}
+\index{broadcast\_address@{broadcast\_address}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{broadcast\_address}{broadcast\_address}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily dhcp.\+DHCPServer\+Configuration.\+broadcast\+\_\+address}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00328}{328}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a74cb330547f34b82e62afaf10e75478e}\label{classdhcp_1_1_d_h_c_p_server_configuration_a74cb330547f34b82e62afaf10e75478e}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!debug@{debug}}
+\index{debug@{debug}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily dhcp.\+DHCPServer\+Configuration.\+debug = lambda $\ast$args, $\ast$$\ast$kw\+: None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00308}{308}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a3237c2a7ad2a15e2ed260960fe04eafc}\label{classdhcp_1_1_d_h_c_p_server_configuration_a3237c2a7ad2a15e2ed260960fe04eafc}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!dhcp\_acknowledge\_after\_seconds@{dhcp\_acknowledge\_after\_seconds}}
+\index{dhcp\_acknowledge\_after\_seconds@{dhcp\_acknowledge\_after\_seconds}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{dhcp\_acknowledge\_after\_seconds}{dhcp\_acknowledge\_after\_seconds}}
+{\footnotesize\ttfamily int dhcp.\+DHCPServer\+Configuration.\+dhcp\+\_\+acknowledge\+\_\+after\+\_\+seconds = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00295}{295}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a8e86611b3ea41d75f9d0ac7010edbc5f}\label{classdhcp_1_1_d_h_c_p_server_configuration_a8e86611b3ea41d75f9d0ac7010edbc5f}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!dhcp\_offer\_after\_seconds@{dhcp\_offer\_after\_seconds}}
+\index{dhcp\_offer\_after\_seconds@{dhcp\_offer\_after\_seconds}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{dhcp\_offer\_after\_seconds}{dhcp\_offer\_after\_seconds}}
+{\footnotesize\ttfamily int dhcp.\+DHCPServer\+Configuration.\+dhcp\+\_\+offer\+\_\+after\+\_\+seconds = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00294}{294}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a8dfb7835e513433b9ec1bb29f380e34a}\label{classdhcp_1_1_d_h_c_p_server_configuration_a8dfb7835e513433b9ec1bb29f380e34a}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!domain\_name\_server@{domain\_name\_server}}
+\index{domain\_name\_server@{domain\_name\_server}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{domain\_name\_server}{domain\_name\_server}}
+{\footnotesize\ttfamily dhcp.\+DHCPServer\+Configuration.\+domain\+\_\+name\+\_\+server = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00304}{304}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a8e7b3b6cdecb88a5355ae33e7b829a46}\label{classdhcp_1_1_d_h_c_p_server_configuration_a8e7b3b6cdecb88a5355ae33e7b829a46}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!host\_file@{host\_file}}
+\index{host\_file@{host\_file}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{host\_file}{host\_file}}
+{\footnotesize\ttfamily string dhcp.\+DHCPServer\+Configuration.\+host\+\_\+file = \textquotesingle{}hosts.\+csv\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00306}{306}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_aa32aa9798ca8bda68d0a251fda995440}\label{classdhcp_1_1_d_h_c_p_server_configuration_aa32aa9798ca8bda68d0a251fda995440}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!ip\_address\_lease\_time@{ip\_address\_lease\_time}}
+\index{ip\_address\_lease\_time@{ip\_address\_lease\_time}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{ip\_address\_lease\_time}{ip\_address\_lease\_time}}
+{\footnotesize\ttfamily int dhcp.\+DHCPServer\+Configuration.\+ip\+\_\+address\+\_\+lease\+\_\+time = 300\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00303}{303}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a3d224e886f43ae665f010cdaf09546a9}\label{classdhcp_1_1_d_h_c_p_server_configuration_a3d224e886f43ae665f010cdaf09546a9}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!length\_of\_transaction@{length\_of\_transaction}}
+\index{length\_of\_transaction@{length\_of\_transaction}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{length\_of\_transaction}{length\_of\_transaction}}
+{\footnotesize\ttfamily int dhcp.\+DHCPServer\+Configuration.\+length\+\_\+of\+\_\+transaction = 40\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00296}{296}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}\label{classdhcp_1_1_d_h_c_p_server_configuration_a8ec5462f74c8fa19621e0c4d0edfb843}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!network@{network}}
+\index{network@{network}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{network}{network}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily string dhcp.\+DHCPServer\+Configuration.\+network = \textquotesingle{}192.\+168.\+173.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00298}{298}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}\label{classdhcp_1_1_d_h_c_p_server_configuration_ad55c5454a6b02e892124f9ef3e3617ab}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!network@{network}}
+\index{network@{network}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{network}{network}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily dhcp.\+DHCPServer\+Configuration.\+network}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00327}{327}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a55b1c1ae7a00c76da1ed7ce2a1f12bf9}\label{classdhcp_1_1_d_h_c_p_server_configuration_a55b1c1ae7a00c76da1ed7ce2a1f12bf9}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!router@{router}}
+\index{router@{router}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily dhcp.\+DHCPServer\+Configuration.\+router = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00301}{301}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}\label{classdhcp_1_1_d_h_c_p_server_configuration_a4296295b495ecc82f6646516017ff2cc}} 
+\index{dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}!subnet\_mask@{subnet\_mask}}
+\index{subnet\_mask@{subnet\_mask}!dhcp.DHCPServerConfiguration@{dhcp.DHCPServerConfiguration}}
+\doxysubsubsection{\texorpdfstring{subnet\_mask}{subnet\_mask}}
+{\footnotesize\ttfamily string dhcp.\+DHCPServer\+Configuration.\+subnet\+\_\+mask = \textquotesingle{}255.\+255.\+255.\+0\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00300}{300}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dhcp_8py}{dhcp.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,127 @@
+\hypertarget{ttldict_8py_source}{}\doxysection{ttldict.\+py}
+\mbox{\hyperlink{ttldict_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00001}\mbox{\hyperlink{namespacettldict}{00001}} \textcolor{keyword}{from} collections \textcolor{keyword}{import} OrderedDict}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00002}00002 \textcolor{keyword}{from} threading \textcolor{keyword}{import} RLock}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00003}00003 \textcolor{keyword}{import} time}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00004}00004 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00005}00005 \_\_all\_\_ = [\textcolor{stringliteral}{'TTLOrderedDict'}]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00008}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{00008}} \textcolor{keyword}{class }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{TTLOrderedDict}}(OrderedDict):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00009}00009     \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00010}00010 \textcolor{stringliteral}{    OrderedDict }\textcolor{keyword}{with} TTL}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00011}00011     Extra args \textcolor{keywordflow}{and} kwargs are passed to initial .update() call}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00012}00012     \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00013}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}{00013}} \textcolor{stringliteral}{    }\textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}{\_\_init\_\_}}(self, default\_ttl, *args, **kwargs):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00014}00014         \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00015}00015 \textcolor{stringliteral}{        Be warned, }\textcolor{keywordflow}{if} you use this \textcolor{keyword}{with} Python versions earlier than 3.6}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00016}00016         when passing **kwargs order \textcolor{keywordflow}{is} \textcolor{keywordflow}{not} preseverd.}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00017}00017         \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00018}00018 \textcolor{stringliteral}{        }\textcolor{keyword}{assert} isinstance(default\_ttl, int)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00019}00019         self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5058aa3f21350d85215fbaa8194759cc}{\_default\_ttl}} = default\_ttl}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00020}00020         self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}} = RLock()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00021}00021         super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_afae9667527ff79a1f8a56b02ce790be3}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00022}00022         self.update(*args, **kwargs)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00024}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5c8732dc608a83dd34ae6816cda7e579}{00024}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5c8732dc608a83dd34ae6816cda7e579}{\_\_repr\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00025}00025         \textcolor{keywordflow}{return} \textcolor{stringliteral}{'<TTLOrderedDict@\%\#08x; ttl=\%r, OrderedDict=\%r;>'} \% (}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00026}00026             id(self), self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5058aa3f21350d85215fbaa8194759cc}{\_default\_ttl}}, self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}{items}}())}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00028}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}{00028}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}{\_\_len\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00029}00029         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00030}00030             self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a19a0b2df596dd7b5ed55369542ba82f3}{\_purge}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00031}00031             \textcolor{keywordflow}{return} super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a279a95f02a2be5c5e51a9a10182f4e0e}{\_\_len\_\_}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00033}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a48600535f4edf65bd03983773f70b9dd}{00033}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a48600535f4edf65bd03983773f70b9dd}{set\_ttl}}(self, key, ttl, now=None):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00034}00034         \textcolor{stringliteral}{"{}"{}"{}Set TTL for the given key"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00035}00035         \textcolor{keywordflow}{if} now \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00036}00036             now = time.time()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00037}00037         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00038}00038             value = self[key]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00039}00039             super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{\_\_setitem\_\_}}(key, (now + ttl, value))}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00041}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a004030f29f2f0a555ac9f8c9f550197a}{00041}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a004030f29f2f0a555ac9f8c9f550197a}{get\_ttl}}(self, key, now=None):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00042}00042         \textcolor{stringliteral}{"{}"{}"{}Return remaining TTL for a key"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00043}00043         \textcolor{keywordflow}{if} now \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00044}00044             now = time.time()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00045}00045         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00046}00046             expire, \_value = super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\_\_getitem\_\_}}(key)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00047}00047             \textcolor{keywordflow}{return} expire -\/ now}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00049}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_ac83d5ddce040eeb4704caa0e3a62770a}{00049}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_ac83d5ddce040eeb4704caa0e3a62770a}{expire\_at}}(self, key, timestamp):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00050}00050         \textcolor{stringliteral}{"{}"{}"{}Set the key expire timestamp"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00051}00051         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00052}00052             value = self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\_\_getitem\_\_}}(key)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00053}00053             super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{\_\_setitem\_\_}}(key,  (timestamp, value))}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00055}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{00055}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{is\_expired}}(self, key, now=None):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00056}00056         \textcolor{stringliteral}{"{}"{}"{} Check if key has expired, and return it if so"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00057}00057         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00058}00058             \textcolor{keywordflow}{if} now \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00059}00059                 now = time.time()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00061}00061             expire, \_value = super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\_\_getitem\_\_}}(key)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00063}00063             \textcolor{keywordflow}{if} expire:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00064}00064                 \textcolor{keywordflow}{if} expire < now:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00065}00065                     \textcolor{keywordflow}{return} key}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00067}00067     \textcolor{keyword}{def }\_purge(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00068}00068         \_keys = list(super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}{\_\_iter\_\_}}())}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00069}00069         \_remove = [key \textcolor{keywordflow}{for} key \textcolor{keywordflow}{in} \_keys \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{is\_expired}}(key)]  \textcolor{comment}{\# noqa}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00070}00070         [self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{\_\_delitem\_\_}}(key) \textcolor{keywordflow}{for} key \textcolor{keywordflow}{in} \_remove]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00072}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}{00072}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}{\_\_iter\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00073}00073         \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00074}00074 \textcolor{stringliteral}{        Yield only non expired keys, without purging the expired ones}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00075}00075 \textcolor{stringliteral}{        "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00076}00076 \textcolor{stringliteral}{        }\textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00077}00077             \textcolor{keywordflow}{for} key \textcolor{keywordflow}{in} super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a809a0cfa7139043ddbd0daeefe0d1c4d}{\_\_iter\_\_}}():}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00078}00078                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{is\_expired}}(key):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00079}00079                     \textcolor{keywordflow}{yield} key}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00081}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{00081}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{\_\_setitem\_\_}}(self, key, value):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00082}00082         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00083}00083             \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5058aa3f21350d85215fbaa8194759cc}{\_default\_ttl}} \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00084}00084                 expire = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00085}00085             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00086}00086                 expire = time.time() + self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a5058aa3f21350d85215fbaa8194759cc}{\_default\_ttl}}}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00087}00087             super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a26a621df64c0ca5bab75f9a2cc95e56f}{\_\_setitem\_\_}}(key,  (expire, value))}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00089}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{00089}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{\_\_delitem\_\_}}(self, key):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00090}00090         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00091}00091             super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{\_\_delitem\_\_}}(key)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00093}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{00093}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\_\_getitem\_\_}}(self, key):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00094}00094         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00095}00095             \textcolor{keywordflow}{if} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3d368c95d360a3242042df56ebd9e064}{is\_expired}}(key):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00096}00096                 self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a51aa0b5b7714464843cc28c082f173a1}{\_\_delitem\_\_}}(key)}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00097}00097                 \textcolor{keywordflow}{raise} KeyError}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00098}00098             item = super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_af25c8a89a2283329b26e7b406052dbc7}{\_\_getitem\_\_}}(key)[1]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00099}00099             \textcolor{keywordflow}{return} item}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00101}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}{00101}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}{keys}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00102}00102         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00103}00103             self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a19a0b2df596dd7b5ed55369542ba82f3}{\_purge}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00104}00104             \textcolor{keywordflow}{return} super().\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a742f0ceaccd3413ca59f7e720a3fa5ca}{keys}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00106}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}{00106}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}{items}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00107}00107         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00108}00108             self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a19a0b2df596dd7b5ed55369542ba82f3}{\_purge}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00109}00109             \_items = list(super(OrderedDict, self).\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a4f0cbcc325c88f3d6e89bd6cb45956a1}{items}}())}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00110}00110             \textcolor{keywordflow}{return} [(k, v[1]) \textcolor{keywordflow}{for} (k, v) \textcolor{keywordflow}{in} \_items]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00112}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}{00112}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}{values}}(self):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00113}00113         \textcolor{keyword}{with} self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a3c3c5e8e24be4d533a0c9d8803c1e84d}{\_lock}}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00114}00114             self.\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a19a0b2df596dd7b5ed55369542ba82f3}{\_purge}}()}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00115}00115             \_values = list(super(OrderedDict, self).\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_aad9956e8af3d68e0c8a3728c39d60a8e}{values}}())}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00116}00116             \textcolor{keywordflow}{return} [v[1] \textcolor{keywordflow}{for} v \textcolor{keywordflow}{in} \_values]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00117}00117 }
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00118}\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a0fff5c429984a81ee22b7357fbbf874e}{00118}}     \textcolor{keyword}{def }\mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict_a0fff5c429984a81ee22b7357fbbf874e}{get}}(self, key, default=None):}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00119}00119         \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00120}00120             \textcolor{keywordflow}{return} self[key]}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00121}00121         \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{\Hypertarget{ttldict_8py_source_l00122}00122             \textcolor{keywordflow}{return} default}
+
+\end{DoxyCode}

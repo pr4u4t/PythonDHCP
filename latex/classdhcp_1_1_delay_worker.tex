@@ -1,0 +1,116 @@
+\hypertarget{classdhcp_1_1_delay_worker}{}\doxysection{dhcp.\+Delay\+Worker Class Reference}
+\label{classdhcp_1_1_delay_worker}\index{dhcp.DelayWorker@{dhcp.DelayWorker}}
+Inheritance diagram for dhcp.\+Delay\+Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdhcp_1_1_delay_worker}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_delay_worker_a7568c60fc34f0d72e01bf9b42268ff86}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_delay_worker_a71df6984475182b90240cdd99874c6ac}{do\+\_\+after}} (self, seconds, func, args=(), kw=\{\})
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_delay_worker_ae892a5a19501fa23f97640939d81f534}{close}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}{closed}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}{queue}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}{thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class used to delay response to DHCP client
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00155}{155}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_a7568c60fc34f0d72e01bf9b42268ff86}\label{classdhcp_1_1_delay_worker_a7568c60fc34f0d72e01bf9b42268ff86}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dhcp.\+Delay\+Worker.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}class constructor internally using priority queue where priority is time
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00158}{158}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_ae892a5a19501fa23f97640939d81f534}\label{classdhcp_1_1_delay_worker_ae892a5a19501fa23f97640939d81f534}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!close@{close}}
+\index{close@{close}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily def dhcp.\+Delay\+Worker.\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to stop worker
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00189}{189}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_a71df6984475182b90240cdd99874c6ac}\label{classdhcp_1_1_delay_worker_a71df6984475182b90240cdd99874c6ac}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!do\_after@{do\_after}}
+\index{do\_after@{do\_after}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{do\_after()}{do\_after()}}
+{\footnotesize\ttfamily def dhcp.\+Delay\+Worker.\+do\+\_\+after (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{seconds,  }\item[{}]{func,  }\item[{}]{args = {\ttfamily ()},  }\item[{}]{kw = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add to queue function which should be called after certain time
+specified by seconds, args, kw are arguments
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00183}{183}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}\label{classdhcp_1_1_delay_worker_a7d290af67c821e7820eec29375126903}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!closed@{closed}}
+\index{closed@{closed}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{closed}{closed}}
+{\footnotesize\ttfamily dhcp.\+Delay\+Worker.\+closed}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00161}{161}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}\label{classdhcp_1_1_delay_worker_a4fa965f933f42b8ce7baf9b696202c0e}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!queue@{queue}}
+\index{queue@{queue}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{queue}{queue}}
+{\footnotesize\ttfamily dhcp.\+Delay\+Worker.\+queue}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00162}{162}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}\label{classdhcp_1_1_delay_worker_af08c829bb866d31925333315a7d0c712}} 
+\index{dhcp.DelayWorker@{dhcp.DelayWorker}!thread@{thread}}
+\index{thread@{thread}!dhcp.DelayWorker@{dhcp.DelayWorker}}
+\doxysubsubsection{\texorpdfstring{thread}{thread}}
+{\footnotesize\ttfamily dhcp.\+Delay\+Worker.\+thread}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00163}{163}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dhcp_8py}{dhcp.\+py}}\end{DoxyCompactItemize}
