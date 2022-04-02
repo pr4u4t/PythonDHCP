@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_0',['s',['../classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e.html#abf08fca05bbe0b19153e9ddb27b56528',1,'dhcp::CASEINSENSITIVE']]],
+  ['s_0',['s',['../classdhcp_1_1_c_a_s_e_i_n_s_e_n_s_i_t_i_v_e.html#abf08fca05bbe0b19153e9ddb27b56528',1,'dhcp.CASEINSENSITIVE.s()'],['../namespacedhcp.html#a4192fc3287e87c089c12f79f8a7c1d5d',1,'dhcp.s()']]],
   ['s1_1',['s1',['../namespacelistener.html#ace45cf563e4e1b90e80395403f60ace7',1,'listener']]],
   ['seconds_5felapsed_2',['seconds_elapsed',['../classdhcp_1_1_write_boot_protocol_packet.html#a34a75a9fd48929777c6730460b577344',1,'dhcp.WriteBootProtocolPacket.seconds_elapsed()'],['../classlistener_1_1_read_boot_protocol_packet.html#af9f675a01088e5776a7fcc97b383f273',1,'listener.ReadBootProtocolPacket.seconds_elapsed()']]],
   ['secs_3',['SECS',['../classlistener_1_1_read_boot_protocol_packet.html#aa2b3b5486815db4bb07e498d1308409a',1,'listener::ReadBootProtocolPacket']]],

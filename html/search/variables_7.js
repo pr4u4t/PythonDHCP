@@ -6,8 +6,9 @@ var searchData=
   ['hops_3',['hops',['../classdhcp_1_1_write_boot_protocol_packet.html#a49c598b664e64b515f80d6f29637e003',1,'dhcp.WriteBootProtocolPacket.hops()'],['../classlistener_1_1_read_boot_protocol_packet.html#a67227d29d96a999260f45172ab1b9e46',1,'listener.ReadBootProtocolPacket.hops()']]],
   ['hops_4',['HOPS',['../classlistener_1_1_read_boot_protocol_packet.html#ac69d82c42cf94cf9e04eaa8b08bd26df',1,'listener::ReadBootProtocolPacket']]],
   ['host_5',['host',['../classlistener_1_1_read_boot_protocol_packet.html#a13023361d7d2c2eb6ade562c70b5b3c6',1,'listener::ReadBootProtocolPacket']]],
-  ['host_5ffile_6',['host_file',['../classdhcp_1_1_d_h_c_p_server_configuration.html#a8e7b3b6cdecb88a5355ae33e7b829a46',1,'dhcp::DHCPServerConfiguration']]],
-  ['hostname_7',['hostname',['../classdhcp_1_1_host.html#a4db1cd4ba6cae9480967587ed4b26b95',1,'dhcp::Host']]],
-  ['hosts_8',['hosts',['../classdhcp_1_1_d_h_c_p_server.html#a664b45ac7c71967fd415966f2ba5ab4d',1,'dhcp.DHCPServer.hosts()'],['../classdhcp_1_1_threaded_tcp_server.html#a57e6722af81dc4507ad2a3ac68d75bf2',1,'dhcp.ThreadedTcpServer.hosts()']]],
-  ['htype_9',['HTYPE',['../classlistener_1_1_read_boot_protocol_packet.html#a7da87a2c24d8fd063542e3f0267a9024',1,'listener::ReadBootProtocolPacket']]]
+  ['host_6',['HOST',['../namespacedhcp.html#a44db535f1dc6992492f6e3a9498cb87e',1,'dhcp']]],
+  ['host_5ffile_7',['host_file',['../classdhcp_1_1_d_h_c_p_server_configuration.html#a8e7b3b6cdecb88a5355ae33e7b829a46',1,'dhcp::DHCPServerConfiguration']]],
+  ['hostname_8',['hostname',['../classdhcp_1_1_host.html#a4db1cd4ba6cae9480967587ed4b26b95',1,'dhcp::Host']]],
+  ['hosts_9',['hosts',['../classdhcp_1_1_d_h_c_p_server.html#a664b45ac7c71967fd415966f2ba5ab4d',1,'dhcp.DHCPServer.hosts()'],['../classdhcp_1_1_threaded_t_c_p_server.html#a895afba96fa627cb796c4b5a14d3f73c',1,'dhcp.ThreadedTCPServer.hosts()']]],
+  ['htype_10',['HTYPE',['../classlistener_1_1_read_boot_protocol_packet.html#a7da87a2c24d8fd063542e3f0267a9024',1,'listener::ReadBootProtocolPacket']]]
 ];

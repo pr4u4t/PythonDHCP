@@ -12,8 +12,8 @@ var annotated_dup =
       [ "HostDatabase", "classdhcp_1_1_host_database.html", "classdhcp_1_1_host_database" ],
       [ "NETWORK", "classdhcp_1_1_n_e_t_w_o_r_k.html", "classdhcp_1_1_n_e_t_w_o_r_k" ],
       [ "PriorityQueue", "classdhcp_1_1_priority_queue.html", "classdhcp_1_1_priority_queue" ],
-      [ "ThreadedTcpRequestHandler", "classdhcp_1_1_threaded_tcp_request_handler.html", "classdhcp_1_1_threaded_tcp_request_handler" ],
-      [ "ThreadedTcpServer", "classdhcp_1_1_threaded_tcp_server.html", "classdhcp_1_1_threaded_tcp_server" ],
+      [ "ThreadedTCPRequestHandler", "classdhcp_1_1_threaded_t_c_p_request_handler.html", "classdhcp_1_1_threaded_t_c_p_request_handler" ],
+      [ "ThreadedTCPServer", "classdhcp_1_1_threaded_t_c_p_server.html", "classdhcp_1_1_threaded_t_c_p_server" ],
       [ "TransactionDelayWorker", "classdhcp_1_1_transaction_delay_worker.html", "classdhcp_1_1_transaction_delay_worker" ],
       [ "WriteBootProtocolPacket", "classdhcp_1_1_write_boot_protocol_packet.html", "classdhcp_1_1_write_boot_protocol_packet" ]
     ] ],

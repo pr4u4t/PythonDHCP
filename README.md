@@ -8,4 +8,23 @@ This DHCP server program will assign IP addresses ten seconds after it received 
 First argument is of program is testet for being configuration file fg.
 ./dhcp.py dhcp.conf
 if that file does not exists arguments are read from command line, strings must be so called double escaped "'string'"
-dhcp.py -broadcast_address "[ '255.255.255.255' ]" -name_server "'192.168.0.1'"
+dhcp.py -broadcast_address "[ '255.255.255.255' ]" -domain_name_server "'192.168.0.1'"
+
+see dhcp.conf for more details
+
+TEST:
+on Server:
+ifconfig ETH_CARD_NAME 192.168.137.0 up
+./dhcp.py dhcp.conf
+
+On client:
+dhcpcd or dhclient ETH_CARD_NAME
+
+ENSURE THAT CARDS HAVE CONNECTIVITY BEFORE TESTING
+
+USE netcat or telnet to connect server command line:
+nc 127.0.0.1 6868
+
+type `help` to get list of commands
+
+

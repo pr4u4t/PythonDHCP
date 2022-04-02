@@ -29,9 +29,9 @@ class \mbox{\hyperlink{classdhcp_1_1_host_database}{dhcp.\+Host\+Database}}
 \item 
 class \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{dhcp.\+DHCPServer}}
 \item 
-class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler}{dhcp.\+Threaded\+Tcp\+Request\+Handler}}
+class \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_request_handler}{dhcp.\+Threaded\+TCPRequest\+Handler}}
 \item 
-class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{dhcp.\+Threaded\+Tcp\+Server}}
+class \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_server}{dhcp.\+Threaded\+TCPServer}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
@@ -54,6 +54,10 @@ def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{dhcp.\+deb
 \item 
 \mbox{\hyperlink{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}{dhcp.\+ALL}} = ALL()
 \item 
+\mbox{\hyperlink{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}{dhcp.\+HOST}}
+\item 
+\mbox{\hyperlink{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}{dhcp.\+PORT}}
+\item 
 \mbox{\hyperlink{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}{dhcp.\+messages}} = TTLOrdered\+Dict(default\+\_\+ttl=86400)
 \item 
 \mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{dhcp.\+configuration}} = DHCPServer\+Configuration()
@@ -63,4 +67,12 @@ def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{dhcp.\+deb
 \mbox{\hyperlink{namespacedhcp_ab7a91c254731d739131c23acd44cc194}{dhcp.\+ip\+\_\+address\+\_\+lease\+\_\+time}}
 \item 
 \mbox{\hyperlink{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}{dhcp.\+server}} = DHCPServer(configuration)
+\item 
+\mbox{\hyperlink{namespacedhcp_a4192fc3287e87c089c12f79f8a7c1d5d}{dhcp.\+s}} = server.\+run\+\_\+in\+\_\+thread()
+\item 
+\mbox{\hyperlink{namespacedhcp_a30d680fd47a3f31137d1c1d70a818e40}{dhcp.\+cserver}} = Threaded\+TCPServer((HOST, PORT), Threaded\+TCPRequest\+Handler)
+\item 
+\mbox{\hyperlink{namespacedhcp_a802cb547c9c7d3558e598dd36721c4e7}{dhcp.\+cserver\+\_\+thread}} = threading.\+Thread(target=cserver.\+serve\+\_\+forever)
+\item 
+\mbox{\hyperlink{namespacedhcp_aae3c666c1c35344f02551cde9d00d866}{dhcp.\+daemon}}
 \end{DoxyCompactItemize}

@@ -25,9 +25,9 @@ class \mbox{\hyperlink{classdhcp_1_1_n_e_t_w_o_r_k}{NETWORK}}
 \item 
 class \mbox{\hyperlink{classdhcp_1_1_priority_queue}{Priority\+Queue}}
 \item 
-class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_request_handler}{Threaded\+Tcp\+Request\+Handler}}
+class \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_request_handler}{Threaded\+TCPRequest\+Handler}}
 \item 
-class \mbox{\hyperlink{classdhcp_1_1_threaded_tcp_server}{Threaded\+Tcp\+Server}}
+class \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_server}{Threaded\+TCPServer}}
 \item 
 class \mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker}{Transaction\+Delay\+Worker}}
 \item 
@@ -49,6 +49,10 @@ def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{debug\+\_\
 \item 
 \mbox{\hyperlink{namespacedhcp_a7dc1828cff0a85a56ca25ead41044324}{ALL}} = \mbox{\hyperlink{classdhcp_1_1_a_l_l}{ALL}}()
 \item 
+\mbox{\hyperlink{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}{HOST}}
+\item 
+\mbox{\hyperlink{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}{PORT}}
+\item 
 \mbox{\hyperlink{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}{messages}} = \mbox{\hyperlink{classttldict_1_1_t_t_l_ordered_dict}{TTLOrdered\+Dict}}(default\+\_\+ttl=86400)
 \item 
 \mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}} = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server_configuration}{DHCPServer\+Configuration}}()
@@ -58,6 +62,14 @@ def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{debug\+\_\
 \mbox{\hyperlink{namespacedhcp_ab7a91c254731d739131c23acd44cc194}{ip\+\_\+address\+\_\+lease\+\_\+time}}
 \item 
 \mbox{\hyperlink{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}{server}} = \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_server}{DHCPServer}}(\mbox{\hyperlink{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}{configuration}})
+\item 
+\mbox{\hyperlink{namespacedhcp_a4192fc3287e87c089c12f79f8a7c1d5d}{s}} = server.\+run\+\_\+in\+\_\+thread()
+\item 
+\mbox{\hyperlink{namespacedhcp_a30d680fd47a3f31137d1c1d70a818e40}{cserver}} = \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_server}{Threaded\+TCPServer}}((\mbox{\hyperlink{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}{HOST}}, \mbox{\hyperlink{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}{PORT}}), \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_request_handler}{Threaded\+TCPRequest\+Handler}})
+\item 
+\mbox{\hyperlink{namespacedhcp_a802cb547c9c7d3558e598dd36721c4e7}{cserver\+\_\+thread}} = threading.\+Thread(target=cserver.\+serve\+\_\+forever)
+\item 
+\mbox{\hyperlink{namespacedhcp_aae3c666c1c35344f02551cde9d00d866}{daemon}}
 \end{DoxyCompactItemize}
 
 
@@ -70,7 +82,7 @@ def \mbox{\hyperlink{namespacedhcp_a601bd489973305b2dba2d3dd7ce30ed3}{debug\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00716}{716}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00719}{719}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_af20880fd0c047e3357f1c8c239968538}\label{namespacedhcp_af20880fd0c047e3357f1c8c239968538}} 
 \index{dhcp@{dhcp}!get\_host\_ip\_addresses@{get\_host\_ip\_addresses}}
@@ -92,7 +104,7 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00059}{59}} of file \mbox{\
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00352}{352}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00351}{351}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}\label{namespacedhcp_ab6b61de7bae0d5e51c3e4b753bc48421}} 
 \index{dhcp@{dhcp}!sorted\_hosts@{sorted\_hosts}}
@@ -102,7 +114,7 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00352}{352}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00515}{515}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00514}{514}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 
 
@@ -115,7 +127,7 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00515}{515}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00369}{369}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00368}{368}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}\label{namespacedhcp_ae07ac61b02b06c25a3797571b09d6b53}} 
 \index{dhcp@{dhcp}!configuration@{configuration}}
@@ -125,7 +137,37 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00369}{369}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00721}{721}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00728}{728}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a30d680fd47a3f31137d1c1d70a818e40}\label{namespacedhcp_a30d680fd47a3f31137d1c1d70a818e40}} 
+\index{dhcp@{dhcp}!cserver@{cserver}}
+\index{cserver@{cserver}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{cserver}{cserver}}
+{\footnotesize\ttfamily dhcp.\+cserver = \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_server}{Threaded\+TCPServer}}((\mbox{\hyperlink{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}{HOST}}, \mbox{\hyperlink{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}{PORT}}), \mbox{\hyperlink{classdhcp_1_1_threaded_t_c_p_request_handler}{Threaded\+TCPRequest\+Handler}})}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00742}{742}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a802cb547c9c7d3558e598dd36721c4e7}\label{namespacedhcp_a802cb547c9c7d3558e598dd36721c4e7}} 
+\index{dhcp@{dhcp}!cserver\_thread@{cserver\_thread}}
+\index{cserver\_thread@{cserver\_thread}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{cserver\_thread}{cserver\_thread}}
+{\footnotesize\ttfamily dhcp.\+cserver\+\_\+thread = threading.\+Thread(target=cserver.\+serve\+\_\+forever)}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00749}{749}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_aae3c666c1c35344f02551cde9d00d866}\label{namespacedhcp_aae3c666c1c35344f02551cde9d00d866}} 
+\index{dhcp@{dhcp}!daemon@{daemon}}
+\index{daemon@{daemon}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{daemon}{daemon}}
+{\footnotesize\ttfamily dhcp.\+daemon}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00751}{751}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}\label{namespacedhcp_a64ea5198ded3c257ffc75ed83f981755}} 
 \index{dhcp@{dhcp}!debug@{debug}}
@@ -135,7 +177,17 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00721}{721}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00722}{722}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00729}{729}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}\label{namespacedhcp_a44db535f1dc6992492f6e3a9498cb87e}} 
+\index{dhcp@{dhcp}!HOST@{HOST}}
+\index{HOST@{HOST}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{HOST}{HOST}}
+{\footnotesize\ttfamily dhcp.\+HOST}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00716}{716}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_ab7a91c254731d739131c23acd44cc194}\label{namespacedhcp_ab7a91c254731d739131c23acd44cc194}} 
 \index{dhcp@{dhcp}!ip\_address\_lease\_time@{ip\_address\_lease\_time}}
@@ -145,7 +197,7 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00722}{722}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00726}{726}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00733}{733}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}\label{namespacedhcp_a4803c82dbc2dc819ace67a76b36fac77}} 
 \index{dhcp@{dhcp}!messages@{messages}}
@@ -155,7 +207,27 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00726}{726}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00714}{714}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00717}{717}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}\label{namespacedhcp_a591a96dc3fc89b18a1baa61ba2352dd0}} 
+\index{dhcp@{dhcp}!PORT@{PORT}}
+\index{PORT@{PORT}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{PORT}{PORT}}
+{\footnotesize\ttfamily dhcp.\+PORT}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00716}{716}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{namespacedhcp_a4192fc3287e87c089c12f79f8a7c1d5d}\label{namespacedhcp_a4192fc3287e87c089c12f79f8a7c1d5d}} 
+\index{dhcp@{dhcp}!s@{s}}
+\index{s@{s}!dhcp@{dhcp}}
+\doxysubsubsection{\texorpdfstring{s}{s}}
+{\footnotesize\ttfamily dhcp.\+s = server.\+run\+\_\+in\+\_\+thread()}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00739}{739}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 
 \mbox{\Hypertarget{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}\label{namespacedhcp_a6c8f85562af4201baa7a635aaa66ea6c}} 
 \index{dhcp@{dhcp}!server@{server}}
@@ -165,5 +237,5 @@ Definition at line \mbox{\hyperlink{dhcp_8py_source_l00714}{714}} of file \mbox{
 
 
 
-Definition at line \mbox{\hyperlink{dhcp_8py_source_l00727}{727}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00734}{734}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
 

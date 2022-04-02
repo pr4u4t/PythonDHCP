@@ -2,4 +2,12 @@ This is a purely Python DHCP server that does not require any additional librari
 
 This DHCP server program will assign IP addresses ten seconds after it received packets from clients. So it can be used in networks that already have a dhcp server running.
 
-First argument is of program is testet for being configuration file fg. ./dhcp.py dhcp.\+conf if that file does not exists arguments are read from command line, strings must be so called double escaped \char`\"{}\textquotesingle{}string\textquotesingle{}\char`\"{} \mbox{\hyperlink{dhcp_8py}{dhcp.\+py}} -\/broadcast\+\_\+address \char`\"{}\mbox{[} \textquotesingle{}255.\+255.\+255.\+255\textquotesingle{} \mbox{]}\char`\"{} -\/name\+\_\+server \char`\"{}\textquotesingle{}192.\+168.\+0.\+1\textquotesingle{}\char`\"{} 
+First argument is of program is testet for being configuration file fg. ./dhcp.py dhcp.\+conf if that file does not exists arguments are read from command line, strings must be so called double escaped \char`\"{}\textquotesingle{}string\textquotesingle{}\char`\"{} \mbox{\hyperlink{dhcp_8py}{dhcp.\+py}} -\/broadcast\+\_\+address \char`\"{}\mbox{[} \textquotesingle{}255.\+255.\+255.\+255\textquotesingle{} \mbox{]}\char`\"{} -\/domain\+\_\+name\+\_\+server \char`\"{}\textquotesingle{}192.\+168.\+0.\+1\textquotesingle{}\char`\"{}
+
+see dhcp.\+conf for more details
+
+TEST\+: on Server\+: ifconfig ETH\+\_\+\+CARD\+\_\+\+NAME 192.\+168.\+137.\+0 up ./dhcp.py dhcp.\+conf
+
+On client\+: dhcpcd or dhclient ETH\+\_\+\+CARD\+\_\+\+NAME
+
+ENSURE THAT CARDS HAVE CONNECTIVITY BEFORE TESTING 

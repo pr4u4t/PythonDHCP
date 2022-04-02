@@ -17,13 +17,13 @@ var hierarchy =
       [ "listener.ReadBootProtocolPacket", "classlistener_1_1_read_boot_protocol_packet.html", null ]
     ] ],
     [ "socketserver.StreamRequestHandler", null, [
-      [ "dhcp.ThreadedTcpRequestHandler", "classdhcp_1_1_threaded_tcp_request_handler.html", null ]
+      [ "dhcp.ThreadedTCPRequestHandler", "classdhcp_1_1_threaded_t_c_p_request_handler.html", null ]
     ] ],
     [ "socketserver.TCPServer", null, [
-      [ "dhcp.ThreadedTcpServer", "classdhcp_1_1_threaded_tcp_server.html", null ]
+      [ "dhcp.ThreadedTCPServer", "classdhcp_1_1_threaded_t_c_p_server.html", null ]
     ] ],
     [ "socketserver.ThreadingMixIn", null, [
-      [ "dhcp.ThreadedTcpServer", "classdhcp_1_1_threaded_tcp_server.html", null ]
+      [ "dhcp.ThreadedTCPServer", "classdhcp_1_1_threaded_t_c_p_server.html", null ]
     ] ],
     [ "OrderedDict", null, [
       [ "ttldict.TTLOrderedDict", "classttldict_1_1_t_t_l_ordered_dict.html", null ]

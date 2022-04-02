@@ -517,12 +517,15 @@ def sorted_hosts(hosts):
     return hosts
 
 class DHCPServer(object):
-
+    """Main DHCP server class that is handling incoming packets and sending responses
+    using all other utility classes
+    """
     def __init__(self, configuration = None):
         if configuration == None:
             configuration = DHCPServerConfiguration()
             
         self.configuration = configuration
+        #OPEN UDP SOCKET FOR HANDLING INCOMING DHCP PACKETS and SENDING RESPONSES
         self.socket = socket(type = SOCK_DGRAM)
         self.socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         self.socket.bind(('', 67))
@@ -587,11 +590,11 @@ class DHCPServer(object):
             for host in known_hosts:
                 if self.is_valid_client_address(host.ip):
                     ip = host.ip
-            print('known ip:', ip)
+            self.configuration.debug('known ip:{}'.format(ip))
         if ip is None and self.is_valid_client_address(requested_ip_address):
             # 2. choose valid requested ip address
             ip = requested_ip_address
-            print('valid ip:', ip)
+            self.configuration.debug('valid ip:{}'.format(ip))
         if ip is None:
             # 3. choose new, free ip address
             chosen = False
@@ -605,9 +608,9 @@ class DHCPServer(object):
                 network_hosts.sort(key = lambda host: host.last_used)
                 ip = network_hosts[0].ip
                 assert self.is_valid_client_address(ip)
-            print('new ip:', ip)
+            self.configuration.debug('new ip:'.format(ip))
         if not any([host.ip == ip for host in known_hosts]):
-            print('add', mac_address, ip, packet.host_name)
+            self.configuration.debug('add {} {}'.format(mac_address, ip, packet.host_name))
             self.hosts.replace(Host(mac_address, ip, packet.host_name or '', time.time()))
         return ip
 
@@ -656,7 +659,7 @@ class DHCPServer(object):
     def get_current_hosts(self):
         return sorted_hosts(self.hosts.get(last_used = GREATER(self.time_started)))
 
-class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
+class ThreadedTCPRequestHandler(socketserver.StreamRequestHandler):
     """Control socket client connection handler
     """
     def handle(self):
@@ -690,7 +693,7 @@ class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
         except Exception as e:
             pass
 
-class ThreadedTcpServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     """DHCP server control interface TCP server
     """
     def setEvents(self,data):
@@ -707,15 +710,20 @@ class ThreadedTcpServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
         """Set DHCP UDP global configuration reference
         """
         self.configuration = data
-        
-if __name__ == '__main__':
-    
+
+
+if __name__ == "__main__":
+    HOST, PORT = "localhost", 6868
     messages = TTLOrderedDict(default_ttl=86400) #keep messages for 24h
     
     def debug_msg(msg,type):
         if bool(type):
             type = 'debug'
         messages[time.time()] = { 'type': type, 'msg': msg }
+
+    if(len(sys.argv) == 1):
+        print('configuration file or command line options must be passed')
+        sys.exit()
 
     configuration = DHCPServerConfiguration()
     configuration.debug = debug_msg
@@ -728,11 +736,23 @@ if __name__ == '__main__':
     for ip in server.configuration.all_ip_addresses():
         assert ip == server.configuration.network_filter()
 
-    with ThreadedTcpServer(("127.0.0.1", 6767), ThreadedTcpRequestHandler) as cserver:
+    s = server.run_in_thread()
+    print("UDP DHCP Server loop running in thread:", s.name)
+    
+    cserver = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)
+    with cserver:
         cserver.setEvents(messages)
         cserver.setHosts(server.hosts.db)
         cserver.setConfiguration(configuration)
-        cserver.serve_forever()
+        # Start a thread with the server -- that thread will then start one
+        # more thread for each request
+        cserver_thread = threading.Thread(target=cserver.serve_forever)
+        # Exit the server thread when the main thread terminates
+        cserver_thread.daemon = True
+        cserver_thread.start()
+        print("Control Server loop running in thread:", cserver_thread.name)
+
+        input("Enter to exit")
+        cserver.shutdown()
     
-    #server.run_in_thread()
-    server.run()
+    server.close()

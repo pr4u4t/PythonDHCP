@@ -87,7 +87,11 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 <div class="contents">
 <div class="textblock"><p >This is a purely Python DHCP server that does not require any additional libraries or installs other that Python 3.</p>
 <p >This DHCP server program will assign IP addresses ten seconds after it received packets from clients. So it can be used in networks that already have a dhcp server running.</p>
-<p >First argument is of program is testet for being configuration file fg. ./dhcp.py dhcp.conf if that file does not exists arguments are read from command line, strings must be so called double escaped "'string'" <a class="el" href="dhcp_8py.html">dhcp.py</a> -broadcast_address "[ '255.255.255.255' ]" -name_server "'192.168.0.1'" </p>
+<p >First argument is of program is testet for being configuration file fg. ./dhcp.py dhcp.conf if that file does not exists arguments are read from command line, strings must be so called double escaped "'string'" <a class="el" href="dhcp_8py.html">dhcp.py</a> -broadcast_address "[ '255.255.255.255' ]" -domain_name_server "'192.168.0.1'"</p>
+<p >see dhcp.conf for more details</p>
+<p >TEST: on Server: ifconfig ETH_CARD_NAME 192.168.137.0 up ./dhcp.py dhcp.conf</p>
+<p >On client: dhcpcd or dhclient ETH_CARD_NAME</p>
+<p >ENSURE THAT CARDS HAVE CONNECTIVITY BEFORE TESTING </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

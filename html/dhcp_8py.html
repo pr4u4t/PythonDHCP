@@ -121,9 +121,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdhcp_1_1_d_h_c_p_server.html">dhcp.DHCPServer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdhcp_1_1_threaded_tcp_request_handler.html">dhcp.ThreadedTcpRequestHandler</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdhcp_1_1_threaded_t_c_p_request_handler.html">dhcp.ThreadedTCPRequestHandler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdhcp_1_1_threaded_tcp_server.html">dhcp.ThreadedTcpServer</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdhcp_1_1_threaded_t_c_p_server.html">dhcp.ThreadedTCPServer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -146,6 +146,10 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a7dc1828cff0a85a56ca25ead41044324"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a7dc1828cff0a85a56ca25ead41044324">dhcp.ALL</a> = ALL()</td></tr>
 <tr class="separator:a7dc1828cff0a85a56ca25ead41044324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44db535f1dc6992492f6e3a9498cb87e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a44db535f1dc6992492f6e3a9498cb87e">dhcp.HOST</a></td></tr>
+<tr class="separator:a44db535f1dc6992492f6e3a9498cb87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a591a96dc3fc89b18a1baa61ba2352dd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a591a96dc3fc89b18a1baa61ba2352dd0">dhcp.PORT</a></td></tr>
+<tr class="separator:a591a96dc3fc89b18a1baa61ba2352dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4803c82dbc2dc819ace67a76b36fac77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a4803c82dbc2dc819ace67a76b36fac77">dhcp.messages</a> = TTLOrderedDict(default_ttl=86400)</td></tr>
 <tr class="separator:a4803c82dbc2dc819ace67a76b36fac77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae07ac61b02b06c25a3797571b09d6b53"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#ae07ac61b02b06c25a3797571b09d6b53">dhcp.configuration</a> = DHCPServerConfiguration()</td></tr>
@@ -156,6 +160,14 @@ Variables</h2></td></tr>
 <tr class="separator:ab7a91c254731d739131c23acd44cc194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c8f85562af4201baa7a635aaa66ea6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a6c8f85562af4201baa7a635aaa66ea6c">dhcp.server</a> = DHCPServer(configuration)</td></tr>
 <tr class="separator:a6c8f85562af4201baa7a635aaa66ea6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4192fc3287e87c089c12f79f8a7c1d5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a4192fc3287e87c089c12f79f8a7c1d5d">dhcp.s</a> = server.run_in_thread()</td></tr>
+<tr class="separator:a4192fc3287e87c089c12f79f8a7c1d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d680fd47a3f31137d1c1d70a818e40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a30d680fd47a3f31137d1c1d70a818e40">dhcp.cserver</a> = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)</td></tr>
+<tr class="separator:a30d680fd47a3f31137d1c1d70a818e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802cb547c9c7d3558e598dd36721c4e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#a802cb547c9c7d3558e598dd36721c4e7">dhcp.cserver_thread</a> = threading.Thread(target=cserver.serve_forever)</td></tr>
+<tr class="separator:a802cb547c9c7d3558e598dd36721c4e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae3c666c1c35344f02551cde9d00d866"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedhcp.html#aae3c666c1c35344f02551cde9d00d866">dhcp.daemon</a></td></tr>
+<tr class="separator:aae3c666c1c35344f02551cde9d00d866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
