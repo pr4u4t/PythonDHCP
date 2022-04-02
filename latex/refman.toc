@@ -1,0 +1,313 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Python DHCP Server}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Namespace Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Namespace List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Index}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Class List}{7}{section.4.1}%
+\contentsline {chapter}{\numberline {5}File Index}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}File List}{9}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Namespace Documentation}{11}{chapter.6}%
+\contentsline {section}{\numberline {6.1}dhcp Namespace Reference}{11}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Function Documentation}{12}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.1}debug\_msg()}{12}{subsubsection.6.1.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.2}get\_host\_ip\_addresses()}{12}{subsubsection.6.1.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.1.3}ip\_addresses()}{12}{subsubsection.6.1.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.1.4}sorted\_hosts()}{12}{subsubsection.6.1.1.4}%
+\contentsline {subsection}{\numberline {6.1.2}Variable Documentation}{12}{subsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.2.1}ALL}{13}{subsubsection.6.1.2.1}%
+\contentsline {subsubsection}{\numberline {6.1.2.2}configuration}{13}{subsubsection.6.1.2.2}%
+\contentsline {subsubsection}{\numberline {6.1.2.3}debug}{13}{subsubsection.6.1.2.3}%
+\contentsline {subsubsection}{\numberline {6.1.2.4}ip\_address\_lease\_time}{13}{subsubsection.6.1.2.4}%
+\contentsline {subsubsection}{\numberline {6.1.2.5}messages}{13}{subsubsection.6.1.2.5}%
+\contentsline {subsubsection}{\numberline {6.1.2.6}server}{13}{subsubsection.6.1.2.6}%
+\contentsline {section}{\numberline {6.2}listener Namespace Reference}{14}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Function Documentation}{14}{subsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.1.1}inet\_atonX()}{14}{subsubsection.6.2.1.1}%
+\contentsline {subsubsection}{\numberline {6.2.1.2}inet\_ntoaX()}{14}{subsubsection.6.2.1.2}%
+\contentsline {subsubsection}{\numberline {6.2.1.3}macpack()}{15}{subsubsection.6.2.1.3}%
+\contentsline {subsubsection}{\numberline {6.2.1.4}macunpack()}{15}{subsubsection.6.2.1.4}%
+\contentsline {subsubsection}{\numberline {6.2.1.5}packbool()}{15}{subsubsection.6.2.1.5}%
+\contentsline {subsubsection}{\numberline {6.2.1.6}unpackbool()}{15}{subsubsection.6.2.1.6}%
+\contentsline {subsection}{\numberline {6.2.2}Variable Documentation}{15}{subsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.2.1}data}{15}{subsubsection.6.2.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2.2}dhcp\_message\_types}{16}{subsubsection.6.2.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.2.3}options}{16}{subsubsection.6.2.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.2.4}p}{16}{subsubsection.6.2.2.4}%
+\contentsline {subsubsection}{\numberline {6.2.2.5}packet}{16}{subsubsection.6.2.2.5}%
+\contentsline {subsubsection}{\numberline {6.2.2.6}reads}{16}{subsubsection.6.2.2.6}%
+\contentsline {subsubsection}{\numberline {6.2.2.7}reversed\_dhcp\_message\_types}{17}{subsubsection.6.2.2.7}%
+\contentsline {subsubsection}{\numberline {6.2.2.8}s1}{17}{subsubsection.6.2.2.8}%
+\contentsline {subsubsection}{\numberline {6.2.2.9}shortpack}{17}{subsubsection.6.2.2.9}%
+\contentsline {subsubsection}{\numberline {6.2.2.10}shortunpack}{17}{subsubsection.6.2.2.10}%
+\contentsline {section}{\numberline {6.3}ttldict Namespace Reference}{17}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Class Documentation}{19}{chapter.7}%
+\contentsline {section}{\numberline {7.1}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ALL Class Reference}{19}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Detailed Description}{19}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Member Function Documentation}{19}{subsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.2.1}\_\_eq\_\_()}{19}{subsubsection.7.1.2.1}%
+\contentsline {subsubsection}{\numberline {7.1.2.2}\_\_repr\_\_()}{20}{subsubsection.7.1.2.2}%
+\contentsline {section}{\numberline {7.2}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CASEINSENSITIVE Class Reference}{20}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Detailed Description}{20}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Constructor \& Destructor Documentation}{20}{subsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.2.1}\_\_init\_\_()}{20}{subsubsection.7.2.2.1}%
+\contentsline {subsection}{\numberline {7.2.3}Member Function Documentation}{21}{subsection.7.2.3}%
+\contentsline {subsubsection}{\numberline {7.2.3.1}\_\_eq\_\_()}{21}{subsubsection.7.2.3.1}%
+\contentsline {subsection}{\numberline {7.2.4}Member Data Documentation}{21}{subsection.7.2.4}%
+\contentsline {subsubsection}{\numberline {7.2.4.1}s}{21}{subsubsection.7.2.4.1}%
+\contentsline {section}{\numberline {7.3}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CSVDatabase Class Reference}{21}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Detailed Description}{22}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Constructor \& Destructor Documentation}{22}{subsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.2.1}\_\_init\_\_()}{22}{subsubsection.7.3.2.1}%
+\contentsline {subsection}{\numberline {7.3.3}Member Function Documentation}{22}{subsection.7.3.3}%
+\contentsline {subsubsection}{\numberline {7.3.3.1}add()}{22}{subsubsection.7.3.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.3.2}all()}{23}{subsubsection.7.3.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3.3}delete()}{23}{subsubsection.7.3.3.3}%
+\contentsline {subsubsection}{\numberline {7.3.3.4}file()}{23}{subsubsection.7.3.3.4}%
+\contentsline {subsubsection}{\numberline {7.3.3.5}get()}{23}{subsubsection.7.3.3.5}%
+\contentsline {subsection}{\numberline {7.3.4}Member Data Documentation}{24}{subsection.7.3.4}%
+\contentsline {subsubsection}{\numberline {7.3.4.1}delimiter}{24}{subsubsection.7.3.4.1}%
+\contentsline {subsubsection}{\numberline {7.3.4.2}file\_name}{24}{subsubsection.7.3.4.2}%
+\contentsline {section}{\numberline {7.4}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}DHCPServer Class Reference}{24}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Detailed Description}{25}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Constructor \& Destructor Documentation}{25}{subsection.7.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.2.1}\_\_init\_\_()}{25}{subsubsection.7.4.2.1}%
+\contentsline {subsection}{\numberline {7.4.3}Member Function Documentation}{25}{subsection.7.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.3.1}broadcast()}{25}{subsubsection.7.4.3.1}%
+\contentsline {subsubsection}{\numberline {7.4.3.2}client\_has\_chosen()}{25}{subsubsection.7.4.3.2}%
+\contentsline {subsubsection}{\numberline {7.4.3.3}close()}{26}{subsubsection.7.4.3.3}%
+\contentsline {subsubsection}{\numberline {7.4.3.4}debug\_clients()}{26}{subsubsection.7.4.3.4}%
+\contentsline {subsubsection}{\numberline {7.4.3.5}get\_all\_hosts()}{26}{subsubsection.7.4.3.5}%
+\contentsline {subsubsection}{\numberline {7.4.3.6}get\_current\_hosts()}{26}{subsubsection.7.4.3.6}%
+\contentsline {subsubsection}{\numberline {7.4.3.7}get\_ip\_address()}{26}{subsubsection.7.4.3.7}%
+\contentsline {subsubsection}{\numberline {7.4.3.8}is\_valid\_client\_address()}{27}{subsubsection.7.4.3.8}%
+\contentsline {subsubsection}{\numberline {7.4.3.9}received()}{27}{subsubsection.7.4.3.9}%
+\contentsline {subsubsection}{\numberline {7.4.3.10}run()}{27}{subsubsection.7.4.3.10}%
+\contentsline {subsubsection}{\numberline {7.4.3.11}run\_in\_thread()}{27}{subsubsection.7.4.3.11}%
+\contentsline {subsubsection}{\numberline {7.4.3.12}server\_identifiers()}{27}{subsubsection.7.4.3.12}%
+\contentsline {subsubsection}{\numberline {7.4.3.13}update()}{28}{subsubsection.7.4.3.13}%
+\contentsline {subsection}{\numberline {7.4.4}Member Data Documentation}{28}{subsection.7.4.4}%
+\contentsline {subsubsection}{\numberline {7.4.4.1}closed}{28}{subsubsection.7.4.4.1}%
+\contentsline {subsubsection}{\numberline {7.4.4.2}configuration}{28}{subsubsection.7.4.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.4.3}delay\_worker}{28}{subsubsection.7.4.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.4.4}hosts}{28}{subsubsection.7.4.4.4}%
+\contentsline {subsubsection}{\numberline {7.4.4.5}socket}{29}{subsubsection.7.4.4.5}%
+\contentsline {subsubsection}{\numberline {7.4.4.6}time\_started}{29}{subsubsection.7.4.4.6}%
+\contentsline {subsubsection}{\numberline {7.4.4.7}transactions}{29}{subsubsection.7.4.4.7}%
+\contentsline {section}{\numberline {7.5}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}DHCPServer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Configuration Class Reference}{29}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Detailed Description}{30}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Member Function Documentation}{30}{subsection.7.5.2}%
+\contentsline {subsubsection}{\numberline {7.5.2.1}adjust\_if\_this\_computer\_is\_a\_router()}{30}{subsubsection.7.5.2.1}%
+\contentsline {subsubsection}{\numberline {7.5.2.2}all\_ip\_addresses()}{30}{subsubsection.7.5.2.2}%
+\contentsline {subsubsection}{\numberline {7.5.2.3}load()}{31}{subsubsection.7.5.2.3}%
+\contentsline {subsubsection}{\numberline {7.5.2.4}network\_filter()}{31}{subsubsection.7.5.2.4}%
+\contentsline {subsection}{\numberline {7.5.3}Member Data Documentation}{31}{subsection.7.5.3}%
+\contentsline {subsubsection}{\numberline {7.5.3.1}broadcast\_address\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{31}{subsubsection.7.5.3.1}%
+\contentsline {subsubsection}{\numberline {7.5.3.2}broadcast\_address\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{31}{subsubsection.7.5.3.2}%
+\contentsline {subsubsection}{\numberline {7.5.3.3}debug}{31}{subsubsection.7.5.3.3}%
+\contentsline {subsubsection}{\numberline {7.5.3.4}dhcp\_acknowledge\_after\_seconds}{32}{subsubsection.7.5.3.4}%
+\contentsline {subsubsection}{\numberline {7.5.3.5}dhcp\_offer\_after\_seconds}{32}{subsubsection.7.5.3.5}%
+\contentsline {subsubsection}{\numberline {7.5.3.6}domain\_name\_server}{32}{subsubsection.7.5.3.6}%
+\contentsline {subsubsection}{\numberline {7.5.3.7}host\_file}{32}{subsubsection.7.5.3.7}%
+\contentsline {subsubsection}{\numberline {7.5.3.8}ip\_address\_lease\_time}{32}{subsubsection.7.5.3.8}%
+\contentsline {subsubsection}{\numberline {7.5.3.9}length\_of\_transaction}{32}{subsubsection.7.5.3.9}%
+\contentsline {subsubsection}{\numberline {7.5.3.10}network\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{33}{subsubsection.7.5.3.10}%
+\contentsline {subsubsection}{\numberline {7.5.3.11}network\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{33}{subsubsection.7.5.3.11}%
+\contentsline {subsubsection}{\numberline {7.5.3.12}router}{33}{subsubsection.7.5.3.12}%
+\contentsline {subsubsection}{\numberline {7.5.3.13}subnet\_mask}{33}{subsubsection.7.5.3.13}%
+\contentsline {section}{\numberline {7.6}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}DHCPTransaction Class Reference}{33}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Detailed Description}{34}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Constructor \& Destructor Documentation}{34}{subsection.7.6.2}%
+\contentsline {subsubsection}{\numberline {7.6.2.1}\_\_init\_\_()}{34}{subsubsection.7.6.2.1}%
+\contentsline {subsection}{\numberline {7.6.3}Member Function Documentation}{34}{subsection.7.6.3}%
+\contentsline {subsubsection}{\numberline {7.6.3.1}acknowledge()}{35}{subsubsection.7.6.3.1}%
+\contentsline {subsubsection}{\numberline {7.6.3.2}close()}{35}{subsubsection.7.6.3.2}%
+\contentsline {subsubsection}{\numberline {7.6.3.3}is\_done()}{35}{subsubsection.7.6.3.3}%
+\contentsline {subsubsection}{\numberline {7.6.3.4}receive()}{35}{subsubsection.7.6.3.4}%
+\contentsline {subsubsection}{\numberline {7.6.3.5}received\_dhcp\_discover()}{36}{subsubsection.7.6.3.5}%
+\contentsline {subsubsection}{\numberline {7.6.3.6}received\_dhcp\_inform()}{36}{subsubsection.7.6.3.6}%
+\contentsline {subsubsection}{\numberline {7.6.3.7}received\_dhcp\_request()}{36}{subsubsection.7.6.3.7}%
+\contentsline {subsubsection}{\numberline {7.6.3.8}send\_offer()}{36}{subsubsection.7.6.3.8}%
+\contentsline {subsection}{\numberline {7.6.4}Member Data Documentation}{37}{subsection.7.6.4}%
+\contentsline {subsubsection}{\numberline {7.6.4.1}configuration}{37}{subsubsection.7.6.4.1}%
+\contentsline {subsubsection}{\numberline {7.6.4.2}debug}{37}{subsubsection.7.6.4.2}%
+\contentsline {subsubsection}{\numberline {7.6.4.3}do\_after}{37}{subsubsection.7.6.4.3}%
+\contentsline {subsubsection}{\numberline {7.6.4.4}done}{37}{subsubsection.7.6.4.4}%
+\contentsline {subsubsection}{\numberline {7.6.4.5}done\_time}{37}{subsubsection.7.6.4.5}%
+\contentsline {subsubsection}{\numberline {7.6.4.6}packets}{38}{subsubsection.7.6.4.6}%
+\contentsline {subsubsection}{\numberline {7.6.4.7}server}{38}{subsubsection.7.6.4.7}%
+\contentsline {section}{\numberline {7.7}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GREATER Class Reference}{38}{section.7.7}%
+\contentsline {subsection}{\numberline {7.7.1}Detailed Description}{38}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2}Constructor \& Destructor Documentation}{38}{subsection.7.7.2}%
+\contentsline {subsubsection}{\numberline {7.7.2.1}\_\_init\_\_()}{39}{subsubsection.7.7.2.1}%
+\contentsline {subsection}{\numberline {7.7.3}Member Function Documentation}{39}{subsection.7.7.3}%
+\contentsline {subsubsection}{\numberline {7.7.3.1}\_\_eq\_\_()}{39}{subsubsection.7.7.3.1}%
+\contentsline {subsection}{\numberline {7.7.4}Member Data Documentation}{39}{subsection.7.7.4}%
+\contentsline {subsubsection}{\numberline {7.7.4.1}value}{39}{subsubsection.7.7.4.1}%
+\contentsline {section}{\numberline {7.8}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Host Class Reference}{39}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Detailed Description}{40}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Constructor \& Destructor Documentation}{40}{subsection.7.8.2}%
+\contentsline {subsubsection}{\numberline {7.8.2.1}\_\_init\_\_()}{40}{subsubsection.7.8.2.1}%
+\contentsline {subsection}{\numberline {7.8.3}Member Function Documentation}{40}{subsection.7.8.3}%
+\contentsline {subsubsection}{\numberline {7.8.3.1}\_\_eq\_\_()}{41}{subsubsection.7.8.3.1}%
+\contentsline {subsubsection}{\numberline {7.8.3.2}\_\_hash\_\_()}{41}{subsubsection.7.8.3.2}%
+\contentsline {subsubsection}{\numberline {7.8.3.3}from\_packet()}{41}{subsubsection.7.8.3.3}%
+\contentsline {subsubsection}{\numberline {7.8.3.4}from\_tuple()}{41}{subsubsection.7.8.3.4}%
+\contentsline {subsubsection}{\numberline {7.8.3.5}get\_pattern()}{41}{subsubsection.7.8.3.5}%
+\contentsline {subsubsection}{\numberline {7.8.3.6}has\_valid\_ip()}{42}{subsubsection.7.8.3.6}%
+\contentsline {subsubsection}{\numberline {7.8.3.7}to\_pattern()}{42}{subsubsection.7.8.3.7}%
+\contentsline {subsubsection}{\numberline {7.8.3.8}to\_tuple()}{42}{subsubsection.7.8.3.8}%
+\contentsline {subsection}{\numberline {7.8.4}Member Data Documentation}{42}{subsection.7.8.4}%
+\contentsline {subsubsection}{\numberline {7.8.4.1}hostname}{42}{subsubsection.7.8.4.1}%
+\contentsline {subsubsection}{\numberline {7.8.4.2}ip}{43}{subsubsection.7.8.4.2}%
+\contentsline {subsubsection}{\numberline {7.8.4.3}last\_used}{43}{subsubsection.7.8.4.3}%
+\contentsline {subsubsection}{\numberline {7.8.4.4}mac}{43}{subsubsection.7.8.4.4}%
+\contentsline {section}{\numberline {7.9}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Host\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Database Class Reference}{43}{section.7.9}%
+\contentsline {subsection}{\numberline {7.9.1}Detailed Description}{44}{subsection.7.9.1}%
+\contentsline {subsection}{\numberline {7.9.2}Constructor \& Destructor Documentation}{44}{subsection.7.9.2}%
+\contentsline {subsubsection}{\numberline {7.9.2.1}\_\_init\_\_()}{44}{subsubsection.7.9.2.1}%
+\contentsline {subsection}{\numberline {7.9.3}Member Function Documentation}{44}{subsection.7.9.3}%
+\contentsline {subsubsection}{\numberline {7.9.3.1}add()}{44}{subsubsection.7.9.3.1}%
+\contentsline {subsubsection}{\numberline {7.9.3.2}all()}{44}{subsubsection.7.9.3.2}%
+\contentsline {subsubsection}{\numberline {7.9.3.3}delete()}{44}{subsubsection.7.9.3.3}%
+\contentsline {subsubsection}{\numberline {7.9.3.4}get()}{45}{subsubsection.7.9.3.4}%
+\contentsline {subsubsection}{\numberline {7.9.3.5}replace()}{45}{subsubsection.7.9.3.5}%
+\contentsline {subsection}{\numberline {7.9.4}Member Data Documentation}{45}{subsection.7.9.4}%
+\contentsline {subsubsection}{\numberline {7.9.4.1}db}{45}{subsubsection.7.9.4.1}%
+\contentsline {section}{\numberline {7.10}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NETWORK Class Reference}{45}{section.7.10}%
+\contentsline {subsection}{\numberline {7.10.1}Detailed Description}{46}{subsection.7.10.1}%
+\contentsline {subsection}{\numberline {7.10.2}Constructor \& Destructor Documentation}{46}{subsection.7.10.2}%
+\contentsline {subsubsection}{\numberline {7.10.2.1}\_\_init\_\_()}{46}{subsubsection.7.10.2.1}%
+\contentsline {subsection}{\numberline {7.10.3}Member Function Documentation}{46}{subsection.7.10.3}%
+\contentsline {subsubsection}{\numberline {7.10.3.1}\_\_eq\_\_()}{46}{subsubsection.7.10.3.1}%
+\contentsline {subsection}{\numberline {7.10.4}Member Data Documentation}{46}{subsection.7.10.4}%
+\contentsline {subsubsection}{\numberline {7.10.4.1}network}{46}{subsubsection.7.10.4.1}%
+\contentsline {subsubsection}{\numberline {7.10.4.2}subnet\_mask}{47}{subsubsection.7.10.4.2}%
+\contentsline {section}{\numberline {7.11}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Priority\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Queue Class Reference}{47}{section.7.11}%
+\contentsline {subsection}{\numberline {7.11.1}Detailed Description}{47}{subsection.7.11.1}%
+\contentsline {subsection}{\numberline {7.11.2}Constructor \& Destructor Documentation}{47}{subsection.7.11.2}%
+\contentsline {subsubsection}{\numberline {7.11.2.1}\_\_init\_\_()}{47}{subsubsection.7.11.2.1}%
+\contentsline {subsection}{\numberline {7.11.3}Member Function Documentation}{48}{subsection.7.11.3}%
+\contentsline {subsubsection}{\numberline {7.11.3.1}get()}{48}{subsubsection.7.11.3.1}%
+\contentsline {subsubsection}{\numberline {7.11.3.2}put()}{48}{subsubsection.7.11.3.2}%
+\contentsline {subsubsection}{\numberline {7.11.3.3}qsize()}{48}{subsubsection.7.11.3.3}%
+\contentsline {section}{\numberline {7.12}listener.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Boot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Protocol\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Packet Class Reference}{48}{section.7.12}%
+\contentsline {subsection}{\numberline {7.12.1}Detailed Description}{49}{subsection.7.12.1}%
+\contentsline {subsection}{\numberline {7.12.2}Constructor \& Destructor Documentation}{49}{subsection.7.12.2}%
+\contentsline {subsubsection}{\numberline {7.12.2.1}\_\_init\_\_()}{50}{subsubsection.7.12.2.1}%
+\contentsline {subsection}{\numberline {7.12.3}Member Function Documentation}{50}{subsection.7.12.3}%
+\contentsline {subsubsection}{\numberline {7.12.3.1}\_\_contains\_\_()}{50}{subsubsection.7.12.3.1}%
+\contentsline {subsubsection}{\numberline {7.12.3.2}\_\_getitem\_\_()}{50}{subsubsection.7.12.3.2}%
+\contentsline {subsubsection}{\numberline {7.12.3.3}\_\_gt\_\_()}{50}{subsubsection.7.12.3.3}%
+\contentsline {subsubsection}{\numberline {7.12.3.4}\_\_str\_\_()}{50}{subsubsection.7.12.3.4}%
+\contentsline {subsubsection}{\numberline {7.12.3.5}formatted\_named\_options()}{51}{subsubsection.7.12.3.5}%
+\contentsline {subsection}{\numberline {7.12.4}Member Data Documentation}{51}{subsection.7.12.4}%
+\contentsline {subsubsection}{\numberline {7.12.4.1}address}{51}{subsubsection.7.12.4.1}%
+\contentsline {subsubsection}{\numberline {7.12.4.2}bootp\_flags}{51}{subsubsection.7.12.4.2}%
+\contentsline {subsubsection}{\numberline {7.12.4.3}CHADDR}{51}{subsubsection.7.12.4.3}%
+\contentsline {subsubsection}{\numberline {7.12.4.4}CIADDR}{51}{subsubsection.7.12.4.4}%
+\contentsline {subsubsection}{\numberline {7.12.4.5}client\_ip\_address}{51}{subsubsection.7.12.4.5}%
+\contentsline {subsubsection}{\numberline {7.12.4.6}client\_mac\_address}{52}{subsubsection.7.12.4.6}%
+\contentsline {subsubsection}{\numberline {7.12.4.7}data}{52}{subsubsection.7.12.4.7}%
+\contentsline {subsubsection}{\numberline {7.12.4.8}FLAGS}{52}{subsubsection.7.12.4.8}%
+\contentsline {subsubsection}{\numberline {7.12.4.9}GIADDR}{52}{subsubsection.7.12.4.9}%
+\contentsline {subsubsection}{\numberline {7.12.4.10}hardware\_address\_length}{52}{subsubsection.7.12.4.10}%
+\contentsline {subsubsection}{\numberline {7.12.4.11}hardware\_type}{52}{subsubsection.7.12.4.11}%
+\contentsline {subsubsection}{\numberline {7.12.4.12}HLEN}{53}{subsubsection.7.12.4.12}%
+\contentsline {subsubsection}{\numberline {7.12.4.13}hops}{53}{subsubsection.7.12.4.13}%
+\contentsline {subsubsection}{\numberline {7.12.4.14}HOPS}{53}{subsubsection.7.12.4.14}%
+\contentsline {subsubsection}{\numberline {7.12.4.15}host}{53}{subsubsection.7.12.4.15}%
+\contentsline {subsubsection}{\numberline {7.12.4.16}HTYPE}{53}{subsubsection.7.12.4.16}%
+\contentsline {subsubsection}{\numberline {7.12.4.17}magic\_cookie}{53}{subsubsection.7.12.4.17}%
+\contentsline {subsubsection}{\numberline {7.12.4.18}message\_type}{54}{subsubsection.7.12.4.18}%
+\contentsline {subsubsection}{\numberline {7.12.4.19}named\_options}{54}{subsubsection.7.12.4.19}%
+\contentsline {subsubsection}{\numberline {7.12.4.20}next\_server\_ip\_address}{54}{subsubsection.7.12.4.20}%
+\contentsline {subsubsection}{\numberline {7.12.4.21}OP}{54}{subsubsection.7.12.4.21}%
+\contentsline {subsubsection}{\numberline {7.12.4.22}options}{54}{subsubsection.7.12.4.22}%
+\contentsline {subsubsection}{\numberline {7.12.4.23}port}{54}{subsubsection.7.12.4.23}%
+\contentsline {subsubsection}{\numberline {7.12.4.24}relay\_agent\_ip\_address}{55}{subsubsection.7.12.4.24}%
+\contentsline {subsubsection}{\numberline {7.12.4.25}seconds\_elapsed}{55}{subsubsection.7.12.4.25}%
+\contentsline {subsubsection}{\numberline {7.12.4.26}SECS}{55}{subsubsection.7.12.4.26}%
+\contentsline {subsubsection}{\numberline {7.12.4.27}SIADDR}{55}{subsubsection.7.12.4.27}%
+\contentsline {subsubsection}{\numberline {7.12.4.28}transaction\_id}{55}{subsubsection.7.12.4.28}%
+\contentsline {subsubsection}{\numberline {7.12.4.29}XID}{55}{subsubsection.7.12.4.29}%
+\contentsline {subsubsection}{\numberline {7.12.4.30}YIADDR}{56}{subsubsection.7.12.4.30}%
+\contentsline {subsubsection}{\numberline {7.12.4.31}your\_ip\_address}{56}{subsubsection.7.12.4.31}%
+\contentsline {section}{\numberline {7.13}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Threaded\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tcp\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Request\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler Class Reference}{56}{section.7.13}%
+\contentsline {subsection}{\numberline {7.13.1}Detailed Description}{56}{subsection.7.13.1}%
+\contentsline {subsection}{\numberline {7.13.2}Member Function Documentation}{56}{subsection.7.13.2}%
+\contentsline {subsubsection}{\numberline {7.13.2.1}handle()}{57}{subsubsection.7.13.2.1}%
+\contentsline {section}{\numberline {7.14}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Threaded\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tcp\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Server Class Reference}{57}{section.7.14}%
+\contentsline {subsection}{\numberline {7.14.1}Detailed Description}{57}{subsection.7.14.1}%
+\contentsline {subsection}{\numberline {7.14.2}Member Function Documentation}{57}{subsection.7.14.2}%
+\contentsline {subsubsection}{\numberline {7.14.2.1}setConfiguration()}{58}{subsubsection.7.14.2.1}%
+\contentsline {subsubsection}{\numberline {7.14.2.2}setEvents()}{58}{subsubsection.7.14.2.2}%
+\contentsline {subsubsection}{\numberline {7.14.2.3}setHosts()}{58}{subsubsection.7.14.2.3}%
+\contentsline {subsection}{\numberline {7.14.3}Member Data Documentation}{58}{subsection.7.14.3}%
+\contentsline {subsubsection}{\numberline {7.14.3.1}configuration}{58}{subsubsection.7.14.3.1}%
+\contentsline {subsubsection}{\numberline {7.14.3.2}events}{59}{subsubsection.7.14.3.2}%
+\contentsline {subsubsection}{\numberline {7.14.3.3}hosts}{59}{subsubsection.7.14.3.3}%
+\contentsline {section}{\numberline {7.15}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transaction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Delay\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Worker Class Reference}{59}{section.7.15}%
+\contentsline {subsection}{\numberline {7.15.1}Detailed Description}{59}{subsection.7.15.1}%
+\contentsline {subsection}{\numberline {7.15.2}Constructor \& Destructor Documentation}{60}{subsection.7.15.2}%
+\contentsline {subsubsection}{\numberline {7.15.2.1}\_\_init\_\_()}{60}{subsubsection.7.15.2.1}%
+\contentsline {subsection}{\numberline {7.15.3}Member Function Documentation}{60}{subsection.7.15.3}%
+\contentsline {subsubsection}{\numberline {7.15.3.1}close()}{60}{subsubsection.7.15.3.1}%
+\contentsline {subsubsection}{\numberline {7.15.3.2}do\_after()}{60}{subsubsection.7.15.3.2}%
+\contentsline {subsection}{\numberline {7.15.4}Member Data Documentation}{60}{subsection.7.15.4}%
+\contentsline {subsubsection}{\numberline {7.15.4.1}closed}{61}{subsubsection.7.15.4.1}%
+\contentsline {subsubsection}{\numberline {7.15.4.2}queue}{61}{subsubsection.7.15.4.2}%
+\contentsline {subsubsection}{\numberline {7.15.4.3}thread}{61}{subsubsection.7.15.4.3}%
+\contentsline {section}{\numberline {7.16}ttldict.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TTLOrdered\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dict Class Reference}{61}{section.7.16}%
+\contentsline {subsection}{\numberline {7.16.1}Detailed Description}{62}{subsection.7.16.1}%
+\contentsline {subsection}{\numberline {7.16.2}Constructor \& Destructor Documentation}{62}{subsection.7.16.2}%
+\contentsline {subsubsection}{\numberline {7.16.2.1}\_\_init\_\_()}{62}{subsubsection.7.16.2.1}%
+\contentsline {subsection}{\numberline {7.16.3}Member Function Documentation}{62}{subsection.7.16.3}%
+\contentsline {subsubsection}{\numberline {7.16.3.1}\_\_delitem\_\_()}{62}{subsubsection.7.16.3.1}%
+\contentsline {subsubsection}{\numberline {7.16.3.2}\_\_getitem\_\_()}{62}{subsubsection.7.16.3.2}%
+\contentsline {subsubsection}{\numberline {7.16.3.3}\_\_iter\_\_()}{63}{subsubsection.7.16.3.3}%
+\contentsline {subsubsection}{\numberline {7.16.3.4}\_\_len\_\_()}{63}{subsubsection.7.16.3.4}%
+\contentsline {subsubsection}{\numberline {7.16.3.5}\_\_repr\_\_()}{63}{subsubsection.7.16.3.5}%
+\contentsline {subsubsection}{\numberline {7.16.3.6}\_\_setitem\_\_()}{63}{subsubsection.7.16.3.6}%
+\contentsline {subsubsection}{\numberline {7.16.3.7}expire\_at()}{63}{subsubsection.7.16.3.7}%
+\contentsline {subsubsection}{\numberline {7.16.3.8}get()}{64}{subsubsection.7.16.3.8}%
+\contentsline {subsubsection}{\numberline {7.16.3.9}get\_ttl()}{64}{subsubsection.7.16.3.9}%
+\contentsline {subsubsection}{\numberline {7.16.3.10}is\_expired()}{64}{subsubsection.7.16.3.10}%
+\contentsline {subsubsection}{\numberline {7.16.3.11}items()}{64}{subsubsection.7.16.3.11}%
+\contentsline {subsubsection}{\numberline {7.16.3.12}keys()}{65}{subsubsection.7.16.3.12}%
+\contentsline {subsubsection}{\numberline {7.16.3.13}set\_ttl()}{65}{subsubsection.7.16.3.13}%
+\contentsline {subsubsection}{\numberline {7.16.3.14}values()}{65}{subsubsection.7.16.3.14}%
+\contentsline {section}{\numberline {7.17}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Write\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Boot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Protocol\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Packet Class Reference}{65}{section.7.17}%
+\contentsline {subsection}{\numberline {7.17.1}Detailed Description}{66}{subsection.7.17.1}%
+\contentsline {subsection}{\numberline {7.17.2}Constructor \& Destructor Documentation}{66}{subsection.7.17.2}%
+\contentsline {subsubsection}{\numberline {7.17.2.1}\_\_init\_\_()}{66}{subsubsection.7.17.2.1}%
+\contentsline {subsection}{\numberline {7.17.3}Member Function Documentation}{67}{subsection.7.17.3}%
+\contentsline {subsubsection}{\numberline {7.17.3.1}\_\_str\_\_()}{67}{subsubsection.7.17.3.1}%
+\contentsline {subsubsection}{\numberline {7.17.3.2}get\_option()}{67}{subsubsection.7.17.3.2}%
+\contentsline {subsubsection}{\numberline {7.17.3.3}options()}{67}{subsubsection.7.17.3.3}%
+\contentsline {subsubsection}{\numberline {7.17.3.4}to\_bytes()}{67}{subsubsection.7.17.3.4}%
+\contentsline {subsection}{\numberline {7.17.4}Member Data Documentation}{68}{subsection.7.17.4}%
+\contentsline {subsubsection}{\numberline {7.17.4.1}bootp\_flags}{68}{subsubsection.7.17.4.1}%
+\contentsline {subsubsection}{\numberline {7.17.4.2}client\_ip\_address}{68}{subsubsection.7.17.4.2}%
+\contentsline {subsubsection}{\numberline {7.17.4.3}client\_mac\_address}{68}{subsubsection.7.17.4.3}%
+\contentsline {subsubsection}{\numberline {7.17.4.4}hardware\_address\_length}{68}{subsubsection.7.17.4.4}%
+\contentsline {subsubsection}{\numberline {7.17.4.5}hardware\_type}{68}{subsubsection.7.17.4.5}%
+\contentsline {subsubsection}{\numberline {7.17.4.6}hops}{69}{subsubsection.7.17.4.6}%
+\contentsline {subsubsection}{\numberline {7.17.4.7}magic\_cookie}{69}{subsubsection.7.17.4.7}%
+\contentsline {subsubsection}{\numberline {7.17.4.8}message\_type}{69}{subsubsection.7.17.4.8}%
+\contentsline {subsubsection}{\numberline {7.17.4.9}next\_server\_ip\_address}{69}{subsubsection.7.17.4.9}%
+\contentsline {subsubsection}{\numberline {7.17.4.10}parameter\_order}{69}{subsubsection.7.17.4.10}%
+\contentsline {subsubsection}{\numberline {7.17.4.11}relay\_agent\_ip\_address}{69}{subsubsection.7.17.4.11}%
+\contentsline {subsubsection}{\numberline {7.17.4.12}seconds\_elapsed}{70}{subsubsection.7.17.4.12}%
+\contentsline {subsubsection}{\numberline {7.17.4.13}transaction\_id}{70}{subsubsection.7.17.4.13}%
+\contentsline {subsubsection}{\numberline {7.17.4.14}your\_ip\_address}{70}{subsubsection.7.17.4.14}%
+\contentsline {chapter}{\numberline {8}File Documentation}{71}{chapter.8}%
+\contentsline {section}{\numberline {8.1}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{71}{section.8.1}%
+\contentsline {section}{\numberline {8.2}dhcp.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{72}{section.8.2}%
+\contentsline {section}{\numberline {8.3}listener.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{80}{section.8.3}%
+\contentsline {section}{\numberline {8.4}listener.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{81}{section.8.4}%
+\contentsline {section}{\numberline {8.5}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{84}{section.8.5}%
+\contentsline {section}{\numberline {8.6}ttldict.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{84}{section.8.6}%
+\contentsline {section}{\numberline {8.7}ttldict.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{85}{section.8.7}%
+\contentsline {chapter}{Index}{87}{section*.68}%

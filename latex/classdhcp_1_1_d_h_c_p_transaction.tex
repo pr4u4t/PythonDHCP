@@ -1,0 +1,247 @@
+\hypertarget{classdhcp_1_1_d_h_c_p_transaction}{}\doxysection{dhcp.\+DHCPTransaction Class Reference}
+\label{classdhcp_1_1_d_h_c_p_transaction}\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+Inheritance diagram for dhcp.\+DHCPTransaction\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdhcp_1_1_d_h_c_p_transaction}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_aa6b4d1ca986f35009cc226a6b33f1334}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_ac258510a5d3bdb1b0e5eaeb567c57532}{server}})
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_af53ca7186575ad528aa4a0698fd9cbb7}{is\+\_\+done}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a3ed98b3b86d150574fa4f89e8932050b}{close}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_aae31911f51f293161e55bcb8b2053f01}{receive}} (self, packet)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a01f7133e90ff9e9f4171156043e97d24}{received\+\_\+dhcp\+\_\+discover}} (self, discovery)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a3902197353a4c20c0dcac8526f78135c}{send\+\_\+offer}} (self, discovery)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a597990e446406ab5b466873cb26d3401}{received\+\_\+dhcp\+\_\+request}} (self, request)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a84787d49ed1d39194315546d1b203be1}{acknowledge}} (self, request)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a688bb4dff2fdd13482813e0d4daf0519}{received\+\_\+dhcp\+\_\+inform}} (self, inform)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_ac258510a5d3bdb1b0e5eaeb567c57532}{server}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_aab72d52c388de5e42435f000c82a2b3b}{configuration}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_ab34941515e9c6acbb985aeef4b26c20f}{packets}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a816612f54eb1d0f9b6281c06f00442b7}{done\+\_\+time}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a9b45fff7092b26fce7b3275c015ba4bf}{done}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_af4c5e3b25264df622a86463f2a581e41}{do\+\_\+after}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_d_h_c_p_transaction_a72d82d13ccf4afc9b426844aaf0aa4a3}{debug}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class representing DHCP Transaction
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00194}{194}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_aa6b4d1ca986f35009cc226a6b33f1334}\label{classdhcp_1_1_d_h_c_p_transaction_aa6b4d1ca986f35009cc226a6b33f1334}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{server }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Contructor of new transaction
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00197}{197}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a84787d49ed1d39194315546d1b203be1}\label{classdhcp_1_1_d_h_c_p_transaction_a84787d49ed1d39194315546d1b203be1}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!acknowledge@{acknowledge}}
+\index{acknowledge@{acknowledge}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{acknowledge()}{acknowledge()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+acknowledge (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{request }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to handle DHCP Acknowledge packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00270}{270}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a3ed98b3b86d150574fa4f89e8932050b}\label{classdhcp_1_1_d_h_c_p_transaction_a3ed98b3b86d150574fa4f89e8932050b}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!close@{close}}
+\index{close@{close}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Close transaction
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00213}{213}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_af53ca7186575ad528aa4a0698fd9cbb7}\label{classdhcp_1_1_d_h_c_p_transaction_af53ca7186575ad528aa4a0698fd9cbb7}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!is\_done@{is\_done}}
+\index{is\_done@{is\_done}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{is\_done()}{is\_done()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+is\+\_\+done (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if transaction is done 
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00208}{208}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_aae31911f51f293161e55bcb8b2053f01}\label{classdhcp_1_1_d_h_c_p_transaction_aae31911f51f293161e55bcb8b2053f01}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!receive@{receive}}
+\index{receive@{receive}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+receive (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{packet }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Receive DHCP UDP packet check it's type and call a proper callback
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00218}{218}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a01f7133e90ff9e9f4171156043e97d24}\label{classdhcp_1_1_d_h_c_p_transaction_a01f7133e90ff9e9f4171156043e97d24}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!received\_dhcp\_discover@{received\_dhcp\_discover}}
+\index{received\_dhcp\_discover@{received\_dhcp\_discover}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{received\_dhcp\_discover()}{received\_dhcp\_discover()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+received\+\_\+dhcp\+\_\+discover (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{discovery }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to handle DHCP Discover packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00234}{234}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a688bb4dff2fdd13482813e0d4daf0519}\label{classdhcp_1_1_d_h_c_p_transaction_a688bb4dff2fdd13482813e0d4daf0519}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!received\_dhcp\_inform@{received\_dhcp\_inform}}
+\index{received\_dhcp\_inform@{received\_dhcp\_inform}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{received\_dhcp\_inform()}{received\_dhcp\_inform()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+received\+\_\+dhcp\+\_\+inform (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{inform }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to handle DHCP Inform packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00288}{288}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a597990e446406ab5b466873cb26d3401}\label{classdhcp_1_1_d_h_c_p_transaction_a597990e446406ab5b466873cb26d3401}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!received\_dhcp\_request@{received\_dhcp\_request}}
+\index{received\_dhcp\_request@{received\_dhcp\_request}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{received\_dhcp\_request()}{received\_dhcp\_request()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+received\+\_\+dhcp\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{request }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to handle DHCP Request packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00261}{261}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a3902197353a4c20c0dcac8526f78135c}\label{classdhcp_1_1_d_h_c_p_transaction_a3902197353a4c20c0dcac8526f78135c}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!send\_offer@{send\_offer}}
+\index{send\_offer@{send\_offer}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{send\_offer()}{send\_offer()}}
+{\footnotesize\ttfamily def dhcp.\+DHCPTransaction.\+send\+\_\+offer (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{discovery }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to send DHCP offer packet
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00241}{241}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_aab72d52c388de5e42435f000c82a2b3b}\label{classdhcp_1_1_d_h_c_p_transaction_aab72d52c388de5e42435f000c82a2b3b}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!configuration@{configuration}}
+\index{configuration@{configuration}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+configuration}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00201}{201}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a72d82d13ccf4afc9b426844aaf0aa4a3}\label{classdhcp_1_1_d_h_c_p_transaction_a72d82d13ccf4afc9b426844aaf0aa4a3}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!debug@{debug}}
+\index{debug@{debug}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+debug}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00206}{206}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_af4c5e3b25264df622a86463f2a581e41}\label{classdhcp_1_1_d_h_c_p_transaction_af4c5e3b25264df622a86463f2a581e41}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!do\_after@{do\_after}}
+\index{do\_after@{do\_after}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{do\_after}{do\_after}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+do\+\_\+after}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00205}{205}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a9b45fff7092b26fce7b3275c015ba4bf}\label{classdhcp_1_1_d_h_c_p_transaction_a9b45fff7092b26fce7b3275c015ba4bf}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!done@{done}}
+\index{done@{done}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{done}{done}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+done}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00204}{204}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_a816612f54eb1d0f9b6281c06f00442b7}\label{classdhcp_1_1_d_h_c_p_transaction_a816612f54eb1d0f9b6281c06f00442b7}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!done\_time@{done\_time}}
+\index{done\_time@{done\_time}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{done\_time}{done\_time}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+done\+\_\+time}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00203}{203}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_ab34941515e9c6acbb985aeef4b26c20f}\label{classdhcp_1_1_d_h_c_p_transaction_ab34941515e9c6acbb985aeef4b26c20f}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!packets@{packets}}
+\index{packets@{packets}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{packets}{packets}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+packets}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00202}{202}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_d_h_c_p_transaction_ac258510a5d3bdb1b0e5eaeb567c57532}\label{classdhcp_1_1_d_h_c_p_transaction_ac258510a5d3bdb1b0e5eaeb567c57532}} 
+\index{dhcp.DHCPTransaction@{dhcp.DHCPTransaction}!server@{server}}
+\index{server@{server}!dhcp.DHCPTransaction@{dhcp.DHCPTransaction}}
+\doxysubsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily dhcp.\+DHCPTransaction.\+server}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00200}{200}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dhcp_8py}{dhcp.\+py}}\end{DoxyCompactItemize}

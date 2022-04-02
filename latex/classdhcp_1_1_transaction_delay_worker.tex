@@ -1,0 +1,116 @@
+\hypertarget{classdhcp_1_1_transaction_delay_worker}{}\doxysection{dhcp.\+Transaction\+Delay\+Worker Class Reference}
+\label{classdhcp_1_1_transaction_delay_worker}\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+Inheritance diagram for dhcp.\+Transaction\+Delay\+Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdhcp_1_1_transaction_delay_worker}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_a6db48dc0f86e3fa546936d02ec8ed2b8}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_a2581fd14007f440528591686e05a6f36}{do\+\_\+after}} (self, seconds, func, args=(), kw=\{\})
+\item 
+def \mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_ab46086ae177f9f76c790277c8dc09f9b}{close}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_a88b591aba959ea71f576bd27c3c23f41}{closed}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_a06c68f50041b6e9e949c6e87fe1d370b}{queue}}
+\item 
+\mbox{\hyperlink{classdhcp_1_1_transaction_delay_worker_acccc4ffe57c17795cba2691c3759fcd8}{thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class used to delay response to DHCP client
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00020}{20}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_a6db48dc0f86e3fa546936d02ec8ed2b8}\label{classdhcp_1_1_transaction_delay_worker_a6db48dc0f86e3fa546936d02ec8ed2b8}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dhcp.\+Transaction\+Delay\+Worker.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}class constructor internally using priority queue where priority is time
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00023}{23}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_ab46086ae177f9f76c790277c8dc09f9b}\label{classdhcp_1_1_transaction_delay_worker_ab46086ae177f9f76c790277c8dc09f9b}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!close@{close}}
+\index{close@{close}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily def dhcp.\+Transaction\+Delay\+Worker.\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method used to stop worker
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00054}{54}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_a2581fd14007f440528591686e05a6f36}\label{classdhcp_1_1_transaction_delay_worker_a2581fd14007f440528591686e05a6f36}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!do\_after@{do\_after}}
+\index{do\_after@{do\_after}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{do\_after()}{do\_after()}}
+{\footnotesize\ttfamily def dhcp.\+Transaction\+Delay\+Worker.\+do\+\_\+after (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{seconds,  }\item[{}]{func,  }\item[{}]{args = {\ttfamily ()},  }\item[{}]{kw = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add to queue function which should be called after certain time
+specified by seconds, args, kw are arguments
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00048}{48}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_a88b591aba959ea71f576bd27c3c23f41}\label{classdhcp_1_1_transaction_delay_worker_a88b591aba959ea71f576bd27c3c23f41}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!closed@{closed}}
+\index{closed@{closed}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{closed}{closed}}
+{\footnotesize\ttfamily dhcp.\+Transaction\+Delay\+Worker.\+closed}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00026}{26}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_a06c68f50041b6e9e949c6e87fe1d370b}\label{classdhcp_1_1_transaction_delay_worker_a06c68f50041b6e9e949c6e87fe1d370b}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!queue@{queue}}
+\index{queue@{queue}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{queue}{queue}}
+{\footnotesize\ttfamily dhcp.\+Transaction\+Delay\+Worker.\+queue}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00027}{27}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+\mbox{\Hypertarget{classdhcp_1_1_transaction_delay_worker_acccc4ffe57c17795cba2691c3759fcd8}\label{classdhcp_1_1_transaction_delay_worker_acccc4ffe57c17795cba2691c3759fcd8}} 
+\index{dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}!thread@{thread}}
+\index{thread@{thread}!dhcp.TransactionDelayWorker@{dhcp.TransactionDelayWorker}}
+\doxysubsubsection{\texorpdfstring{thread}{thread}}
+{\footnotesize\ttfamily dhcp.\+Transaction\+Delay\+Worker.\+thread}
+
+
+
+Definition at line \mbox{\hyperlink{dhcp_8py_source_l00028}{28}} of file \mbox{\hyperlink{dhcp_8py_source}{dhcp.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dhcp_8py}{dhcp.\+py}}\end{DoxyCompactItemize}

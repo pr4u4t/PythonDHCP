@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+from os.path import exists
+import re
+from ttldict import  TTLOrderedDict
+import socketserver
 import time
 import threading
 import struct
@@ -10,13 +14,47 @@ import random
 import socket
 import heapq    
 import sys
-from os.path import exists
-import re
-from ttldict import  TTLOrderedDict
-import socketserver
 
 from listener import *
 
+class TransactionDelayWorker(object):
+    """Class used to delay response to DHCP client
+    """
+    def __init__(self):
+        """class constructor internally using priority queue where priority is time
+        """
+        self.closed = False
+        self.queue = PriorityQueue()
+        self.thread = threading.Thread(target = self._delay_response_thread)
+        self.thread.start()
+
+    def _delay_response_thread(self):
+        """thread worker
+        """
+        while not self.closed:
+            if self.closed:
+                break
+            if self.queue.qsize() > 0:
+                p = self.queue.get()
+                t, func, args, kw = p
+                now = time.time()
+                if now < t:
+                    time.sleep(0.01)
+                    self.queue.put(p)
+                else:
+                    func(*args, **kw)
+
+
+    def do_after(self, seconds, func, args = (), kw = {}):
+        """Add to queue function which should be called after certain time
+        specified by seconds, args, kw are arguments
+        """
+        self.queue.put((time.time() + seconds, func, args, kw))
+
+    def close(self):
+        """Method used to stop worker
+        """
+        self.closed = True
 
 def get_host_ip_addresses():
     """Get IP address of current host.
@@ -152,46 +190,7 @@ class WriteBootProtocolPacket(object):
         """
         return str(ReadBootProtocolPacket(self.to_bytes()))
 
-class DelayWorker(object):
-    """Class used to delay response to DHCP client
-    """
-    def __init__(self):
-        """class constructor internally using priority queue where priority is time
-        """
-        self.closed = False
-        self.queue = PriorityQueue()
-        self.thread = threading.Thread(target = self._delay_response_thread)
-        self.thread.start()
-
-    def _delay_response_thread(self):
-        """thread worker
-        """
-        while not self.closed:
-            if self.closed:
-                break
-            if self.queue.qsize() > 0:
-                p = self.queue.get()
-                t, func, args, kw = p
-                now = time.time()
-                if now < t:
-                    time.sleep(0.01)
-                    self.queue.put(p)
-                else:
-                    func(*args, **kw)
-
-
-    def do_after(self, seconds, func, args = (), kw = {}):
-        """Add to queue function which should be called after certain time
-        specified by seconds, args, kw are arguments
-        """
-        self.queue.put((time.time() + seconds, func, args, kw))
-
-    def close(self):
-        """Method used to stop worker
-        """
-        self.closed = True
-
-class Transaction(object):
+class DHCPTransaction(object):
     """Class representing DHCP Transaction
     """
     def __init__(self, server):
@@ -286,11 +285,15 @@ class Transaction(object):
         self.server.broadcast(ack)
 
     def received_dhcp_inform(self, inform):
+        """Method used to handle DHCP Inform packet
+        """
         self.configuration.debug('inform:\n {}'.format(str(inform).replace('\n', '\n\t')))
         self.close()
         self.server.client_has_chosen(inform)
 
 class DHCPServerConfiguration(object):
+    """Class to load DHCP server configuration from file or command line
+    """
     dhcp_offer_after_seconds = 10
     dhcp_acknowledge_after_seconds = 10
     length_of_transaction = 40
@@ -308,6 +311,10 @@ class DHCPServerConfiguration(object):
     debug = lambda *args, **kw: None
 
     def load(self, file):
+        """Load configuration from file using exec to parse file as object dictionary
+        or get ALL command line arguments and change them using regexp to file layout
+        and treat as file
+        """
         if(len(file) > 0 and exists(file)):
             with open(file) as f:
                 exec(f.read(), self.__dict__)
@@ -319,6 +326,8 @@ class DHCPServerConfiguration(object):
             exec(args, self.__dict__)
 
     def adjust_if_this_computer_is_a_router(self):
+        """Automatically adjust some DHCP configuration parameters if this computer is router
+        """
         ip_addresses = get_host_ip_addresses()
         for ip in reversed(ip_addresses):
             if ip.split('.')[-1] == '1':
@@ -349,6 +358,8 @@ def ip_addresses(network, subnet_mask):
     return (socket.inet_ntoa(struct.pack('>I', i)) for i in range(start, end))
 
 class ALL(object):
+    """Comparator class
+    """
     def __eq__(self, other):
         return True
     def __repr__(self):
@@ -357,12 +368,16 @@ class ALL(object):
 ALL = ALL()
 
 class GREATER(object):
+    """Comparator class
+    """
     def __init__(self, value):
         self.value = value
     def __eq__(self, other):
         return type(self.value)(other) > self.value
 
 class NETWORK(object):
+    """Comparator class to check if address within same network
+    """
     def __init__(self, network, subnet_mask):
         self.subnet_mask = struct.unpack('>I', inet_aton(subnet_mask))[0]
         self.network = struct.unpack('>I', inet_aton(network))[0]
@@ -373,30 +388,44 @@ class NETWORK(object):
                ip - self.network != ~self.subnet_mask & 0xffffffff
         
 class CASEINSENSITIVE(object):
+    """Comparator class
+    """
     def __init__(self, s):
         self.s = s.lower()
     def __eq__(self, other):
         return self.s == other.lower()
 
 class CSVDatabase(object):
+    """Class handling CSV file database to keep host definitions
+    """
     delimiter = ';'
 
     def __init__(self, file_name):
+        """Construct new CSV database with storage in file_name
+        """
         self.file_name = file_name
         self.file('a').close() # create file
 
     def file(self, mode = 'r'):
+        """Open CSV file with selected mode
+        """
         return open(self.file_name, mode)
 
     def get(self, pattern):
+        """Get CSV entry representing host(MAC) and lease(IP)
+        """
         pattern = list(pattern)
         return [line for line in self.all() if pattern == line]
 
     def add(self, line):
+        """Add host entry to CSV file
+        """
         with self.file('a') as f:
             f.write(self.delimiter.join(line) + '\n')
 
     def delete(self, pattern):
+        """Delete host entry from CSV file
+        """
         lines = self.all()
         lines_to_delete = self.get(pattern)
         self.file('w').close() # empty file
@@ -405,10 +434,14 @@ class CSVDatabase(object):
                 self.add(line)
 
     def all(self):
+        """Get all entries from CSV file
+        """
         with self.file() as f:
             return [list(line.strip().split(self.delimiter)) for line in f]
 
 class Host(object):
+    """Class representing host with MAC address, IP, hostname if available and last used timestamp
+    """
     def __init__(self, mac, ip, hostname, last_used):
         self.mac = mac.upper()
         self.ip = ip
@@ -433,9 +466,13 @@ class Host(object):
         return [mac, ip, hostname, last_used]
 
     def to_tuple(self):
+        """Convert host to tuple
+        """
         return [self.mac, self.ip, self.hostname, str(int(self.last_used))]
 
     def to_pattern(self):
+        """Convert host to pattern
+        """
         return self.get_pattern(ip = self.ip, mac = self.mac)
 
     def __hash__(self):
@@ -445,6 +482,8 @@ class Host(object):
         return self.to_tuple() == other.to_tuple()
 
     def has_valid_ip(self):
+        """Check if host has valid IP address
+        """
         return self.ip and self.ip != '0.0.0.0'
         
 class HostDatabase(object):
@@ -487,9 +526,9 @@ class DHCPServer(object):
         self.socket = socket(type = SOCK_DGRAM)
         self.socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         self.socket.bind(('', 67))
-        self.delay_worker = DelayWorker()
+        self.delay_worker = TransactionDelayWorker()
         self.closed = False
-        self.transactions = collections.defaultdict(lambda: Transaction(self)) # id: transaction
+        self.transactions = collections.defaultdict(lambda: DHCPTransaction(self)) # id: transaction
         self.hosts = HostDatabase(self.configuration.host_file)
         self.time_started = time.time()
 
@@ -637,6 +676,12 @@ class ThreadedTcpRequestHandler(socketserver.StreamRequestHandler):
                     for value in options:
                         if(hasattr(self.server.configuration,value[0])):
                             self.request.sendall(bytes("{}: {}\r\n".format(value[0],getattr(self.server.configuration,value[0])),'ascii'))
+                elif(data.decode() == "help"):
+                    self.request.sendall(bytes("hosts\t\tdisplay host database\r\n",'ascii'))
+                    self.request.sendall(bytes("events\t\tdisplay DHCP event log\r\n",'ascii'))
+                    self.request.sendall(bytes("configuration\tdisplay current server configuration\r\n",'ascii'))
+                    self.request.sendall(bytes("help\t\tthis command\r\n",'ascii'))
+                    self.request.sendall(bytes("quit\t\tdisconnect from current session\r\n",'ascii'))
                 elif(data.decode() == "quit"):
                     self.request.sendall(bytes("bye\r\n", 'ascii'))
                     break
